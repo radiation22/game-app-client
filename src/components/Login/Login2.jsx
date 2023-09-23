@@ -37,6 +37,8 @@ const Login2 = () => {
   }, []);
 
   const handleSignIn = async (data) => {
+    setIsLoading(true); // Set loading to true at the beginning
+
     try {
       // Fetch user role based on email from your server
       const response = await fetch(
@@ -49,8 +51,9 @@ const Login2 = () => {
         // If the user's role is "driver", sign in and navigate to the next screen
         await signIn(data.email, data.password);
         setLoginError("");
-        navigate(from, { replace: true });
-        window.reload();
+        toast.success("login successfully");
+        navigate("/dashboard");
+        // window.reload();
       } else {
         // If the user's role is not "driver", show an error message
         setError("You are not authorized to access this page.");
@@ -58,17 +61,11 @@ const Login2 = () => {
     } catch (error) {
       setError(error.message);
       setLoginError(error.message);
+    } finally {
+      setIsLoading(false); // Set loading to false when the operation is completed (whether success or error)
     }
   };
 
-  // // Handle file input change for multiple images
-  // const handleFileChange = (e, index) => {
-  //   const file = e.target.files[0];
-  //   const updatedFiles = [...selectedFiles];
-  //   updatedFiles[index] = file;
-  //   setSelectedFiles(updatedFiles);
-  //   console.log(updatedFiles);
-  // };
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     setSelectedFile(file);
@@ -116,13 +113,14 @@ const Login2 = () => {
 
       const result = await createUser(data.email, data.password);
       const user = result.user;
-      console.log(user);
+      // console.log(user);
 
       await handleUpdateUser(data.name, data.email, imageUrl);
-      saveUser(data.name, data.email, userRole, drivers?.length, imageUrl);
+      saveUser(data.name, data.email, userRole, drivers?.length + 1, imageUrl);
 
       toast.success("Successfully registered");
       navigate("/dashboard");
+      window.reload();
     } catch (error) {
       console.error("Image upload or user creation failed:", error);
     } finally {

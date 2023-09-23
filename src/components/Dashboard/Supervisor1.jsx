@@ -5,11 +5,13 @@ import { AuthContext } from "../context/AuthProvider";
 import MyTickets from "./MyTickets";
 import { useQuery } from "@tanstack/react-query";
 import DriverNav from "../Navbar/DriverNav";
+import { toast } from "react-toastify";
+import DriverFooter from "../Footer/DriverFooter";
 const Supervisor1 = () => {
   const { user } = useContext(AuthContext);
   const [ticketNo, setTicketNo] = useState(0);
   const [trip, setTrip] = useState(1);
-  const [busNo, setBusNo] = useState(null);
+  const [busNo, setBusNo] = useState(0);
   const [donation, setDonation] = useState(0);
   const [totalCostSum, setTotalCostSum] = useState(0);
   const [totalPassengerSum, setTotalPassengerSum] = useState(0);
@@ -26,49 +28,121 @@ const Supervisor1 = () => {
   const refreshPage = () => {
     window.location.reload();
   };
-
-  // this is for reducing the cost when it send to the manager
   useEffect(() => {
     // Fetch data from the URL
     fetch("https://nirapode-server.vercel.app/trips")
       .then((response) => response.json())
       .then((data) => {
-        const todayTrips = data.filter(
-          (trip) => trip.formattedDate === formattedDate
-        );
+        const todayTrips = data.filter((trip) => {
+          return trip.formattedDate === formattedDate && trip.busNo === busNo;
+        });
+        // console.log(todayTrips);
+
         // Calculate totalCost and totalTickets
         const totalCostSum = todayTrips.reduce(
           (sum, trip) => sum + trip.totalCostSum,
           0
         );
-        // console.log(totalCostSum);
+
         const totalTicketsSum = todayTrips.reduce(
           (sum, trip) => sum + trip.ticketNo,
           0
         );
+
         const totalDonationSum = todayTrips.reduce(
           (sum, trip) => sum + trip.donation,
           0
         );
+
         const totalTripSum = todayTrips.reduce(
           (sum, trip) => sum + trip.trip,
           0
         );
+
         const tripPassenger = todayTrips.reduce(
           (sum, trip) => sum + trip.totalPassengerSum,
           0
         );
+
         setTripPassenger(tripPassenger);
-
-        setTrip(totalTripSum + 1);
-
+        setTrip(todayTrips.length);
         setTotalCost(totalCostSum);
         setTotalTickets(totalTicketsSum);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
-  }, []);
+  }, [formattedDate, busNo]); // Update the dependencies to include both formattedDate and busNo
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Fetch driver data and extract bus numbers
+        const driverResponse = await fetch(
+          `https://nirapode-server.vercel.app/singleDrivers?email=${user.email}`
+        );
+
+        const driverData = await driverResponse.json();
+
+        const extractedBusNumbers = driverData.map((item) => {
+          setBusNo(item?.busNo);
+          // item.busNo;
+        });
+
+        // Fetch bus ticket data
+        const busTicketResponse = await fetch(
+          `https://nirapode-server.vercel.app/busTicket?busNo=${busNo}`
+        );
+        const busTicketData = await busTicketResponse.json();
+
+        // Filter data by status "confirmed"
+        const confirmedTickets = busTicketData.filter((ticket) => {
+          const today = new Date();
+          const dd = String(today.getDate()).padStart(2, "0");
+          const mm = String(today.getMonth() + 1).padStart(2, "0"); // January is 0!
+          const yyyy = today.getFullYear();
+          const formattedDate = `${dd}/${mm}/${yyyy}`;
+
+          return (
+            ticket.status === "checked" &&
+            ticket.formattedDate === formattedDate
+          );
+        });
+        // console.log(confirmedTickets);
+
+        setTicketNo(confirmedTickets?.length);
+
+        // Calculate total cost and passenger sum for confirmed tickets
+        const costSum = confirmedTickets.reduce(
+          (sum, ticket) => sum + ticket.totalCost,
+          0
+        );
+        const passengerSum = confirmedTickets.reduce(
+          (sum, ticket) => sum + ticket.passenger,
+          0
+        );
+        const donationSum = confirmedTickets.reduce(
+          (sum, ticket) => sum + ticket.donation,
+          0
+        );
+        // setBusNo(extractedBusNumbers);
+
+        setTotalCostSum(costSum);
+        setTotalPassengerSum(passengerSum);
+        setDonation(donationSum);
+        setLoading(false);
+        // setTimeout(refreshPage, 20000);
+
+        // Refresh the tickets query
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+
+    fetchData();
+  }, [busNo]);
+
+  // this is for reducing the cost when it send to the manager
 
   const handleManager = () => {
     // Create a confirmation dialog
@@ -99,74 +173,11 @@ const Supervisor1 = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged) {
-          window.location.reload();
           toast.success("Trip Confirmed");
+          window.location.reload();
         }
       });
   };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // Fetch driver data and extract bus numbers
-        const driverResponse = await fetch(
-          `https://nirapode-server.vercel.app/singleDrivers?email=${user.email}`
-        );
-
-        const driverData = await driverResponse.json();
-
-        const extractedBusNumbers = driverData.map((item) => item.busNo);
-        setBusNo(extractedBusNumbers);
-
-        // Fetch bus ticket data
-        const busTicketResponse = await fetch(
-          `https://nirapode-server.vercel.app/busTicket?busNo=${extractedBusNumbers}`
-        );
-        const busTicketData = await busTicketResponse.json();
-
-        // Filter data by status "confirmed"
-        const confirmedTickets = busTicketData.filter((ticket) => {
-          const today = new Date();
-          const dd = String(today.getDate()).padStart(2, "0");
-          const mm = String(today.getMonth() + 1).padStart(2, "0"); // January is 0!
-          const yyyy = today.getFullYear();
-          const formattedDate = `${dd}/${mm}/${yyyy}`;
-          return (
-            ticket.status === "checked" &&
-            ticket.formattedDate === formattedDate
-          );
-        });
-
-        setTicketNo(confirmedTickets?.length);
-
-        // Calculate total cost and passenger sum for confirmed tickets
-        const costSum = confirmedTickets.reduce(
-          (sum, ticket) => sum + ticket.totalCost,
-          0
-        );
-        const passengerSum = confirmedTickets.reduce(
-          (sum, ticket) => sum + ticket.passenger,
-          0
-        );
-        const donationSum = confirmedTickets.reduce(
-          (sum, ticket) => sum + ticket.donation,
-          0
-        );
-
-        setTotalCostSum(costSum);
-        setTotalPassengerSum(passengerSum);
-        setDonation(donationSum);
-        setLoading(false);
-        // setTimeout(refreshPage, 20000);
-
-        // Refresh the tickets query
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    };
-
-    fetchData();
-  }, [user?.email]);
 
   return (
     <>
@@ -177,11 +188,14 @@ const Supervisor1 = () => {
         <p className="text-xl mt-4">Good Afternoon {user?.displayName}</p>
         <div className="">
           <button className="px-4 bg-[#05A83F] text-white uppercase py-2 rounded-lg my-3">
-            Trip No - 0{trip}
+            BUS: 0{busNo}
+          </button>
+          <button className="px-4 ml-2 bg-[#05A83F] text-white uppercase py-2 rounded-lg my-3">
+            Trip No - 0{trip + 1}
           </button>
           <button
             onClick={refreshPage}
-            className=" ml-4 px-4 bg-[#05A83F] text-white uppercase py-2 rounded-lg my-3"
+            className=" ml-2 px-4 bg-[#05A83F] text-white uppercase py-2 rounded-lg my-3"
           >
             Refresh
           </button>
@@ -235,7 +249,7 @@ const Supervisor1 = () => {
 
         <hr className="mx-5 py-4" />
         {/* <MyTickets tickets={tickets}></MyTickets> */}
-        <Footer></Footer>
+        <DriverFooter></DriverFooter>
       </div>
     </>
   );

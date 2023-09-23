@@ -27,6 +27,8 @@ import Inbox from "../components/Message/Inbox";
 import UserWelcome from "../components/Login/UserWelcome";
 import Register from "../components/Login/Register";
 import Notification from "../components/Notification/Notification";
+import DriverReward from "../components/Rewards/DriverReward";
+import DriverDonate from "../components/Donation/DriverDonate";
 
 export const router = createBrowserRouter([
   {
@@ -166,6 +168,14 @@ export const router = createBrowserRouter([
       {
         path: "/notification",
         element: <Notification></Notification>,
+      },
+      {
+        path: "/driverDonate",
+        element: <DriverDonate></DriverDonate>,
+      },
+      {
+        path: "/driverReward",
+        element: <DriverReward></DriverReward>,
       },
     ],
   },

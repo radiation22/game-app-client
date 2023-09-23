@@ -36,7 +36,7 @@ const Rewards = () => {
   const progressBarWidth = `${progressPercentage}%`;
 
   // Define whether each reward is enabled based on points
-  const isCashBackEnabled = points >= 70;
+  const isCashBackEnabled = points >= 100;
   const isFreeRideEnabled = points >= 200;
 
   return (
@@ -57,7 +57,7 @@ const Rewards = () => {
         <div className="bg-[#FE9F0D] rounded-full mt-4 mx-5 py-2">
           <p className="text-center text-white">Gold</p>
           <div
-            className="rounded-full h-[7px] mx-5 mb-3 mt-1 bg-white"
+            className="rounded-full  h-[7px] mx-5 mb-3 mt-1 bg-white"
             style={{ width: progressBarWidth }}
           ></div>
         </div>

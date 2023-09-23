@@ -4,7 +4,7 @@ import { AuthContext } from "../context/AuthProvider";
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
 import { Link } from "react-router-dom";
-
+import nirapode from "../../assets/nirapode.png";
 const Message = () => {
   const { user } = useContext(AuthContext);
   return (
@@ -15,11 +15,7 @@ const Message = () => {
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-4">
               <div className="w-[100px]">
-                <img
-                  className="h-14 w-14 rounded-full"
-                  src={user?.photoURL}
-                  alt=""
-                />
+                <img className="h-14 w-14 rounded-full" src={nirapode} alt="" />
               </div>
               <div>
                 <p className="font-bold">Team Nirapode</p>

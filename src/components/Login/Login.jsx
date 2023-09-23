@@ -12,6 +12,7 @@ import { FaAngleRight, FaEnvelope, FaLock } from "react-icons/fa";
 import userPlus from "../../assets/userplus.png";
 import question from "../../assets/question.png";
 import Loader from "../Loader/Loader";
+import ForgotPassword from "./ForgotPassword";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
@@ -24,6 +25,15 @@ const Login = () => {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
   const { createUser, updateUserProfile, signIn } = useContext(AuthContext);
+  const [isForgotPasswordModalOpen, setIsForgotPasswordModalOpen] =
+    useState(false);
+
+  const openForgotPasswordModal = () => {
+    setIsForgotPasswordModalOpen(true);
+  };
+  const closeForgotPasswordModal = () => {
+    setIsForgotPasswordModalOpen(false);
+  };
 
   const handleSignIn = (data) => {
     setIsLoading(true); // Set loading to true when starting the authentication process
@@ -128,12 +138,13 @@ const Login = () => {
 
           {/* Additional UI */}
           {!isSignUp && (
-            <div className="py-4">
+            <div onClick={openForgotPasswordModal} className="py-4">
               <p className="text-sm text-center  text-[#54C27D]">
                 Forgot password?
               </p>
             </div>
           )}
+          {isForgotPasswordModalOpen && <ForgotPassword></ForgotPassword>}
           <div className="flex items-cen	pt-4 space-x-1">
             <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
             <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>

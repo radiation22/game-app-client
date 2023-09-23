@@ -48,20 +48,15 @@ const Navbar = () => {
     }
   };
 
-  const showTicket = () => {
-    navigate("/myTicket");
-  };
-
   return (
     <>
       <header className="bg-[#04A83F] w-full px-3 text-white pt-1">
         <div className="container mx-auto flex items-center">
           <div className="flex">
-            {/* Add the user icon */}
             <div className="mr-4">
               <img className="h-6" src={bus} alt="" />
             </div>
-            {/* Add the cog icon */}
+
             <div className="mr-4">
               <img className="h-6" src={search} alt="" />
             </div>
@@ -133,7 +128,7 @@ const Navbar = () => {
             )}
           </NavLink>
           <NavLink
-            to="/rewards"
+            to="/driverReward"
             className={({ isActive }) =>
               isActive
                 ? "flex flex-col bg-white  px-4 py-3  items-center cursor-pointer"
@@ -157,7 +152,7 @@ const Navbar = () => {
             )}
           </NavLink>
           <NavLink
-            to="/donation"
+            to="/driverDonate"
             className={({ isActive }) =>
               isActive
                 ? "flex flex-col bg-white  px-4 py-3  items-center cursor-pointer"
@@ -182,7 +177,7 @@ const Navbar = () => {
           </NavLink>
 
           <NavLink
-            to="/more"
+            to="/"
             className={({ isActive }) =>
               isActive
                 ? "flex flex-col bg-white  px-4 py-3  items-center cursor-pointer"
