@@ -1,0 +1,6 @@
+@font-face {
+    font-family: 'Nexa';
+    /* src: local('Nexa'), url(fonts/Nexa-Black.woff) format('woff'); */
+    /* Add additional formats if you have them */
+    src: local('Nexa'), url(fonts/Nexa-Black.woff2) format('woff2'), url(fonts/Nexa-Black.ttf) format('truetype');
+}
