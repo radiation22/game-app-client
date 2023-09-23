@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthProvider";
 import DriverNav from "../Navbar/DriverNav";
+import DriverFooter from "../Footer/DriverFooter";
 
 const SuperTicket = ({ tickets }) => {
   const { user } = useContext(AuthContext);
@@ -55,6 +56,7 @@ const SuperTicket = ({ tickets }) => {
           </tbody>
         </table>
       </div>
+      <DriverFooter></DriverFooter>
     </>
   );
 };

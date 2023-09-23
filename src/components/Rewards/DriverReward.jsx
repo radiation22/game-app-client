@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import sun from "../../assets/sun.png";
 import star from "../../assets/star.png";
 import { FaAngleRight } from "react-icons/fa";
+import DriverFooter from "../Footer/DriverFooter";
 const DriverReward = () => {
   const { user } = useContext(AuthContext);
 
@@ -104,6 +105,7 @@ const DriverReward = () => {
           </button>
         </div>
       </div>
+      <DriverFooter></DriverFooter>
     </>
   );
 };

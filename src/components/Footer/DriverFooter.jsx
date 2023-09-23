@@ -42,7 +42,7 @@ const DriverFooter = () => {
             )}
           </NavLink>
         </div>
-        <NavLink to="/message">
+        <NavLink to="">
           {({ isActive }) => (
             <>
               {isActive ? (
@@ -68,12 +68,12 @@ const DriverFooter = () => {
           )}
         </NavLink>
 
-        <Link to="/location">
+        <Link to="/dashboard">
           <div className="flex flex-col items-center mt-[-40px]">
             <img className="w-[70px]" src={plus} alt="" />
           </div>
         </Link>
-        <NavLink to="/setting">
+        <NavLink to="/driverSetting">
           {({ isActive }) => (
             <>
               {isActive ? (
@@ -98,7 +98,7 @@ const DriverFooter = () => {
             </>
           )}
         </NavLink>
-        <NavLink to="/more">
+        <NavLink to="">
           {({ isActive }) => (
             <>
               {isActive ? (

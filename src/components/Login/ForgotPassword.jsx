@@ -3,27 +3,28 @@ import { useForm } from "react-hook-form";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import { toast } from "react-toastify";
 import app from "../../firebase/firebase.init";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthProvider";
 const ForgotPassword = () => {
+  const { user } = useContext(AuthContext);
   const { register, handleSubmit } = useForm();
   const auth = getAuth(app);
   const handleForgotPassword = (data) => {
-    firebase
-      .auth()
-      .sendPasswordResetEmail(data.email)
-      .then(() => {
-        // Password reset email sent!
-        console.log("check inbox");
-        // ..
-      })
-      .catch((error) => {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // ..
-      });
+    // sendPasswordResetEmail(auth, user?.email)
+    //   .then(() => {
+    //     // Password reset email sent!
+    //     console.log("check inbox");
+    //     // ..
+    //   })
+    //   .catch((error) => {
+    //     var errorCode = error.code;
+    //     var errorMessage = error.message;
+    //     // ..
+    //   });
     //   closeForgotPasswordModal();
   };
   const closeForgotPasswordModal = () => {
-    setIsForgotPasswordModalOpen(false);
+    // setIsForgotPasswordModalOpen(false);
   };
 
   return (

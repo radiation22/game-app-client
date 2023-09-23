@@ -29,6 +29,8 @@ import Register from "../components/Login/Register";
 import Notification from "../components/Notification/Notification";
 import DriverReward from "../components/Rewards/DriverReward";
 import DriverDonate from "../components/Donation/DriverDonate";
+import DriverSetting from "../components/Setting/DriverSetting";
+import DriverProfile from "../components/Profile/DriverProfile";
 
 export const router = createBrowserRouter([
   {
@@ -120,6 +122,14 @@ export const router = createBrowserRouter([
       {
         path: "/slider",
         element: <Slider></Slider>,
+      },
+      {
+        path: "/driverSetting",
+        element: <DriverSetting></DriverSetting>,
+      },
+      {
+        path: "/driverProfile",
+        element: <DriverProfile></DriverProfile>,
       },
       {
         path: "/donation",

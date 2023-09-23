@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useContext } from "react";
@@ -13,6 +13,8 @@ import userPlus from "../../assets/userplus.png";
 import question from "../../assets/question.png";
 import Loader from "../Loader/Loader";
 import ForgotPassword from "./ForgotPassword";
+import { getAuth, sendPasswordResetEmail } from "firebase/auth";
+import app from "../../firebase/firebase.init";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
@@ -23,16 +25,38 @@ const Login = () => {
   const [isSignUpLoading, setIsSignUpLoading] = useState(false); // Track loading state
   const navigate = useNavigate();
   const location = useLocation();
+  const auth = getAuth(app);
   const from = location.state?.from?.pathname || "/";
   const { createUser, updateUserProfile, signIn } = useContext(AuthContext);
   const [isForgotPasswordModalOpen, setIsForgotPasswordModalOpen] =
     useState(false);
+  const [email, setEmail] = useState("");
 
   const openForgotPasswordModal = () => {
     setIsForgotPasswordModalOpen(true);
   };
   const closeForgotPasswordModal = () => {
     setIsForgotPasswordModalOpen(false);
+  };
+  const handleEmailChange = (event) => {
+    const newEmail = event.target.value;
+    console.log(newEmail); // Log the new email value
+    setEmail(newEmail); // Update the email state
+  };
+
+  const handleForgotPassword = (data) => {
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        // Password reset email sent!
+        console.log("check inbox");
+        // ..
+      })
+      .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // ..
+      });
+    closeForgotPasswordModal();
   };
 
   const handleSignIn = (data) => {
@@ -144,7 +168,48 @@ const Login = () => {
               </p>
             </div>
           )}
-          {isForgotPasswordModalOpen && <ForgotPassword></ForgotPassword>}
+          {isForgotPasswordModalOpen && (
+            <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-50">
+              <div className="bg-white w-[400px] p-6 rounded-lg">
+                {/* Add your forgot password form here */}
+                <h2 className="text-xl font-semibold mb-4">Forgot Password</h2>
+                <form onSubmit={handleForgotPassword}>
+                  <div className="mb-4">
+                    <label
+                      htmlFor="email"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={email} // Bind the input value to the email state
+                      onChange={handleEmailChange}
+                      className="w-full px-4 py-2 border rounded-md"
+                      required
+                    />
+                  </div>
+                  <div className="flex justify-end">
+                    <button
+                      type="button"
+                      className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900"
+                      onClick={closeForgotPasswordModal}
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="submit"
+                      className="ml-2 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
+                    >
+                      Reset Password
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          )}
           <div className="flex items-cen	pt-4 space-x-1">
             <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
             <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
