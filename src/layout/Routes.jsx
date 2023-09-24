@@ -31,6 +31,9 @@ import DriverReward from "../components/Rewards/DriverReward";
 import DriverDonate from "../components/Donation/DriverDonate";
 import DriverSetting from "../components/Setting/DriverSetting";
 import DriverProfile from "../components/Profile/DriverProfile";
+import Admin from "../components/Login/Admin";
+import AdminRoute from "../components/PrivateRoute/AdminRoute";
+import DriverMore from "../components/More/DriverMore";
 
 export const router = createBrowserRouter([
   {
@@ -93,7 +96,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/manager",
-        element: <Manager></Manager>,
+        element: (
+          <AdminRoute>
+            <Manager></Manager>
+          </AdminRoute>
+        ),
       },
       {
         path: "/myTicket",
@@ -122,6 +129,10 @@ export const router = createBrowserRouter([
       {
         path: "/slider",
         element: <Slider></Slider>,
+      },
+      {
+        path: "/admin",
+        element: <Admin></Admin>,
       },
       {
         path: "/driverSetting",
@@ -186,6 +197,10 @@ export const router = createBrowserRouter([
       {
         path: "/driverReward",
         element: <DriverReward></DriverReward>,
+      },
+      {
+        path: "/driverMore",
+        element: <DriverMore></DriverMore>,
       },
     ],
   },

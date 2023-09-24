@@ -1,29 +1,107 @@
 import React, { useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthProvider";
 import userPlus from "../../assets/userplus.png";
 import question from "../../assets/question.png";
 import bg from "../../assets/signbg.jpg";
-import logo from "../../assets/logo.png";
 import icon from "../../assets/leftarrow.png";
 import { toast } from "react-toastify";
 import { FaAngleRight, FaEdit } from "react-icons/fa";
-import edit from "../../assets/edit.png";
+import {
+  getAuth,
+  updateProfile,
+  reauthenticateWithCredential,
+  EmailAuthProvider,
+  updatePassword,
+} from "firebase/auth";
+import app from "../../firebase/firebase.init";
 
 const Profile = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { register, handleSubmit } = useForm();
   const [selectedFile, setSelectedFile] = useState(null);
-  const [loginError, setLoginError] = useState("");
   const { user } = useContext(AuthContext);
+  const auth = getAuth(app);
+
+  const uploadImageToImgBB = async (imageFile) => {
+    try {
+      // Create a FormData object to send the image file
+      const formData = new FormData();
+      formData.append("image", imageFile);
+
+      // Your ImgBB API key
+      const apiKey = "8c45a65277afef5acc89d1665e868e9c";
+
+      // Make a POST request to the ImgBB API endpoint
+      const response = await fetch(
+        `https://api.imgbb.com/1/upload?key=${apiKey}`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      // Check if the request was successful (status code 200)
+      if (response.ok) {
+        const data = await response.json();
+        // The uploaded image URL is available in data.data.url
+        return data.data.url;
+      } else {
+        // Handle the error if the request fails
+        throw new Error("Image upload failed");
+      }
+    } catch (error) {
+      // Handle any errors that occurred during the fetch
+      console.error("Error uploading image:", error);
+      throw error;
+    }
+  };
+
+  const reauthenticateUser = async (currentPassword) => {
+    const user = auth.currentUser;
+    const credential = EmailAuthProvider.credential(
+      user.email,
+      currentPassword
+    );
+    await reauthenticateWithCredential(user, credential);
+  };
+
+  const onSubmit = async (data) => {
+    try {
+      // data object contains the form input values
+      console.log(data);
+
+      // Upload the image asynchronously
+      const imageUrl = await uploadImageToImgBB(selectedFile);
+
+      // Reauthenticate the user with their current password
+      await reauthenticateUser(data.currentPassword);
+
+      // Update the user's profile
+      await updateProfile(auth.currentUser, {
+        displayName: data.name,
+        photoURL: imageUrl,
+      });
+
+      // Update the user's password
+      await updatePassword(auth.currentUser, data.newPassword);
+
+      // Success: All operations completed
+      console.log("Profile updated successfully.");
+    } catch (error) {
+      // Handle any errors that occurred during the operations
+      console.error("Error:", error);
+    }
+  };
 
   // Handle file input change
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     setSelectedFile(file);
   };
+
   return (
     <div
       style={{
@@ -56,6 +134,7 @@ const Profile = () => {
 
           {!isLoading && (
             <form
+              onSubmit={handleSubmit(onSubmit)}
               noValidate=""
               action=""
               className="space-y-6 mt-4 ng-untouched ng-pristine ng-valid"
@@ -92,12 +171,26 @@ const Profile = () => {
               </div>
               <div className="relative">
                 <input
-                  {...register("password")}
+                  {...register("currentPassword")}
                   type="password"
-                  name="password"
-                  id="password"
+                  name="currentPassword"
+                  id="currentPassword"
                   required
-                  placeholder="Password"
+                  placeholder="Current Password"
+                  className="w-full pl-4 py-3 drop-shadow-xl border-2 rounded-full  border-[#54B89C] focus:outline-green-500  text-gray-900"
+                />
+                <span className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                  <FaEdit className="text-[#A7B4C2] mr-3 text-xl"></FaEdit>
+                </span>
+              </div>
+              <div className="relative">
+                <input
+                  {...register("newPassword")}
+                  type="password"
+                  name="newPassword"
+                  id="newPassword"
+                  required
+                  placeholder="New Password"
                   className="w-full pl-4 py-3 drop-shadow-xl border-2 rounded-full  border-[#54B89C] focus:outline-green-500  text-gray-900"
                 />
                 <span className="absolute right-3 top-1/2 transform -translate-y-1/2">

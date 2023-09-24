@@ -98,7 +98,7 @@ const DriverFooter = () => {
             </>
           )}
         </NavLink>
-        <NavLink to="">
+        <NavLink to="/driverMore">
           {({ isActive }) => (
             <>
               {isActive ? (

@@ -68,9 +68,9 @@ const Home = () => {
           <p className="text-[#AFAFAF] py-1 rounded-lg underline  uppercase text-[11px]">
             Not Now
           </p>
-          {/* <Link to="/manager">
+          <Link to="/admin">
             <FaTv className="text-3xl text-white hover:bg-black"></FaTv>
-          </Link> */}
+          </Link>
         </div>
       </div>
       <div className="bg-[#04A83F] h-[50px] w-full mt- fixed bottom-0"></div>

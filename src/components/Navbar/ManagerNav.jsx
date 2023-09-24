@@ -16,7 +16,7 @@ const ManagerNav = () => {
     logOut()
       .then((result) => {
         toast.success("you have logged out");
-        navigate("/home");
+        navigate("/admin");
       })
       .catch((error) => console.log(error));
   };
@@ -76,7 +76,7 @@ const ManagerNav = () => {
         </div>
       </header>
 
-      <footer className="bg-[#BF1B21] w-full text-white   p-4">
+      {/* <footer className="bg-[#BF1B21] w-full text-white   p-4">
         <div className="container mx-auto flex justify-between">
           <div onClick={handleTrip} className="flex flex-col items-center">
             <FaChartLine
@@ -98,7 +98,7 @@ const ManagerNav = () => {
             <span className="uppercase py-1">More</span>
           </div>
         </div>
-      </footer>
+      </footer> */}
     </>
   );
 };

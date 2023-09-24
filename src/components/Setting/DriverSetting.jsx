@@ -12,6 +12,7 @@ import icon from "../../assets/left2.png";
 import { AuthContext } from "../context/AuthProvider";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
+import DriverFooter from "../Footer/DriverFooter";
 const DriverSetting = () => {
   const navigate = useNavigate();
   const { user, logOut } = useContext(AuthContext);
@@ -19,7 +20,7 @@ const DriverSetting = () => {
     logOut()
       .then((result) => {
         toast.success("You have logged out");
-        navigate("/welcome");
+        navigate("/login2");
       })
       .catch((error) => console.log(error));
   };
@@ -95,7 +96,7 @@ const DriverSetting = () => {
           </div>
         </div>
       </div>
-      <Footer></Footer>
+      <DriverFooter></DriverFooter>
     </>
   );
 };

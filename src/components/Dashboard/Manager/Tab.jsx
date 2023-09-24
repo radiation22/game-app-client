@@ -123,8 +123,66 @@ const Tabs = () => {
         >
           <div>
             <h2>All User Tickets</h2>
-            {tickets.map((ticket, idx) => (
-              <div className="p-2">
+            {tickets
+              .slice()
+              .reverse() // Create a copy of the array to avoid modifying the original array
+              .sort((a, b) => {
+                const startPointA = a.startPoint.toLowerCase(); // Convert to lowercase for case-insensitive sorting
+                const startPointB = b.startPoint.toLowerCase();
+                const dateA = new Date(a?.formattedDate);
+                const dateB = new Date(b?.formattedDate);
+
+                // First, compare by startPoint in descending order
+                if (startPointB !== startPointA) {
+                  return startPointB.localeCompare(startPointA);
+                }
+
+                // If the startPoints are the same, compare by formattedDate in descending order
+                return dateB - dateA;
+              })
+              .map((ticket, idx) => (
+                <div className="p-2" key={idx}>
+                  <div
+                    className={`border ${
+                      ticket.status === "checked"
+                        ? "bg-stone-300  p-6 rounded-xl shadow-lg flex justify-between"
+                        : "border p-6 rounded-xl shadow-lg flex justify-between"
+                    }`}
+                  >
+                    <div>
+                      <p className="font-bold">
+                        StartPoint: {ticket?.startPoint}
+                      </p>
+                      <p className="font-bold">
+                        Destination: {ticket.destination}
+                      </p>
+                      <p className="font-bold">Date: {ticket.formattedDate}</p>
+                    </div>
+                    <div>
+                      <p>Total Cost: </p>
+                      <p>{ticket.totalCost} BDT</p>
+
+                      <button className="bg-black mt-3 text-white px-3 py-1 rounded">
+                        {ticket.status}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+          </div>
+        </div>
+
+        <div
+          id="today"
+          className={`${
+            activeTab === "today" ? "block" : "hidden"
+          } bg-white border p-4 rounded-lg`}
+        >
+          {todayTickets
+            .slice()
+            .reverse()
+            .map((ticket, idx) => (
+              <div className="p-2" key={idx}>
                 <div
                   className={`border ${
                     ticket.status === "checked"
@@ -144,53 +202,19 @@ const Tabs = () => {
                   <div>
                     <p>Total Cost: </p>
                     <p>{ticket.totalCost} BDT</p>
-
-                    <button className="bg-black mt-3 text-white px-3 py-1 rounded">
-                      {ticket.status}
-                    </button>
+                    {ticket.status === "checked" ? (
+                      <button className="bg-black text-white px-3 py-1 rounded">
+                        Checked
+                      </button>
+                    ) : (
+                      <button className="bg-black mt-3 text-white px-3 py-1 rounded">
+                        Pending
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
             ))}
-          </div>
-        </div>
-
-        <div
-          id="today"
-          className={`${
-            activeTab === "today" ? "block" : "hidden"
-          } bg-white border p-4 rounded-lg`}
-        >
-          {todayTickets.slice().map((ticket, idx) => (
-            <div className="p-2">
-              <div
-                className={`border ${
-                  ticket.status === "checked"
-                    ? "bg-stone-300  p-6 rounded-xl shadow-lg flex justify-between"
-                    : "border p-6 rounded-xl shadow-lg flex justify-between"
-                }`}
-              >
-                <div>
-                  <p className="font-bold">StartPoint: {ticket?.startPoint}</p>
-                  <p className="font-bold">Destination: {ticket.destination}</p>
-                  <p className="font-bold">Date: {ticket.formattedDate}</p>
-                </div>
-                <div>
-                  <p>Total Cost: </p>
-                  <p>{ticket.totalCost} BDT</p>
-                  {ticket.status === "checked" ? (
-                    <button className="bg-black text-white px-3 py-1 rounded">
-                      Checked
-                    </button>
-                  ) : (
-                    <button className="bg-black mt-3 text-white px-3 py-1 rounded">
-                      Pending
-                    </button>
-                  )}
-                </div>
-              </div>
-            </div>
-          ))}
         </div>
       </div>
     </div>

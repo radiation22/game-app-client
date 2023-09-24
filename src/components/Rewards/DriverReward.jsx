@@ -24,7 +24,7 @@ const DriverReward = () => {
         const todayTrips = data.filter((trip) => {
           return trip.formattedDate === formattedDate;
         });
-        console.log(todayTrips);
+        // console.log(todayTrips);
         setTrip(todayTrips);
       })
       .catch((error) => {

@@ -177,7 +177,7 @@ const Navbar = () => {
           </NavLink>
 
           <NavLink
-            to="/"
+            to="/driverMore"
             className={({ isActive }) =>
               isActive
                 ? "flex flex-col bg-white  px-4 py-3  items-center cursor-pointer"

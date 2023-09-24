@@ -2,11 +2,12 @@
 import { useContext, useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../context/AuthProvider";
+import Loader from "../Loader/Loader";
 
-const DriverRoute = ({ children }) => {
+const AdminRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
   const location = useLocation();
-  const [role, setRole] = useState("driver"); // State to store the user's role
+  const [role, setRole] = useState("admin"); // State to store the user's role
 
   useEffect(() => {
     // Fetch the user's role when the component mounts
@@ -14,11 +15,11 @@ const DriverRoute = ({ children }) => {
       const fetchData = async () => {
         try {
           const response = await fetch(
-            `https://nirapode-server.vercel.app/validateUserRole?email=${user?.email}`
+            `https://nirapode-server.vercel.app/validateAdminRole?email=${user?.email}`
           );
           const userData = await response.json();
-
-          setRole(userData?.userRole); // Assuming the role is in the response
+          console.log(userData);
+          setRole(userData.userRole); // Assuming the role is in the response
         } catch (error) {
           console.error("Error fetching user role:", error);
         }
@@ -29,20 +30,16 @@ const DriverRoute = ({ children }) => {
   }, [user]);
 
   if (loading) {
-    return (
-      <div className="text-center">
-        <button className="btn loading">Loading</button>
-      </div>
-    );
+    return <Loader></Loader>;
   }
 
-  if (!user || role !== "driver") {
+  if (!user || role !== "admin") {
     // Redirect to the login page or another appropriate route
-    return <Navigate to="/login2" state={{ from: location }} replace />;
+    return <Navigate to="/admin" state={{ from: location }} replace />;
   }
 
   // Allow access to the protected route for "driver" role
   return children;
 };
 
-export default DriverRoute;
+export default AdminRoute;

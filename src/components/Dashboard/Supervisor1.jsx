@@ -28,58 +28,14 @@ const Supervisor1 = () => {
   const refreshPage = () => {
     window.location.reload();
   };
-  useEffect(() => {
-    // Fetch data from the URL
-    fetch("https://nirapode-server.vercel.app/trips")
-      .then((response) => response.json())
-      .then((data) => {
-        const todayTrips = data.filter((trip) => {
-          return trip.formattedDate === formattedDate && trip.busNo === busNo;
-        });
-        // console.log(todayTrips);
-
-        // Calculate totalCost and totalTickets
-        const totalCostSum = todayTrips.reduce(
-          (sum, trip) => sum + trip.totalCostSum,
-          0
-        );
-
-        const totalTicketsSum = todayTrips.reduce(
-          (sum, trip) => sum + trip.ticketNo,
-          0
-        );
-
-        const totalDonationSum = todayTrips.reduce(
-          (sum, trip) => sum + trip.donation,
-          0
-        );
-
-        const totalTripSum = todayTrips.reduce(
-          (sum, trip) => sum + trip.trip,
-          0
-        );
-
-        const tripPassenger = todayTrips.reduce(
-          (sum, trip) => sum + trip.totalPassengerSum,
-          0
-        );
-
-        setTripPassenger(tripPassenger);
-        setTrip(todayTrips.length);
-        setTotalCost(totalCostSum);
-        setTotalTickets(totalTicketsSum);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-  }, [formattedDate, busNo]); // Update the dependencies to include both formattedDate and busNo
+  // Update the dependencies to include both formattedDate and busNo
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         // Fetch driver data and extract bus numbers
         const driverResponse = await fetch(
-          `https://nirapode-server.vercel.app/singleDrivers?email=${user.email}`
+          `https://nirapode-server.vercel.app/singleDrivers?email=${user?.email}`
         );
 
         const driverData = await driverResponse.json();
@@ -108,7 +64,6 @@ const Supervisor1 = () => {
             ticket.formattedDate === formattedDate
           );
         });
-        // console.log(confirmedTickets);
 
         setTicketNo(confirmedTickets?.length);
 
@@ -117,6 +72,7 @@ const Supervisor1 = () => {
           (sum, ticket) => sum + ticket.totalCost,
           0
         );
+
         const passengerSum = confirmedTickets.reduce(
           (sum, ticket) => sum + ticket.passenger,
           0
@@ -142,6 +98,46 @@ const Supervisor1 = () => {
     fetchData();
   }, [busNo]);
 
+  useEffect(() => {
+    // Fetch data from the URL
+    fetch("https://nirapode-server.vercel.app/trips")
+      .then((response) => response.json())
+      .then((data) => {
+        const todayTrips = data.filter((trip) => {
+          return trip.formattedDate === formattedDate && trip.busNo === busNo;
+        });
+
+        // Calculate totalCost and totalTickets
+        const totalCostSum = todayTrips.reduce(
+          (sum, trip) => sum + trip?.totalCostSum,
+          0
+        );
+
+        const totalTicketsSum = todayTrips.reduce(
+          (sum, trip) => sum + trip.ticketNo,
+          0
+        );
+
+        const totalDonationSum = todayTrips.reduce(
+          (sum, trip) => sum + trip.donation,
+          0
+        );
+
+        const tripPassenger = todayTrips.reduce(
+          (sum, trip) => sum + trip.totalPassengerSum,
+          0
+        );
+
+        setTripPassenger(tripPassenger);
+        setTrip(todayTrips?.length);
+        setTotalCost(totalCostSum);
+        setTotalTickets(totalTicketsSum);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, [formattedDate, busNo]);
+
   // this is for reducing the cost when it send to the manager
 
   const handleManager = () => {
@@ -158,7 +154,7 @@ const Supervisor1 = () => {
       totalPassengerSum,
       ticketNo,
       donation,
-      trip,
+      trip: trip + 1,
       email: user?.email,
       busNo,
       status: "Pending",
