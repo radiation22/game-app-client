@@ -17,6 +17,7 @@ import TicketInfo from "../components/UserTicket/TicketInfo";
 import SuperTicket from "../components/Dashboard/SuperTicket";
 import ShowTicket from "../components/UserTicket/ShowTicket";
 import Slider from "../components/Slider/Slider";
+import Sliderb from "../components/Slider/Sliderb";
 import Donation from "../components/Donation/Donation";
 import Rewards from "../components/Rewards/Rewards";
 import Profile from "../components/Profile/Profile";
@@ -34,6 +35,14 @@ import DriverProfile from "../components/Profile/DriverProfile";
 import Admin from "../components/Login/Admin";
 import AdminRoute from "../components/PrivateRoute/AdminRoute";
 import DriverMore from "../components/More/DriverMore";
+import Homeb from "../components/Home/Homeb";
+import ChooseAccountb from "../components/ChooseAccount/ChooseAccountb";
+import Locationb from "../components/Location/Locationb";
+import ChooseBusb from "../components/ChooseBus/ChooseBusb";
+import TicketDetailsb from "../components/TicketDetails/TicketDetailsb";
+import Settingb from "../components/Setting/Settingb";
+import Moreb from "../components/More/Moreb";
+import Language from "./../components/Language/Language";
 
 export const router = createBrowserRouter([
   {
@@ -46,9 +55,18 @@ export const router = createBrowserRouter([
         path: "/",
         element: <StartPage></StartPage>,
       },
+
       {
         path: "/home",
         element: <Main></Main>,
+      },
+      {
+        path: "/language",
+        element: <Language></Language>,
+      },
+      {
+        path: "/homeb",
+        element: <Homeb></Homeb>,
       },
       {
         path: "/register",
@@ -59,10 +77,22 @@ export const router = createBrowserRouter([
         element: <ChooseAccount></ChooseAccount>,
       },
       {
+        path: "/accountb",
+        element: <ChooseAccountb></ChooseAccountb>,
+      },
+      {
         path: "/location",
         element: (
           <PrivateRoute>
             <Location></Location>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/locationb",
+        element: (
+          <PrivateRoute>
+            <Locationb></Locationb>
           </PrivateRoute>
         ),
       },
@@ -75,10 +105,26 @@ export const router = createBrowserRouter([
         ),
       },
       {
+        path: "/chooseBusb/:busNumber",
+        element: (
+          <PrivateRoute>
+            <ChooseBusb></ChooseBusb>
+          </PrivateRoute>
+        ),
+      },
+      {
         path: "/ticket",
         element: (
           <PrivateRoute>
             <TicketDetails></TicketDetails>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/ticketb",
+        element: (
+          <PrivateRoute>
+            <TicketDetailsb></TicketDetailsb>
           </PrivateRoute>
         ),
       },
@@ -131,6 +177,10 @@ export const router = createBrowserRouter([
         element: <Slider></Slider>,
       },
       {
+        path: "/sliderb",
+        element: <Sliderb></Sliderb>,
+      },
+      {
         path: "/admin",
         element: <Admin></Admin>,
       },
@@ -171,12 +221,20 @@ export const router = createBrowserRouter([
         element: <Setting></Setting>,
       },
       {
+        path: "/settingb",
+        element: <Settingb></Settingb>,
+      },
+      {
         path: "/message",
         element: <Message></Message>,
       },
       {
         path: "/more",
         element: <More></More>,
+      },
+      {
+        path: "/moreb",
+        element: <Moreb></Moreb>,
       },
       {
         path: "/inbox",

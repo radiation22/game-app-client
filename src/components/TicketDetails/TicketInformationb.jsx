@@ -6,7 +6,7 @@ import { toast } from "react-hot-toast";
 import danger from "../../assets/danger.png";
 import { AuthContext } from "../context/AuthProvider";
 import circle from "../../assets/style.png";
-const TicketInformation = ({ ticket, refetch }) => {
+const TicketInformationb = ({ ticket, refetch }) => {
   const [secret, setSecret] = useState("");
   const [item, setItem] = useState(null);
   const [item2, setItem2] = useState(null);
@@ -221,4 +221,4 @@ const TicketInformation = ({ ticket, refetch }) => {
   );
 };
 
-export default TicketInformation;
+export default TicketInformationb;

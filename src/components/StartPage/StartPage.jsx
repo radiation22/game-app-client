@@ -8,7 +8,7 @@ const StartPage = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-      navigate("/slider");
+      navigate("/language");
     }, 5000);
 
     return () => clearTimeout(timer);

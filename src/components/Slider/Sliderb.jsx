@@ -6,12 +6,13 @@ import "./styles.css";
 import "swiper/css/navigation";
 import next from "../../assets/next.png";
 import { Pagination, Autoplay, Navigation } from "swiper/modules";
-import Page1 from "./Page1";
-import Page2 from "./Page2";
-import Page3 from "./Page3";
+
 import { Link, useNavigate } from "react-router-dom";
 import skip from "../../assets/skip.png";
 import bus2 from "../../assets/bus2.png";
+import Page1b from "./Page1b";
+import Page2b from "./Page2b";
+import Page3b from "./Page3b";
 
 export default function App() {
   const swiperRef = useRef(null);
@@ -24,7 +25,7 @@ export default function App() {
       if (currentSlide === swiperInstance.slides.length) {
         // Check if the current slide is the last one
         // Navigate to the next route when on the last slide
-        navigate("/home");
+        navigate("/homeb");
       } else {
         // Go to the next slide if it's not the last slide
         swiperInstance.slideNext();
@@ -36,12 +37,12 @@ export default function App() {
   return (
     <>
       <div className="flex z-0 justify-between">
-        <Link to="/home">
+        <Link to="/homeb">
           <img className="h-24" src={skip} alt="" />
         </Link>
         <img className="relative h-24 mt-6 mr-6" src={bus2} alt="" />
       </div>
-      <Link to="/home">
+      <Link to="/homeb">
         <p className="absolute top-10 z-40 left-10 text-lg text-white">Skip</p>
       </Link>
 
@@ -63,13 +64,13 @@ export default function App() {
         }}
       >
         <SwiperSlide>
-          <Page1 />
+          <Page1b />
         </SwiperSlide>
         <SwiperSlide>
-          <Page2 />
+          <Page2b />
         </SwiperSlide>
         <SwiperSlide>
-          <Page3 />
+          <Page3b />
         </SwiperSlide>
       </Swiper>
 
