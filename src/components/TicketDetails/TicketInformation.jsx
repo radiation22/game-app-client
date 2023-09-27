@@ -202,17 +202,25 @@ const TicketInformation = ({ ticket, refetch }) => {
                 <p className="text-red-500">{secret}</p>
               </div>
             ) : (
-              <div className="flex justify-center">
-                <button
-                  onClick={() => {
-                    confirmTicket(ticket?._id);
-                    confirmTicket2(ticket._id);
-                  }}
-                  className="bg-[#C1282D] text-white px-20 mt-1 rounded-full py-1"
-                >
-                  Confirm
-                </button>
-              </div>
+              <>
+                {status === "checked" ? (
+                  <></>
+                ) : (
+                  <>
+                    <div className="flex justify-center">
+                      <button
+                        onClick={() => {
+                          confirmTicket(details?._id);
+                          confirmTicket2(details._id);
+                        }}
+                        className="bg-[#C1282D] text-white px-20 mt-1 rounded-full py-1"
+                      >
+                        Confirm
+                      </button>
+                    </div>
+                  </>
+                )}
+              </>
             )}
           </div>
         </div>

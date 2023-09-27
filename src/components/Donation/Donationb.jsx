@@ -7,9 +7,10 @@ import homepic from "../../assets/donateHome.png";
 import Navbar from "../Navbar/Navbar";
 import { AuthContext } from "../context/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
-import Footer from "../Footer/Footer";
+import Navbarb from "../Navbar/Navbarb";
+import Footerb from "../Footer/Footerb";
 
-const Donation = () => {
+const Donationb = () => {
   const { user } = useContext(AuthContext);
 
   // Define the query key
@@ -37,7 +38,7 @@ const Donation = () => {
 
   return (
     <>
-      <Navbar />
+      <Navbarb />
       <div className="h-screen">
         <img className="h-[180px] mt-8 mx-auto" src={homepic} alt="" />
         <h2 className="text-center text-xl py-5 font-bold uppercase text-[#00A63A]">
@@ -114,9 +115,9 @@ const Donation = () => {
           </div>
         </div>
       </div>
-      <Footer></Footer>
+      <Footerb></Footerb>
     </>
   );
 };
 
-export default Donation;
+export default Donationb;

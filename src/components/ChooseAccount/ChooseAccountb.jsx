@@ -9,7 +9,7 @@ const ChooseAccountb = () => {
     navigate("/locationb");
   };
   const handleDriver = () => {
-    navigate("/dashboard");
+    navigate("/dashboardb");
   };
   return (
     <div

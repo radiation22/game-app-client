@@ -12,7 +12,7 @@ const Page1b = () => {
             নিরাপদে পরিবারে আপনাকে স্বাগতম . এটি একটি পাবলিক ট্রান্সপোর্ট
             অটোমেশন
             <br />
-            পরিসেবা যা প্রোডাক্ট/সিস্টার কনসার্ন অফ
+            পরিসেবা যা প্রোডাক্ট/সিস্টার কনসার্ন
             <a className="underline" href="https://radiationgroup.tech/">
               Radiation corporation.
             </a>

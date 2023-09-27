@@ -29,14 +29,14 @@ const Navbarb = () => {
     logOut()
       .then((result) => {
         toast.success("You have logged out");
-        navigate("/home");
+        navigate("/homeb");
       })
       .catch((error) => console.log(error));
   };
 
   const handleNotificationClick = () => {
     setNotificationCount(0);
-    navigate("/notification");
+    navigate("/notificationb");
   };
 
   const toggleDropdown = () => {
@@ -50,7 +50,7 @@ const Navbarb = () => {
   };
 
   const showTicket = () => {
-    navigate("/myTicket");
+    navigate("/myTicketb");
   };
 
   return (
@@ -84,7 +84,7 @@ const Navbarb = () => {
               onClick={toggleDropdown}
             >
               {/* Add your user profile image */}
-              <Link to="/setting">
+              <Link to="/settingb">
                 {" "}
                 <img
                   className="rounded-full h-6 w-6"
@@ -113,7 +113,7 @@ const Navbarb = () => {
       <footer className="bg-[#9DDE2A] w-full  text-white">
         <div className="container mx-auto flex justify-around">
           <NavLink
-            to="/myTicket"
+            to="/myTicketb"
             className={({ isActive }) =>
               isActive
                 ? "flex flex-col bg-white  px-4 py-3  items-center cursor-pointer"
@@ -137,7 +137,7 @@ const Navbarb = () => {
             )}
           </NavLink>
           <NavLink
-            to="/rewards"
+            to="/rewardsb"
             className={({ isActive }) =>
               isActive
                 ? "flex flex-col bg-white  px-4 py-3  items-center cursor-pointer"
@@ -161,7 +161,7 @@ const Navbarb = () => {
             )}
           </NavLink>
           <NavLink
-            to="/donation"
+            to="/donationb"
             className={({ isActive }) =>
               isActive
                 ? "flex flex-col bg-white  px-4 py-3  items-center cursor-pointer"
@@ -186,7 +186,7 @@ const Navbarb = () => {
           </NavLink>
 
           <NavLink
-            to="/more"
+            to="/moreb"
             className={({ isActive }) =>
               isActive
                 ? "flex flex-col bg-white  px-4 py-3  items-center cursor-pointer"

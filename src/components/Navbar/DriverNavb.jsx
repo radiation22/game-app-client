@@ -16,7 +16,7 @@ import bell from "../../assets/bell.png";
 import bus from "../../assets/bus1.png";
 import ticket2 from "../../assets/ticket2.png";
 
-const DriverNav = () => {
+const DriverNavb = () => {
   const [notificationCount, setNotificationCount] = useState(0);
   const navigate = useNavigate();
   const { user, logOut } = useContext(AuthContext);
@@ -29,7 +29,7 @@ const DriverNav = () => {
     logOut()
       .then((result) => {
         toast.success("You have logged out");
-        navigate("/login2");
+        navigate("/login2b");
       })
       .catch((error) => console.log(error));
   };
@@ -104,7 +104,7 @@ const DriverNav = () => {
       <footer className="bg-[#9DDE2A] w-full  text-white">
         <div className="container mx-auto flex justify-around">
           <NavLink
-            to="/trip"
+            to="/tripb"
             className={({ isActive }) =>
               isActive
                 ? "flex flex-col bg-white  px-4 py-3  items-center cursor-pointer"
@@ -116,19 +116,19 @@ const DriverNav = () => {
                 {isActive ? (
                   <>
                     <img className="w-8 h-5" src={ticket2} alt="" />
-                    <span className="text-green-600 mt-1">Trips</span>
+                    <span className="text-green-600 mt-1">ট্রিপস</span>
                   </>
                 ) : (
                   <>
                     <img className="w-8 h-5" src={ticket} alt="" />
-                    <span className="mt-1">Trips</span>
+                    <span className="mt-1"></span>ট্রিপস
                   </>
                 )}
               </>
             )}
           </NavLink>
           <NavLink
-            to="/driverReward"
+            to="/driverRewardb"
             className={({ isActive }) =>
               isActive
                 ? "flex flex-col bg-white  px-4 py-3  items-center cursor-pointer"
@@ -140,19 +140,19 @@ const DriverNav = () => {
                 {isActive ? (
                   <>
                     <img className="w-8 h-6" src={reward2} alt="" />
-                    <span className=" text-green-600">Your Gift</span>
+                    <span className=" text-green-600">আপনার গিফট</span>
                   </>
                 ) : (
                   <>
                     <img className="w-8 h-6" src={reward} alt="" />
-                    <span className="">Your Gift</span>
+                    <span className="">আপনার গিফট</span>
                   </>
                 )}
               </>
             )}
           </NavLink>
           <NavLink
-            to="/driverDonate"
+            to="/driverDonateb"
             className={({ isActive }) =>
               isActive
                 ? "flex flex-col bg-white  px-4 py-3  items-center cursor-pointer"
@@ -164,12 +164,12 @@ const DriverNav = () => {
                 {isActive ? (
                   <>
                     <img className="w-8 h-6" src={donate2} alt="" />
-                    <span className=" text-green-600">Donate</span>
+                    <span className=" text-green-600">অনুদান</span>
                   </>
                 ) : (
                   <>
                     <img className="w-8 h-6" src={donate} alt="" />
-                    <span className="">Donate</span>
+                    <span className="">অনুদান</span>
                   </>
                 )}
               </>
@@ -177,7 +177,7 @@ const DriverNav = () => {
           </NavLink>
 
           <NavLink
-            to="/driverMore"
+            to="/driverMoreb"
             className={({ isActive }) =>
               isActive
                 ? "flex flex-col bg-white  px-4 py-3  items-center cursor-pointer"
@@ -189,12 +189,12 @@ const DriverNav = () => {
                 {isActive ? (
                   <>
                     <img className="w-6 h-6" src={more2} alt="" />
-                    <span className=" text-green-600">More</span>
+                    <span className=" text-green-600">আরো</span>
                   </>
                 ) : (
                   <>
                     <img className="w-6 h-6" src={more} alt="" />
-                    <span className="">More</span>
+                    <span className="">আরো</span>
                   </>
                 )}
               </>
@@ -206,4 +206,4 @@ const DriverNav = () => {
   );
 };
 
-export default DriverNav;
+export default DriverNavb;

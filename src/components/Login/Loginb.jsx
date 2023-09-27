@@ -66,7 +66,7 @@ const Loginb = () => {
         const user = result.user;
         setLoginError("");
         toast.success("Login Successfully");
-        navigate("/location");
+        navigate("/locationb");
         // navigate(from, { replace: true });
       })
       .catch((error) => {
@@ -89,7 +89,7 @@ const Loginb = () => {
       }}
       className=""
     >
-      <Link to="/welcome">
+      <Link to="/welcomeb">
         <div>
           <img className="h-12 pt-4 pl-4" src={icon} alt="" />
         </div>
@@ -149,7 +149,7 @@ const Loginb = () => {
                   type="submit"
                   className="w-full px-8 py-3 font-semibold drop-shadow-xl rounded-full bg-[#9DDE2A] hover:text-white text-gray-100"
                 >
-                  Sign In
+                  সাইন ইন
                 </button>
               </div>
             </form>
@@ -164,7 +164,7 @@ const Loginb = () => {
           {!isSignUp && (
             <div onClick={openForgotPasswordModal} className="py-4">
               <p className="text-sm text-center  text-[#54C27D]">
-                Forgot password?
+                পাসওয়ার্ড ভুলে গেছেন?
               </p>
             </div>
           )}
@@ -216,9 +216,9 @@ const Loginb = () => {
           </div>
           <p className="px-6 text-sm text-center text-[#B0BDC9]">
             <i>Do not have an account?</i>
-            <Link to="/register">
+            <Link to="/registerb">
               <button className="hover:underline  font-bold text-[#A7E142]">
-                Sign Up
+                সাইন আপ
               </button>
             </Link>
           </p>

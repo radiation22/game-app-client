@@ -54,7 +54,7 @@ const DriverSetting = () => {
             <FaAngleRight className="text-[#92A1B3]"></FaAngleRight>
           </div>
         </div>
-        <Link to="/dashboard">
+        <Link to="/driverNotification">
           <div className="bg-white mx-6 rounded-lg py-3 px-5 mt-1">
             <div className="flex justify-between items-center">
               <div className="flex gap-5">

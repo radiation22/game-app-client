@@ -65,7 +65,7 @@ const Locationb = () => {
             বাস সিলেক্ট
           </button>
           {showDropdown && (
-            <ul className="absolute top-[-142px] z-0  left-[12%] border shadow-lg rounded-xl bg-[#9DDE2A]">
+            <ul className="absolute top-[-140px] z-0  left-[9%] border shadow-lg rounded-xl bg-[#9DDE2A]">
               {busOptions.map((option) => (
                 <li
                   // key={option._id}

@@ -6,8 +6,10 @@ import Footer from "../Footer/Footer";
 import { Link, useNavigate } from "react-router-dom";
 import circle from "../../assets/style2.png";
 import dashed from "../../assets/dashed.png";
+import Footerb from "../Footer/Footerb";
+import Navbarb from "../Navbar/Navbarb";
 
-const TicketInfo = () => {
+const TicketInfob = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -36,14 +38,14 @@ const TicketInfo = () => {
   const formattedToday = `${dd}/${mm}/${yyyy}`;
 
   const showTicket = (id) => {
-    navigate(`/ticket/${id}`);
+    navigate(`/ticketb/${id}`);
   };
 
   return (
     <>
-      <Navbar></Navbar>
+      <Navbarb></Navbarb>
       <div className="px-4">
-        <Link to="/ticket">
+        <Link to="/ticketb">
           <button className="bg-[#9DDE2A] rounded-full text-white px-6 mt-5 py-1 ">
             Last Ticket
           </button>
@@ -114,9 +116,9 @@ const TicketInfo = () => {
           ))}
       </div>
 
-      <Footer></Footer>
+      <Footerb></Footerb>
     </>
   );
 };
 
-export default TicketInfo;
+export default TicketInfob;

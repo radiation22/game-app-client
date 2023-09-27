@@ -43,6 +43,30 @@ import TicketDetailsb from "../components/TicketDetails/TicketDetailsb";
 import Settingb from "../components/Setting/Settingb";
 import Moreb from "../components/More/Moreb";
 import Language from "./../components/Language/Language";
+import PrivateRouteb from "../components/PrivateRoute/PrivateRouteb";
+import UserWelcomeb from "../components/Login/UserWelcomeb";
+import Loginb from "../components/Login/Loginb";
+import Registerb from "../components/Login/Registerb";
+import Messageb from "../components/Message/Messageb";
+import Inboxb from "../components/Message/Inboxb";
+import TicketInfob from "../components/UserTicket/TicketInfob";
+import Rewardsb from "../components/Rewards/Rewardsb";
+import Donationb from "../components/Donation/Donationb";
+import Notificationb from "../components/Notification/Notificationb";
+import Claim from "../components/Claim/Claim";
+import Supervisor1b from "../components/Dashboard/Supervisor1b";
+import Tripb from "../components/Dashboard/Tripb";
+import DriverDonateb from "../components/Donation/DriverDonateb";
+import DriverRewardb from "../components/Rewards/DriverRewardb";
+import DriverMoreb from "../components/More/DriverMoreb";
+import DriverSettingb from "../components/Setting/DriverSettingb";
+import DriverNotificationb from "../components/Notification/DriverNotificationb";
+import DriverNotification from "../components/Notification/DriverNotification";
+import DriverProfileb from "../components/Profile/DriverProfileb";
+import Profileb from "../components/Profile/Profileb";
+import DriverRouteb from "../components/PrivateRoute/DriverRouteb";
+import Login2b from "../components/Login/Login2b";
+import ShowTicketb from "../components/UserTicket/ShowTicketb";
 
 export const router = createBrowserRouter([
   {
@@ -65,12 +89,20 @@ export const router = createBrowserRouter([
         element: <Language></Language>,
       },
       {
+        path: "/claim",
+        element: <Claim></Claim>,
+      },
+      {
         path: "/homeb",
         element: <Homeb></Homeb>,
       },
       {
         path: "/register",
         element: <Register></Register>,
+      },
+      {
+        path: "/registerb",
+        element: <Registerb></Registerb>,
       },
       {
         path: "/account",
@@ -91,9 +123,9 @@ export const router = createBrowserRouter([
       {
         path: "/locationb",
         element: (
-          <PrivateRoute>
+          <PrivateRouteb>
             <Locationb></Locationb>
-          </PrivateRoute>
+          </PrivateRouteb>
         ),
       },
       {
@@ -137,6 +169,14 @@ export const router = createBrowserRouter([
         ),
       },
       {
+        path: "/dashboardb",
+        element: (
+          <DriverRouteb>
+            <Supervisor1b></Supervisor1b>
+          </DriverRouteb>
+        ),
+      },
+      {
         path: "/deliver",
         element: <Delivered></Delivered>,
       },
@@ -157,20 +197,44 @@ export const router = createBrowserRouter([
         ),
       },
       {
+        path: "/myTicketb",
+        element: (
+          <PrivateRouteb>
+            <TicketInfob></TicketInfob>
+          </PrivateRouteb>
+        ),
+      },
+      {
         path: "/trip",
         element: <SuperTicket></SuperTicket>,
+      },
+      {
+        path: "/tripb",
+        element: <Tripb></Tripb>,
       },
       {
         path: "/login",
         element: <Login></Login>,
       },
       {
+        path: "/loginb",
+        element: <Loginb></Loginb>,
+      },
+      {
         path: "/login2",
         element: <Login2></Login2>,
       },
       {
+        path: "/login2b",
+        element: <Login2b></Login2b>,
+      },
+      {
         path: "/ticket/:id",
         element: <ShowTicket></ShowTicket>,
+      },
+      {
+        path: "/ticketb/:id",
+        element: <ShowTicketb></ShowTicketb>,
       },
       {
         path: "/slider",
@@ -189,8 +253,16 @@ export const router = createBrowserRouter([
         element: <DriverSetting></DriverSetting>,
       },
       {
+        path: "/driverSettingb",
+        element: <DriverSettingb></DriverSettingb>,
+      },
+      {
         path: "/driverProfile",
         element: <DriverProfile></DriverProfile>,
+      },
+      {
+        path: "/driverProfileb",
+        element: <DriverProfileb></DriverProfileb>,
       },
       {
         path: "/donation",
@@ -198,6 +270,14 @@ export const router = createBrowserRouter([
           <PrivateRoute>
             <Donation></Donation>
           </PrivateRoute>
+        ),
+      },
+      {
+        path: "/donationb",
+        element: (
+          <PrivateRouteb>
+            <Donationb></Donationb>
+          </PrivateRouteb>
         ),
       },
       {
@@ -209,10 +289,26 @@ export const router = createBrowserRouter([
         ),
       },
       {
+        path: "/rewardsb",
+        element: (
+          <PrivateRouteb>
+            <Rewardsb></Rewardsb>
+          </PrivateRouteb>
+        ),
+      },
+      {
         path: "/profile",
         element: (
           <PrivateRoute>
             <Profile></Profile>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/profileb",
+        element: (
+          <PrivateRoute>
+            <Profileb></Profileb>
           </PrivateRoute>
         ),
       },
@@ -229,6 +325,10 @@ export const router = createBrowserRouter([
         element: <Message></Message>,
       },
       {
+        path: "/messageb",
+        element: <Messageb></Messageb>,
+      },
+      {
         path: "/more",
         element: <More></More>,
       },
@@ -241,24 +341,56 @@ export const router = createBrowserRouter([
         element: <Inbox></Inbox>,
       },
       {
+        path: "/inboxb",
+        element: <Inboxb></Inboxb>,
+      },
+      {
         path: "/welcome",
         element: <UserWelcome></UserWelcome>,
+      },
+      {
+        path: "/welcomeb",
+        element: <UserWelcomeb></UserWelcomeb>,
       },
       {
         path: "/notification",
         element: <Notification></Notification>,
       },
       {
+        path: "/notificationb",
+        element: <Notificationb></Notificationb>,
+      },
+      {
+        path: "/driverNotification",
+        element: <DriverNotification></DriverNotification>,
+      },
+      {
+        path: "/driverNotificationb",
+        element: <DriverNotificationb></DriverNotificationb>,
+      },
+      {
         path: "/driverDonate",
         element: <DriverDonate></DriverDonate>,
+      },
+      {
+        path: "/driverDonateb",
+        element: <DriverDonateb></DriverDonateb>,
       },
       {
         path: "/driverReward",
         element: <DriverReward></DriverReward>,
       },
       {
+        path: "/driverRewardb",
+        element: <DriverRewardb></DriverRewardb>,
+      },
+      {
         path: "/driverMore",
         element: <DriverMore></DriverMore>,
+      },
+      {
+        path: "/driverMoreb",
+        element: <DriverMoreb></DriverMoreb>,
       },
     ],
   },

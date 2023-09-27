@@ -18,19 +18,21 @@ import Footer from "../Footer/Footer";
 import { Link } from "react-router-dom";
 import DriverFooter from "../Footer/DriverFooter";
 import DriverNav from "../Navbar/DriverNav";
-const DriverMore = () => {
+import DriverFooterb from "../Footer/DriverFooterb";
+import DriverNavb from "../Navbar/DriverNavb";
+const DriverMoreb = () => {
   return (
     <>
-      <DriverNav></DriverNav>
+      <DriverNavb></DriverNavb>
       <div>
-        <Link to="/dashboard">
+        <Link to="/dashboardb">
           <img className="h-10 pl-6 mt-10" src={icon} alt="" />
         </Link>
         <div className="bg-white mx-6 rounded-lg py-3 mt-5 px-5">
           <div className="flex justify-between items-center">
             <div className="flex gap-5">
               <FaWallet className="text-[24px] text-green-600"></FaWallet>
-              <p>E-Wallet</p>
+              <p>ই-ওয়ালেট</p>
             </div>
             <FaAngleRight className="text-[#92A1B3]"></FaAngleRight>
           </div>
@@ -39,7 +41,7 @@ const DriverMore = () => {
           <div className="flex justify-between items-center">
             <div className="flex gap-5">
               <FaPhoneSquareAlt className="text-[24px] text-green-600"></FaPhoneSquareAlt>
-              <p>Free Call</p>
+              <p>ফ্রী-কল</p>
             </div>
             <FaAngleRight className="text-[#92A1B3]"></FaAngleRight>
           </div>
@@ -48,7 +50,7 @@ const DriverMore = () => {
           <div className="flex justify-between items-center">
             <div className="flex gap-5">
               <FaGift className="text-[24px] text-green-600"></FaGift>
-              <p>Gift a Ticket for your partner</p>
+              <p>পার্টনারকে টিকিট গিফট করুন</p>
             </div>
             <FaAngleRight className="text-[#92A1B3]"></FaAngleRight>
           </div>
@@ -57,7 +59,7 @@ const DriverMore = () => {
           <div className="flex justify-between items-center">
             <div className="flex gap-5">
               <FaGifts className="text-[24px] text-green-600"></FaGifts>
-              <p>Gift my rewards to other</p>
+              <p>অন্যকে রিওয়ার্ড গিফট করুন</p>
             </div>
             <FaAngleRight className="text-[#92A1B3]"></FaAngleRight>
           </div>
@@ -66,15 +68,15 @@ const DriverMore = () => {
           <div className="flex justify-between items-center">
             <div className="flex gap-5">
               <FaPeopleArrows className="text-[24px] text-green-600"></FaPeopleArrows>
-              <p>Community/Make new friends</p>
+              <p>নতুন বন্ধু/কমিউনিটি বানান</p>
             </div>
             <FaAngleRight className="text-[#92A1B3]"></FaAngleRight>
           </div>
         </div>
       </div>
-      <DriverFooter></DriverFooter>
+      <DriverFooterb></DriverFooterb>
     </>
   );
 };
 
-export default DriverMore;
+export default DriverMoreb;

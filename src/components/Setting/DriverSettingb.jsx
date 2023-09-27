@@ -12,16 +12,17 @@ import icon from "../../assets/left2.png";
 import { AuthContext } from "../context/AuthProvider";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
+import DriverFooter from "../Footer/DriverFooter";
+import DriverFooterb from "../Footer/DriverFooterb";
 import Navbarb from "../Navbar/Navbarb";
-import Footerb from "../Footer/Footerb";
-const Settingb = () => {
+const DriverSettingb = () => {
   const navigate = useNavigate();
   const { user, logOut } = useContext(AuthContext);
   const handleSignOut = () => {
     logOut()
       .then((result) => {
         toast.success("You have logged out");
-        navigate("/welcome");
+        navigate("/login2b");
       })
       .catch((error) => console.log(error));
   };
@@ -29,12 +30,11 @@ const Settingb = () => {
     <>
       <Navbarb></Navbarb>
       <div>
-        <Link to="/locationb">
-          {" "}
+        <Link to="/dashboardb">
           <img className="h-10 pl-6 mt-10" src={icon} alt="" />
         </Link>
         <p className="mx-6 mt-6 text-[#4d5155]">একাউন্ট</p>
-        <Link to="/profileb">
+        <Link to="/driverProfileb">
           <div className="bg-white mx-6 rounded-lg py-3 px-5 mt-3">
             <div className="flex justify-between items-center">
               <div className="flex gap-5">
@@ -55,7 +55,7 @@ const Settingb = () => {
             <FaAngleRight className="text-[#92A1B3]"></FaAngleRight>
           </div>
         </div>
-        <Link to="/notification">
+        <Link to="/driverNotificationb">
           <div className="bg-white mx-6 rounded-lg py-3 px-5 mt-1">
             <div className="flex justify-between items-center">
               <div className="flex gap-5">
@@ -97,9 +97,9 @@ const Settingb = () => {
           </div>
         </div>
       </div>
-      <Footerb></Footerb>
+      <DriverFooterb></DriverFooterb>
     </>
   );
 };
 
-export default Settingb;
+export default DriverSettingb;

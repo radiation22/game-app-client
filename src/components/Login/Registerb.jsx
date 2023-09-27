@@ -70,7 +70,7 @@ const Registerb = () => {
       await handleUpdateUser(data.name, data.email, imageUrl);
 
       toast.success("Successfully registered");
-      navigate("/location");
+      navigate("/locationb");
     } catch (error) {
       console.error("Image upload or user creation failed:", error);
     } finally {
@@ -109,7 +109,7 @@ const Registerb = () => {
       }}
       className=""
     >
-      <Link to="/welcome">
+      <Link to="/welcomeb">
         <div>
           <img className="h-12 pt-4 pl-4" src={icon} alt="" />
         </div>
@@ -191,7 +191,7 @@ const Registerb = () => {
                   type="submit"
                   className="w-full px-8 py-3 font-semibold drop-shadow-xl rounded-full bg-[#9DDE2A] hover:text-white text-gray-100"
                 >
-                  Sign Up
+                  সাইন আপ
                 </button>
               </div>
             </form>

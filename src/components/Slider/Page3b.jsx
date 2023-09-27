@@ -10,7 +10,7 @@ const Page3b = () => {
       <div className="">
         <img className="w-full" src={slid1} alt="" />
         <div className="mt-[-50px]">
-          <p className="text-[#232323] font-bold text-xl">স্বাধীনতা</p>
+          <p className="text-[#232323] font-bold text-xl">বাধাহীন ব্যবহার</p>
           <p className="text-sm mx-10 text-center mb-10 text-[#C9CACB]">
             এই অ্যাপের মাধ্যমে আপনি যেকোনো সময়, যেকোনো জায়গা থেকে টিকিট কিনতে
             পারবেন। অ্যাপ থেকে ইচ্ছে মত টিকিট কাটুন এবং পুরো দিনের জন্য একটি
