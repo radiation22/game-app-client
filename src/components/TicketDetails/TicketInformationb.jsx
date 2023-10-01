@@ -35,8 +35,14 @@ const TicketInformationb = ({ ticket, refetch }) => {
   const handleSecret = (e) => {
     const reviews = {
       status: "checked",
+      secret: e.target.value,
     };
-    if (e.target.value == 4444) {
+    if (
+      e.target.value == 19990 ||
+      e.target.value == 28880 ||
+      e.target.value == 35550 ||
+      e.target.value == 41110
+    ) {
       const url = `https://nirapode-server.vercel.app/myticket/${item}`;
       console.log(url);
       fetch(url, {

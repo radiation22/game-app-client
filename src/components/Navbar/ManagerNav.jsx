@@ -1,34 +1,80 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FaBell, FaChartLine, FaSearch, FaUser } from "react-icons/fa";
-import { FaGear, FaHandHoldingDollar, FaGift } from "react-icons/fa6";
 import { AuthContext } from "../context/AuthProvider";
-import { toast } from "react-hot-toast";
+
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const ManagerNav = () => {
   const [showSignOut, setShowSignOut] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false); // Add state for the dropdown
   const [notificationCount, setNotificationCount] = useState(0);
   const navigate = useNavigate();
-  //   const [showTicketPage, setShowTicketPage] = useState(false);
-  //   const [showDropdown, setShowDropdown] = useState(false);
   const { user, logOut } = useContext(AuthContext);
+  const [trips, setTrips] = useState([]);
+
+  useEffect(() => {
+    // Fetch data from the URL
+    fetch("https://nirapode-server.vercel.app/trips")
+      .then((response) => response.json())
+      .then((data) => {
+        const notificationLength = data.filter(
+          (noti) => noti.status === "Pending"
+        );
+        setNotificationCount(notificationLength?.length);
+        setTrips(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
+
+  const handleApprove = (id) => {
+    const reviews = {
+      status: "Approved",
+    };
+
+    const url = `https://nirapode-server.vercel.app/adminApprove/${id}`;
+
+    fetch(url, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(reviews),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // console.log(data);
+        toast.success("Trip Confirm");
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+
   const handleSignOut = () => {
     logOut()
       .then((result) => {
-        toast.success("you have logged out");
+        toast.success("You have logged out");
         navigate("/admin");
       })
       .catch((error) => console.log(error));
   };
-  const handleTrip = () => {
-    navigate("/trip");
-  };
+
   const toggleSignOut = () => {
     setShowSignOut(!showSignOut);
   };
-  const handleNotificationClick = () => {
-    setNotificationCount(0);
+
+  const toggleDropdown = () => {
+    setShowDropdown(!showDropdown);
   };
+
+  const handleNotificationClick = () => {
+    // Toggle the dropdown when notification icon is clicked
+    toggleDropdown();
+  };
+
   return (
     <>
       <header className="bg-[#BF1B21] w-full text-white p-4">
@@ -53,6 +99,32 @@ const ManagerNav = () => {
                   </span>
                 )}
               </div>
+              {/* Dropdown menu for notifications */}
+              {showDropdown && notificationCount > 0 && (
+                <div className="absolute top-12 right-5 bg-white text-black w-[200px] shadow-md rounded-md">
+                  <table className="border-collapse border">
+                    <tbody>
+                      {trips
+                        .slice()
+                        .reverse()
+                        .map((trip) => (
+                          <tr key={trip._id} className="text-center">
+                            <td className="border p-2">Trip: 0{trip.trip}</td>
+                            <td className="border p-2">Bus: 0{trip.busNo}</td>
+                            <td className="border p-2">
+                              <button
+                                onClick={() => handleApprove(trip._id)}
+                                className="bg-red-500 px-2  py-1 rounded-md text-white"
+                              >
+                                Approve
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
             </button>
             <div className="flex flex-col items-center">
               <FaUser
@@ -75,30 +147,6 @@ const ManagerNav = () => {
           </div>
         </div>
       </header>
-
-      {/* <footer className="bg-[#BF1B21] w-full text-white   p-4">
-        <div className="container mx-auto flex justify-between">
-          <div onClick={handleTrip} className="flex flex-col items-center">
-            <FaChartLine
-              className="text-2xl cursor-pointer
-                text-white"
-            />
-            <span className="uppercase py-1">Trips</span>
-          </div>
-          <div className="flex flex-col items-center">
-            <FaGift className="text-2xl"></FaGift>
-            <span className="uppercase py-1">Your Gift</span>
-          </div>
-          <div className="flex flex-col items-center">
-            <FaHandHoldingDollar className="text-2xl"></FaHandHoldingDollar>
-            <span className="uppercase py-1">Donate</span>
-          </div>
-          <div className="flex flex-col items-center">
-            <FaGear className="text-2xl"></FaGear>
-            <span className="uppercase py-1">More</span>
-          </div>
-        </div>
-      </footer> */}
     </>
   );
 };

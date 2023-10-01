@@ -35,8 +35,14 @@ const TicketInformation = ({ ticket, refetch }) => {
   const handleSecret = (e) => {
     const reviews = {
       status: "checked",
+      secret: e.target.value,
     };
-    if (e.target.value == 4444) {
+    if (
+      e.target.value == 19990 ||
+      e.target.value == 28880 ||
+      e.target.value == 35550 ||
+      e.target.value == 41110
+    ) {
       const url = `https://nirapode-server.vercel.app/myticket/${item}`;
       console.log(url);
       fetch(url, {
@@ -210,8 +216,8 @@ const TicketInformation = ({ ticket, refetch }) => {
                     <div className="flex justify-center">
                       <button
                         onClick={() => {
-                          confirmTicket(details?._id);
-                          confirmTicket2(details._id);
+                          confirmTicket(ticket?._id);
+                          confirmTicket2(ticket?._id);
                         }}
                         className="bg-[#C1282D] text-white px-20 mt-1 rounded-full py-1"
                       >

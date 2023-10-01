@@ -36,7 +36,12 @@ const ShowTicket = () => {
     const reviews = {
       status: "checked",
     };
-    if (e.target.value == 4444) {
+    if (
+      e.target.value == 19990 ||
+      e.target.value == 28880 ||
+      e.target.value == 35550 ||
+      e.target.value == 41110
+    ) {
       const url = `https://nirapode-server.vercel.app/myticket/${item}`;
 
       fetch(url, {

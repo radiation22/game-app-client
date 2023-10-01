@@ -359,7 +359,7 @@ const ChooseBus = () => {
     const startPoint = data.startPoint;
     const destination = data.destination;
     const passenger = parseFloat(data.passenger);
-    const donation = parseFloat(data.donation);
+    const donation = data.donation ? parseFloat(data.donation) : 0;
     const email = user?.email;
 
     // Get the current time
@@ -390,6 +390,7 @@ const ChooseBus = () => {
       busNo,
       status,
       ticketNo: ticket?.length,
+      secret: "",
     };
 
     fetch("https://nirapode-server.vercel.app/addTicket", {
@@ -523,8 +524,7 @@ const ChooseBus = () => {
                     className="w-full px-3 py-2 drop-shadow-xl border rounded-full  border-[#54B89C] focus:outline-green-500  text-gray-900"
                     id="numPeople"
                     type="number"
-                    placeholder="    Donations"
-                    required
+                    placeholder="    Donations (optional)"
                   />
                 </div>
               </div>

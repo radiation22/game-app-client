@@ -10,8 +10,10 @@ import Footerb from "../Footer/Footerb";
 import Navbarb from "../Navbar/Navbarb";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import Footerb from "./../Footer/Footerb";
+import Navbarb from "./../Navbar/Navbarb";
 
-const Claim = () => {
+const Claimb = () => {
   const { user } = useContext(AuthContext);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
@@ -41,12 +43,12 @@ const Claim = () => {
   const progressBarWidth = `${progressPercentage}%`;
 
   // Define whether each reward is enabled based on points
-  const isCashBackEnabled = points >= 50;
+  const isCashBackEnabled = points >= 100;
   const isFreeRideEnabled = points >= 200;
 
   return (
     <>
-      <Navbar></Navbar>
+      <Navbarb></Navbarb>
       <div className="pt-10 pb-28">
         <div>
           <p className="text-2xl font-bold text-center px-4">
@@ -124,9 +126,9 @@ const Claim = () => {
         </div>
       </div>
 
-      <Footer></Footer>
+      <Footerb></Footerb>
     </>
   );
 };
 
-export default Claim;
+export default Claimb;

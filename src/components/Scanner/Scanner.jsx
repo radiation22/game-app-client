@@ -16,7 +16,7 @@ const ScannerWithNameExtraction = ({ ticket }) => {
       <QRCode
         className="w-[120px]"
         value={JSON.stringify(data)}
-        style={{ height: "50px", width: "100px" }}
+        style={{ height: "60px", width: "110px" }}
       />
     </div>
   );

@@ -106,7 +106,9 @@ const Tabs = () => {
                       <td className="border p-2">{trip.ticketNo}</td>
                       <td className="border p-2">{trip.totalCostSum} BDT</td>
                       <td className="border p-2">
-                        <button>{trip.status}</button>
+                        <button className="bg-red-500 px-5 py-2 rounded-full text-white">
+                          {trip.status}
+                        </button>
                       </td>
                     </tr>
                   ))}

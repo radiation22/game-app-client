@@ -23,8 +23,27 @@ const Registerb = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
-  const { createUser, updateUserProfile, signIn } = useContext(AuthContext);
 
+  const [selectedCity, setSelectedCity] = useState("");
+  const { createUser, updateUserProfile, signIn } = useContext(AuthContext);
+  const handleCityChange = (e) => {
+    const selectedValue = e.target.value;
+    if (selectedValue === cities[0].value) {
+      setSelectedCity(selectedValue);
+    } else {
+      // Show a pop-up or handle the error here
+      toast.error("Not available now. Coming soon.");
+    }
+  };
+
+  const cities = [
+    { value: "Chattogram", label: "Chattogram" },
+    { value: "Dhaka", label: "Dhaka" },
+    { value: "Rajshahi", label: "Rajshahi" },
+    { value: "Sylhet", label: "Sylhet" },
+    { value: "Khulna", label: "Khulna" },
+    // Add more cities here
+  ];
   const uploadImageToImgBB = async (imageFile) => {
     try {
       // Create a FormData object to send the image file
@@ -67,7 +86,7 @@ const Registerb = () => {
       const result = await createUser(data.email, data.password);
       const user = result.user;
 
-      await handleUpdateUser(data.name, data.email, imageUrl);
+      await handleUpdateUser(data.name, data.email, imageUrl, selectedCity);
 
       toast.success("Successfully registered");
       navigate("/locationb");
@@ -78,11 +97,12 @@ const Registerb = () => {
     }
   };
 
-  const handleUpdateUser = async (name, email, photoURL) => {
+  const handleUpdateUser = async (name, email, photoURL, city) => {
     const profile = {
       displayName: name,
       email,
-      photoURL, // Include the uploaded image URL in the user's profile
+      photoURL,
+      city, // Include the uploaded image URL in the user's profile
     };
 
     try {
@@ -172,6 +192,25 @@ const Registerb = () => {
                 <span className="absolute left-3 top-1/2 transform -translate-y-1/2">
                   <FaLock className="text-[#A7B4C2] ml-3"></FaLock>
                 </span>
+              </div>
+
+              <div>
+                <div>
+                  <select
+                    value={selectedCity}
+                    onChange={handleCityChange}
+                    className="w-full pl-10 py-3 drop-shadow-xl border-2 rounded-full border-[#54B89C] focus:outline-green-500 text-gray-900"
+                  >
+                    <option value="" disabled>
+                      Select your city
+                    </option>
+                    {cities.map((city) => (
+                      <option key={city.value} value={city.value}>
+                        {city.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
               </div>
 
               <div>
