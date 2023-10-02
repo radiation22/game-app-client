@@ -1,23 +1,45 @@
-import React from "react";
+import { useState } from "react";
+import io from "socket.io-client";
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
-import { useState } from "react";
+import { useEffect } from "react";
+import { AuthContext } from "../context/AuthProvider";
+import { useContext } from "react";
 
-const Inbox = () => {
-  const [messages, setMessages] = useState([
-    { text: "Hello, how can I help you?", sender: "Admin" },
-  ]);
+function inbox() {
+  const { user } = useContext(AuthContext);
+  const socket = io.connect("http://localhost:5000/");
+  const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
-
-  const handleSendMessage = () => {
+  const handleMessage = (e) => {
     if (newMessage.trim() === "") return;
-    setMessages([...messages, { text: newMessage, sender: "You" }]);
+
+    // Send the message to the server
+    socket.emit("message", { text: newMessage, sender: user?.email });
+
+    // Update the client's message state
+    const userMessage = { text: newMessage, sender: user?.email };
+    setMessages([...messages, userMessage]);
     setNewMessage("");
   };
+
+  useEffect(() => {
+    // Listen for messages from the server
+    socket.on("adminMessage", (message) => {
+      console.log(message);
+      // Update the client's message state
+      setMessages([...messages, message]);
+    });
+
+    return () => {
+      // Clean up socket connection when component unmounts
+      socket.disconnect();
+    };
+  }, [messages]);
   return (
     <>
       <Navbar></Navbar>
-      <div className="flex flex-col  bg-gray-100">
+      <div className="flex flex-col bg-gray-100">
         <div className="flex-1 overflow-y-scroll p-4">
           {messages.map((message, index) => (
             <div
@@ -47,13 +69,13 @@ const Inbox = () => {
             onChange={(e) => setNewMessage(e.target.value)}
             onKeyPress={(e) => {
               if (e.key === "Enter") {
-                handleSendMessage();
+                handleMessage();
               }
             }}
           />
           <button
-            className="mt-2 px-4 py-3 mb-20 w-full bg-[#05A83F] text-white rounded-full"
-            onClick={handleSendMessage}
+            className="mt-2 px-4 py-3 w-full bg-[#05A83F] text-white rounded-full"
+            onClick={handleMessage}
           >
             Send Message
           </button>
@@ -62,6 +84,6 @@ const Inbox = () => {
       <Footer></Footer>
     </>
   );
-};
+}
 
-export default Inbox;
+export default inbox;
