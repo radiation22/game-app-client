@@ -1,47 +1,67 @@
-import { useState } from "react";
-import io from "socket.io-client";
+import { useState, useEffect } from "react";
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
-import { useEffect } from "react";
 import { AuthContext } from "../context/AuthProvider";
 import { useContext } from "react";
 
-function inbox() {
+function Inbox() {
   const { user } = useContext(AuthContext);
-  const socket = io.connect("http://localhost:5000/");
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+
   const handleMessage = (e) => {
     if (newMessage.trim() === "") return;
 
-    // Send the message to the server
-    socket.emit("message", { text: newMessage, sender: user?.email });
-
     // Update the client's message state
     const userMessage = { text: newMessage, sender: user?.email };
-    setMessages([...messages, userMessage]);
-    setNewMessage("");
+    fetch("https://nirapode-server.vercel.app/addMessage", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(userMessage),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged) {
+          console.log("success");
+          setNewMessage("");
+        }
+      });
   };
 
   useEffect(() => {
-    // Listen for messages from the server
-    socket.on("adminMessage", (message) => {
-      console.log(message);
-      // Update the client's message state
-      setMessages([...messages, message]);
-    });
+    // Fetch messages from the database when the component mounts
+    const fetchMessagesFromDatabase = async () => {
+      try {
+        const response = await fetch(
+          "https://nirapode-server.vercel.app/message"
+        );
+        if (response.ok) {
+          const data = await response.json();
 
-    return () => {
-      // Clean up socket connection when component unmounts
-      socket.disconnect();
+          // Filter messages for user.email and admin senders
+          const filteredMessages = data.filter(
+            (message) =>
+              message.sender === user.email || message.sender === "Admin"
+          );
+
+          setMessages(filteredMessages);
+        }
+      } catch (error) {
+        console.error("Error fetching messages from the database:", error);
+      }
     };
-  }, [messages]);
+
+    fetchMessagesFromDatabase(); // Call the function to fetch messages
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user, messages]); // Empty dependency array to ensure this effect runs only once when the component mounts
+
   return (
     <>
-      <Navbar></Navbar>
+      <Navbar />
       <div className="flex flex-col bg-gray-100">
-        <div className="flex-1 overflow-y-scroll p-4">
-          {messages.map((message, index) => (
+        <div className="flex-1  p-4">
+          {messages?.map((message, index) => (
             <div
               key={index}
               className={`mb-2 ${
@@ -74,16 +94,16 @@ function inbox() {
             }}
           />
           <button
-            className="mt-2 px-4 py-3 w-full bg-[#05A83F] text-white rounded-full"
+            className="mt-2 mb-20 px-4 py-3 w-full bg-[#05A83F] text-white rounded-full"
             onClick={handleMessage}
           >
             Send Message
           </button>
         </div>
       </div>
-      <Footer></Footer>
+      <Footer />
     </>
   );
 }
 
-export default inbox;
+export default Inbox;

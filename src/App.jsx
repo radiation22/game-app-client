@@ -4,7 +4,7 @@ import "./App.css";
 import socketIO from "socket.io-client";
 
 function App() {
-  const socket = socketIO.connect("http://localhost:5000/");
+  // const socket = socketIO.connect("https://nirapode-server.vercel.app");
   return (
     <>
       <RouterProvider router={router} />

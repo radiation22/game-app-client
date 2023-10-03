@@ -1,25 +1,53 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Message from "./../../Message/Message";
 import io from "socket.io-client";
+import { AuthContext } from "../../context/AuthProvider";
 const Tabs = () => {
   const [activeTab, setActiveTab] = useState("London");
   const [tickets, setTickets] = useState([]);
   const [trips, setTrips] = useState([]);
-
-  const socket = io.connect("http://localhost:5000/");
+  const { user } = useContext(AuthContext);
+  // const socket = io.connect("https://nirapode-server.vercel.app");
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const handleMessage = (e) => {
     if (newMessage.trim() === "") return;
-
-    // Send the message to the server
-    socket.emit("message", { text: newMessage, sender: "Admin" });
-
-    // Update the client's message state
     const userMessage = { text: newMessage, sender: "Admin" };
-    setMessages([...messages, userMessage]);
-    setNewMessage("");
+    fetch("https://nirapode-server.vercel.app/addMessage", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(userMessage),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged) {
+          console.log("success");
+          setNewMessage("");
+        }
+      });
   };
+
+  useEffect(() => {
+    // Fetch messages from the database when the component mounts
+    const fetchMessagesFromDatabase = async () => {
+      try {
+        const response = await fetch(
+          "https://nirapode-server.vercel.app/message"
+        );
+        if (response.ok) {
+          const data = await response.json();
+
+          setMessages(data);
+        }
+      } catch (error) {
+        console.error("Error fetching messages from the database:", error);
+      }
+    };
+
+    fetchMessagesFromDatabase(); // Call the function to fetch messages
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user, messages]);
 
   useEffect(() => {
     // Fetch data from the URL
@@ -152,7 +180,7 @@ const Tabs = () => {
             <h2>All the Message</h2>
             <div className="flex flex-col bg-gray-100">
               <div className="flex-1 overflow-y-scroll p-4">
-                {messages.map((message, index) => (
+                {messages?.map((message, index) => (
                   <div
                     key={index}
                     className={`mb-2 ${
