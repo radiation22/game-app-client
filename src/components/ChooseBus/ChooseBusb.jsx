@@ -379,7 +379,7 @@ const ChooseBusb = () => {
     const cost = calculateCost(startPoint, destination);
 
     // Calculate the total cost (including donation)
-    const totalCost = cost * passenger;
+    const totalCost = cost * passenger + 1;
     const tickets = {
       startPoint,
       destination,

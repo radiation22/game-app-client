@@ -6,14 +6,12 @@ import { FaAngleRight } from "react-icons/fa";
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 import Footerb from "../Footer/Footerb";
 import Navbarb from "../Navbar/Navbarb";
-import { useState } from "react";
-import { Link } from "react-router-dom";
 
 const Rewardsb = () => {
   const { user } = useContext(AuthContext);
-  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   // Define the query key
   const queryKey = ["tickets", user?.email];
@@ -41,8 +39,28 @@ const Rewardsb = () => {
   const progressBarWidth = `${progressPercentage}%`;
 
   // Define whether each reward is enabled based on points
-  const isCashBackEnabled = points >= 50;
+  const isCashBackEnabled = points >= 100;
   const isFreeRideEnabled = points >= 200;
+
+  const claims = {
+    status: "Pending",
+    email: user?.email,
+  };
+
+  const handleCollectButtonClick = () => {
+    fetch("http://localhost:5000/addClaim", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(claims),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged) {
+          console.log("success");
+        }
+      });
+    // setIsButtonClicked(true);
+  };
 
   return (
     <>
@@ -69,75 +87,76 @@ const Rewardsb = () => {
 
         <div className="bg-white p-4 rounded-2xl mt-5 mx-5">
           <div className="flex justify-between">
-            <h1 className="text-[#0DAB46]">রিওয়ার্ডস</h1>
-            <p className="text-[#9DDE2A]">সব দেখুন</p>
+            <h1 className="text-[#0DAB46]">Rewards</h1>
+            <p className="text-[#9DDE2A]">View all</p>
           </div>
           <hr className="mt-2 mb-4" />
           {/* Render Cash Back reward if enabled */}
-          {isCashBackEnabled && (
-            <div className="flex gap-3 items-center justify-between">
-              <div className="w-[20%]">
-                <div
-                  style={{
-                    borderRadius: "50%",
-                    width: "70px",
-                    height: "70px",
-                    background: "#9DDE2A",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <p>
-                    Free <br /> Ride
-                  </p>
-                </div>
-              </div>
-              <p className="w-[60%] text-sm text-[#96A6B6]">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Perferendis mollitia
-              </p>
-              <Link to="/claim">
-                {" "}
-                <button
-                  className="bg-[#96A6B6] py-2 px-4 rounded-full"
-                  disabled={isButtonDisabled}
-                >
-                  Claim
-                </button>
-              </Link>
-            </div>
-          )}
 
-          {/* Render Free Ride reward if enabled */}
-          {isFreeRideEnabled && (
-            <div className="flex gap-3 items-center mt-3 justify-between">
-              <div className="w-[20%]">
-                <div
-                  style={{
-                    borderRadius: "50%",
-                    width: "70px",
-                    height: "70px",
-                    background: "#9DDE2A",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <p>
-                    Cash <br /> Back
-                  </p>
-                </div>
+          <div className="flex gap-3 items-center justify-between">
+            <div className="w-[20%]">
+              <div
+                style={{
+                  borderRadius: "50%",
+                  width: "60px",
+                  height: "60px",
+                  background: "#9DDE2A",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <p>
+                  Free <br /> Ride
+                </p>
               </div>
-              <p className="w-[60%] text-sm text-[#96A6B6]">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Perferendis mollitia
-              </p>
-              <button className="bg-[#9DDE2A] py-2 px-4 rounded-full">
+            </div>
+            <p className="w-[60%] text-sm text-[#96A6B6]">
+              Enjoy a free ride with using claim
+            </p>
+            <Link to="/claim">
+              {" "}
+              <button
+                onClick={handleCollectButtonClick}
+                className="bg-[#96A6B6] py-2 px-4 rounded-full"
+                disabled={!isCashBackEnabled} // Disable the button if not enabled
+              >
                 Claim
               </button>
+            </Link>
+          </div>
+
+          {/* Render Free Ride reward if enabled */}
+
+          <div className="flex gap-3 items-center mt-3 justify-between">
+            <div className="w-[20%]">
+              <div
+                style={{
+                  borderRadius: "50%",
+                  width: "60px",
+                  height: "60px",
+                  background: "#9DDE2A",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <p>
+                  Free <br /> Ride
+                </p>
+              </div>
             </div>
-          )}
+            <p className="w-[60%] text-sm text-[#96A6B6]">
+              Enjoy Cashback with using claim
+            </p>
+            <button
+              onClick={handleCollectButtonClick}
+              className="bg-[#9DDE2A] py-2 px-4 rounded-full"
+              disabled={!isFreeRideEnabled} // Disable the button if not enabled
+            >
+              Claim
+            </button>
+          </div>
         </div>
 
         <div className="bg-white mx-6 rounded-full py-3 px-5 mt-6">

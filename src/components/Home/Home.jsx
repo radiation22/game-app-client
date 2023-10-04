@@ -4,7 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaRegUserCircle, FaTv } from "react-icons/fa";
 import back from "../../assets/Asset 8.png";
 import bus from "../../assets/bus1.png";
-import userIcon from "../../assets/user.png";
 
 const Home = () => {
   const [locationEnabled, setLocationEnabled] = useState(false);
@@ -23,17 +22,46 @@ const Home = () => {
     }
   };
 
+  // const handleAvailableBusesClick = () => {
+  //   // Check if geolocation is available in the browser
+  //   if ("geolocation" in navigator) {
+  //     // Try to get the location continuously until it's successful or permission is granted
+  //     const watchId = navigator.geolocation.watchPosition(
+  //       (position) => {
+  //         // Location is obtained, navigate to the "/account" route
+  //         navigate("/account");
+  //         // Clear the watch to stop continuous tracking
+  //         navigator.geolocation.clearWatch(watchId);
+  //       },
+  //       (error) => {
+  //         if (error.code === 1) {
+  //           // Location permission is denied, show an alert or prompt the user to enable it
+  //           alert("Please enable location services to continue.");
+  //           // Clear the watch to stop continuous tracking
+  //           navigator.geolocation.clearWatch(watchId);
+  //         } else {
+  //           // An error occurred, handle it accordingly
+  //           console.error("Error getting location:", error);
+  //         }
+  //       }
+  //     );
+  //   } else {
+  //     // Geolocation is not supported in the browser
+  //     alert("Geolocation is not supported in your browser.");
+  //   }
+  // };
+
   const handleAvailableBusesClick = () => {
     if (locationEnabled) {
       navigate("/account"); // Navigate to the "/account" route when location is enabled
     } else {
-      alert("Turn On Location");
+      navigate("/account");
     }
   };
 
   useEffect(() => {
     checkLocationStatus();
-  }, []);
+  }, [locationEnabled]);
 
   return (
     <>

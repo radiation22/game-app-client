@@ -316,7 +316,7 @@ const Supervisor1 = () => {
         </div>
         <button
           onClick={openModal}
-          className=" ml-2 px-4 bg-[#05A83F] text-white uppercase py-2 rounded-lg my-3"
+          className=" ml-2 px-4 bg-[#9DDE2A] text-white uppercase py-2 rounded-lg my-3"
         >
           টিকিট কেটে দিন
         </button>
@@ -342,6 +342,7 @@ const Supervisor1 = () => {
                         className="w-full px-3 py-2 drop-shadow-xl border rounded-full  border-[#54B89C] focus:outline-green-500  text-gray-900"
                         id="numPeople"
                         type="number"
+                        value={1}
                         required
                         placeholder="    Number of Passengers"
                       />
@@ -358,19 +359,19 @@ const Supervisor1 = () => {
                         className="w-full px-3 py-2 drop-shadow-xl border rounded-full  border-[#54B89C] focus:outline-green-500  text-gray-900"
                         id="packageRequested"
                       >
-                        <option value="12">12 tk</option>
-                        <option value="15">15 tk</option>
-                        <option value="18">18 tk</option>
-                        <option value="21">21 tk</option>
-                        <option value="24">24 tk</option>
-                        <option value="27">27 tk</option>
-                        <option value="30">30 tk</option>
-                        <option value="33">33 tk</option>
-                        <option value="37">37 tk</option>
-                        <option value="40">40 tk</option>
-                        <option value="43">43 tk</option>
-                        <option value="47">47 tk</option>
-                        <option value="50">50 tk</option>
+                        <option value="13">13 tk</option>
+                        <option value="16">16 tk</option>
+                        <option value="19">19 tk</option>
+                        <option value="22">22 tk</option>
+                        <option value="25">25 tk</option>
+                        <option value="28">28 tk</option>
+                        <option value="31">31 tk</option>
+                        <option value="34">34 tk</option>
+                        <option value="38">38 tk</option>
+                        <option value="41">41 tk</option>
+                        <option value="44">44 tk</option>
+                        <option value="48">48 tk</option>
+                        <option value="51">51 tk</option>
                       </select>
                     </div>
                     <button className=" ml-2 px-4 bg-[#05A83F] text-white uppercase py-2 rounded-lg my-3">

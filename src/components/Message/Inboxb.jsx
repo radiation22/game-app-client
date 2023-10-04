@@ -3,6 +3,8 @@ import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
 import { AuthContext } from "../context/AuthProvider";
 import { useContext } from "react";
+import Navbarb from "../Navbar/Navbarb";
+import Footerb from "../Footer/Footerb";
 
 function Inboxb() {
   const { user } = useContext(AuthContext);
@@ -61,7 +63,7 @@ function Inboxb() {
 
   return (
     <>
-      <Navbar />
+      <Navbarb />
       <div className="flex flex-col bg-gray-100">
         <div className="flex-1  p-4">
           {messages?.map((message, index) => (
@@ -104,7 +106,7 @@ function Inboxb() {
           </button>
         </div>
       </div>
-      <Footer />
+      <Footerb />
     </>
   );
 }

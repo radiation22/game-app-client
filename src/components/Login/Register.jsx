@@ -34,7 +34,7 @@ const Register = () => {
       setSelectedCity(selectedValue);
     } else {
       // Show a pop-up or handle the error here
-      toast.error("Not available now. Coming soon.");
+      toast.error("Not available now In your City. We are Coming soon.");
     }
   };
 
@@ -208,7 +208,15 @@ const Register = () => {
                       Select your city
                     </option>
                     {cities.map((city) => (
-                      <option key={city.value} value={city.value}>
+                      <option
+                        key={city.value}
+                        value={city.value}
+                        className={
+                          city.label === "Chattogram"
+                            ? "text-red-500"
+                            : "text-[#A3B5C9]"
+                        }
+                      >
                         {city.label}
                       </option>
                     ))}

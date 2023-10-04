@@ -3,12 +3,12 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthProvider";
 import MyTickets from "./MyTickets";
 import { useQuery } from "@tanstack/react-query";
-
+import DriverNav from "../Navbar/DriverNav";
 import { toast } from "react-toastify";
-import DriverNavb from "./../Navbar/DriverNavb";
-import DriverFooterb from "./../Footer/DriverFooterb";
+import DriverFooter from "../Footer/DriverFooter";
 import { useForm } from "react-hook-form";
-
+import DriverFooterb from "./../Footer/DriverFooterb";
+import DriverNavb from "./../Navbar/DriverNavb";
 const Supervisor1b = () => {
   const { user } = useContext(AuthContext);
   const [ticketNo, setTicketNo] = useState(0);
@@ -21,18 +21,17 @@ const Supervisor1b = () => {
   const [totalTickets, setTotalTickets] = useState(0);
   const [tripPassenger, setTripPassenger] = useState(0);
   const [loading, setLoading] = useState(true);
-  const [secret, setSecret] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const { register, handleSubmit } = useForm();
   const today = new Date();
   const dd = String(today.getDate()).padStart(2, "0");
   const mm = String(today.getMonth() + 1).padStart(2, "0"); // January is 0!
   const yyyy = today.getFullYear();
   const formattedDate = `${dd}/${mm}/${yyyy}`;
-  const refreshPage = () => {
-    window.location.reload();
-  };
-  // Update the dependencies to include both formattedDate and busNo
+
+  const [trips, setTrips] = useState([]);
+  const [secret, setSecret] = useState(null);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
     if (busNo == 1) {
@@ -96,6 +95,35 @@ const Supervisor1b = () => {
       });
   };
   useEffect(() => {
+    // Fetch data from the URL
+    fetch("https://nirapode-server.vercel.app/trips")
+      .then((response) => response.json())
+      .then((data) => {
+        // Get today's date in ISO format (e.g., "2023-09-29T00:00:00Z")
+
+        // Filter trips by today's date
+        const todayTrips = data.filter((trip) => {
+          return (
+            trip.formattedDate === formattedDate &&
+            trip.status == "Pending" &&
+            trip.busNo == busNo
+          );
+        });
+        console.log(todayTrips);
+        // Update the state with the filtered trips for today
+        setTrips(todayTrips);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
+
+  const refreshPage = () => {
+    window.location.reload();
+  };
+  // Update the dependencies to include both formattedDate and busNo
+
+  useEffect(() => {
     const fetchData = async () => {
       try {
         // Fetch driver data and extract bus numbers
@@ -116,6 +144,19 @@ const Supervisor1b = () => {
         );
         const busTicketData = await busTicketResponse.json();
 
+        // Filter data by status "confirmed"
+        // const confirmedTickets = busTicketData.filter((ticket) => {
+        //   const today = new Date();
+        //   const dd = String(today.getDate()).padStart(2, "0");
+        //   const mm = String(today.getMonth() + 1).padStart(2, "0"); // January is 0!
+        //   const yyyy = today.getFullYear();
+        //   const formattedDate = `${dd}/${mm}/${yyyy}`;
+
+        //   return (
+        //     ticket.status === "checked" &&
+        //     ticket.formattedDate === formattedDate
+        //   );
+        // });
         const confirmedTickets = busTicketData.filter((ticket) => {
           const today = new Date();
           const dd = String(today.getDate()).padStart(2, "0");
@@ -216,6 +257,9 @@ const Supervisor1b = () => {
   // this is for reducing the cost when it send to the manager
 
   const handleManager = () => {
+    if (trips.length > 0) {
+      return toast.error("Wait for Manager approve");
+    }
     // Create a confirmation dialog
     const confirmed = window.confirm("Are you sure to Deliver?");
 
@@ -254,26 +298,26 @@ const Supervisor1b = () => {
     <>
       <DriverNavb></DriverNavb>
       <div className=" text-center h-screen  py-5 ">
-        <h1 className="text-2xl font-bold">ড্যাশবোর্ড</h1>
+        <h1 className="text-2xl font-bold">Dashboard</h1>
         <p>[Supervisor - 2]</p>
         <p className="text-xl mt-4">Welcome {user?.displayName}</p>
         <div className="">
           <button className="px-4 bg-[#05A83F] text-white uppercase py-2 rounded-lg my-3">
-            বাস: 0{busNo}
+            BUS: 0{busNo}
           </button>
           <button className="px-4 ml-2 bg-[#05A83F] text-white uppercase py-2 rounded-lg my-3">
-            ট্রিপ নং - 0{trip + 1}
+            Trip No - 0{trip + 1}
           </button>
           <button
             onClick={refreshPage}
             className=" ml-2 px-4 bg-[#05A83F] text-white uppercase py-2 rounded-lg my-3"
           >
-            রিফ্রেশ
+            Refresh
           </button>
         </div>
         <button
           onClick={openModal}
-          className=" ml-2 px-4 bg-[#05A83F] text-white uppercase py-2 rounded-lg my-3"
+          className=" ml-2 px-4 bg-[#9DDE2A] text-white uppercase py-2 rounded-lg my-3"
         >
           টিকিট কেটে দিন
         </button>
@@ -299,6 +343,7 @@ const Supervisor1b = () => {
                         className="w-full px-3 py-2 drop-shadow-xl border rounded-full  border-[#54B89C] focus:outline-green-500  text-gray-900"
                         id="numPeople"
                         type="number"
+                        value={1}
                         required
                         placeholder="    Number of Passengers"
                       />
@@ -315,19 +360,19 @@ const Supervisor1b = () => {
                         className="w-full px-3 py-2 drop-shadow-xl border rounded-full  border-[#54B89C] focus:outline-green-500  text-gray-900"
                         id="packageRequested"
                       >
-                        <option value="12">12 tk</option>
-                        <option value="15">15 tk</option>
-                        <option value="18">18 tk</option>
-                        <option value="21">21 tk</option>
-                        <option value="24">24 tk</option>
-                        <option value="27">27 tk</option>
-                        <option value="30">30 tk</option>
-                        <option value="33">33 tk</option>
-                        <option value="37">37 tk</option>
-                        <option value="40">40 tk</option>
-                        <option value="43">43 tk</option>
-                        <option value="47">47 tk</option>
-                        <option value="50">50 tk</option>
+                        <option value="13">13 tk</option>
+                        <option value="16">16 tk</option>
+                        <option value="19">19 tk</option>
+                        <option value="22">22 tk</option>
+                        <option value="25">25 tk</option>
+                        <option value="28">28 tk</option>
+                        <option value="31">31 tk</option>
+                        <option value="34">34 tk</option>
+                        <option value="38">38 tk</option>
+                        <option value="41">41 tk</option>
+                        <option value="44">44 tk</option>
+                        <option value="48">48 tk</option>
+                        <option value="51">51 tk</option>
                       </select>
                     </div>
                     <button className=" ml-2 px-4 bg-[#05A83F] text-white uppercase py-2 rounded-lg my-3">
@@ -349,7 +394,7 @@ const Supervisor1b = () => {
             <div className="flex flex-col py-5 w-full">
               <div className="bg-[#41d341] space-y-3  rounded-lg mx-4 my-5 text-center p-5">
                 <h1 className="text-lg text-white font-bold">
-                  এই ট্রিপের জন্য জমা দিন
+                  For this trip you have to deliver
                 </h1>
                 <h1 className="text-3xl text-white font-bold">
                   {totalCostSum - totalCost} BDT
@@ -359,23 +404,27 @@ const Supervisor1b = () => {
               <div className="space-y-3 w-[60%] mx-auto">
                 <p className="text-lg font-bold">Summary for this trip</p>
                 <div className="flex justify-between uppercase mt-5">
-                  <p className="border-l-4 ps-3 border-[#41d341]">মোট যাত্রী</p>
+                  <p className="border-l-4 ps-3 border-[#41d341]">
+                    Total Passenger
+                  </p>
                   <p>{totalPassengerSum - tripPassenger}</p>
                 </div>
 
                 <div className="flex justify-between uppercase">
-                  <p className="border-l-4 ps-3 border-[#41d341]">মোট টিকিট</p>
+                  <p className="border-l-4 ps-3 border-[#41d341]">
+                    Total Ticket
+                  </p>
                   <p>{ticketNo - totalTickets}</p>
                 </div>
                 <div className="flex justify-between uppercase">
-                  <p className="border-l-4 ps-3 border-[#41d341]">অনুদান</p>
+                  <p className="border-l-4 ps-3 border-[#41d341]">Donation</p>
                   <p>{donation}</p>
                 </div>
                 <button
                   onClick={handleManager}
-                  className="px-5 bg-[#9DDE2A] uppercase py-2  rounded-full my-3"
+                  className="px-5 bg-[#9DDE2A] uppercase py-2 rounded-full my-3"
                 >
-                  ম্যানেজারকে জমা দিন
+                  Deliver to Manager
                 </button>
               </div>
             </div>

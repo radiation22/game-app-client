@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthProvider";
 import sun from "../../assets/sun.png";
 import star from "../../assets/star.png";
@@ -8,12 +8,32 @@ import Footer from "../Footer/Footer";
 import { useQuery } from "@tanstack/react-query";
 import Footerb from "../Footer/Footerb";
 import Navbarb from "../Navbar/Navbarb";
-import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 const Claim = () => {
   const { user } = useContext(AuthContext);
-  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const [isButtonClicked, setIsButtonClicked] = useState(false);
+  const [claim, setClaims] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [inputValue, setInputValue] = useState("");
+  const { register, handleSubmit } = useForm();
+  const [secret, setSecret] = useState(null);
+  useEffect(() => {
+    // Fetch data from the URL
+    const url = `https://nirapode-server.vercel.app/claims?email=${user?.email}`;
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        // Update the state with the fetched data
+        console.log(data);
+        setClaims(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, [user?.email]);
 
   // Define the query key
   const queryKey = ["tickets", user?.email];
@@ -31,6 +51,7 @@ const Claim = () => {
       enabled: !!user?.email, // Only fetch data when user.email is available
     }
   );
+
   const points = 10 + 5 * tickets.length; // Replace with the actual points
   const totalPointsGoal = 200; // Replace with your total points goal
 
@@ -41,16 +62,58 @@ const Claim = () => {
   const progressBarWidth = `${progressPercentage}%`;
 
   // Define whether each reward is enabled based on points
-  const isCashBackEnabled = points >= 10;
+  const isCashBackEnabled = points >= 100;
   const isFreeRideEnabled = points >= 200;
+  const claims = {
+    status: "Pending",
+    email: user?.email,
+  };
+  const handleCollectButtonClick = (id) => {
+    setSecret(id);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const onSubmit = (data) => {
+    const reviews = {
+      status: "checked",
+    };
+    if (data.passenger == 111000) {
+      const url = `https://nirapode-server.vercel.app/claim/${secret}`;
+
+      fetch(url, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(reviews),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          // console.log(data);
+
+          toast.success("Claim collect");
+          setIsModalOpen(false);
+          window.location.reload();
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    } else {
+      toast.error("Not Match");
+    }
+  };
 
   return (
     <>
       <Navbar></Navbar>
       <div className="pt-10 pb-28">
         <div>
-          <p className="text-2xl font-bold text-center px-4">
-            Don't Click Anywhere Just Show it Supervisor
+          <p className="text-xl font-bold text-center px-4">
+            Don't Click Anywhere Just Show it Supervisor when you want to use
           </p>
         </div>
         <div className="bg-white p-4 rounded-2xl mt-5 mx-5">
@@ -60,67 +123,93 @@ const Claim = () => {
           </div>
           <hr className="mt-2 mb-4" />
           {/* Render Cash Back reward if enabled */}
-          {isCashBackEnabled && (
-            <div className="flex gap-3 items-center justify-between">
+
+          {claim.map((c) => (
+            <div
+              key={c._id}
+              className="flex gap-3 items-center justify-between"
+            >
               <div className="w-[20%]">
                 <div
                   style={{
                     borderRadius: "50%",
-                    width: "70px",
-                    height: "70px",
+                    width: "60px",
+                    height: "60px",
                     background: "#9DDE2A",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                   }}
                 >
-                  <p>
+                  <p className="text-white">
                     Free <br /> Ride
                   </p>
                 </div>
               </div>
+
               <p className="w-[60%] text-sm text-[#96A6B6]">
-                Please Collect your Reward
+                {user?.displayName} Collect your Claim from supervisor
               </p>
 
-              <button
-                className="bg-[#96A6B6] py-2 px-4 rounded-full"
-                disabled={isButtonDisabled}
-              >
-                Collect
-              </button>
-            </div>
-          )}
+              {c.status === "Pending" ? (
+                <>
+                  <button
+                    className="bg-[#96A6B6] py-2 px-4 rounded-full"
+                    onClick={() => handleCollectButtonClick(c._id)}
+                  >
+                    Collect
+                  </button>
+                  {isModalOpen && (
+                    <div className="fixed inset-0 flex items-center justify-center z-50">
+                      <div className="modal-overlay" onClick={closeModal}></div>
+                      <div className="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
+                        <div className="modal-content py-4 text-left px-6">
+                          <div className="flex justify-between items-center pb-3">
+                            <p className="text-2xl font-bold"></p>
+                            <button
+                              className="modal-close-button rounded-full cursor-pointer z-50 bg-red-400 px-3 py-1 text-white"
+                              onClick={closeModal}
+                            >
+                              X
+                            </button>
+                          </div>
+                          <div>
+                            <form onSubmit={handleSubmit(onSubmit)}>
+                              <div className="w-full pt-5  px-2 mb-1 lg:mb-0">
+                                <input
+                                  {...register("passenger")}
+                                  className="w-full px-3 py-2 drop-shadow-xl border rounded-full  border-[#54B89C] focus:outline-green-500  text-gray-900"
+                                  id="numPeople"
+                                  type="number"
+                                  required
+                                  placeholder="Secret Number"
+                                />
+                              </div>
 
-          {/* Render Free Ride reward if enabled */}
-          {isFreeRideEnabled && (
-            <div className="flex gap-3 items-center mt-3 justify-between">
-              <div className="w-[20%]">
-                <div
-                  style={{
-                    borderRadius: "50%",
-                    width: "70px",
-                    height: "70px",
-                    background: "#9DDE2A",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <p>
-                    Cash <br /> Back
-                  </p>
-                </div>
-              </div>
-              <p className="w-[60%] text-sm text-[#96A6B6]">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Perferendis mollitia
-              </p>
-              <button className="bg-[#9DDE2A] py-2 px-4 rounded-full">
-                Claim
-              </button>
+                              <button className=" ml-2 px-4 bg-[#05A83F] text-white uppercase py-2 rounded-lg my-3">
+                                Confirm
+                              </button>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </>
+              ) : (
+                <>
+                  <button
+                    disabled
+                    className="bg-[#96A6B6] py-2 px-4 rounded-full"
+                  >
+                    Collected
+                  </button>
+                </>
+              )}
             </div>
-          )}
+          ))}
+
+          {/* ... (render other rewards if needed) */}
         </div>
       </div>
 

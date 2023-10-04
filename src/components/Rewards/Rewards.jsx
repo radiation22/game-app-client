@@ -40,6 +40,26 @@ const Rewards = () => {
   const isCashBackEnabled = points >= 100;
   const isFreeRideEnabled = points >= 200;
 
+  const claims = {
+    status: "Pending",
+    email: user?.email,
+  };
+
+  const handleCollectButtonClick = () => {
+    fetch("http://localhost:5000/addClaim", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(claims),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged) {
+          console.log("success");
+        }
+      });
+    // setIsButtonClicked(true);
+  };
+
   return (
     <>
       <Navbar></Navbar>
@@ -76,8 +96,8 @@ const Rewards = () => {
               <div
                 style={{
                   borderRadius: "50%",
-                  width: "70px",
-                  height: "70px",
+                  width: "60px",
+                  height: "60px",
                   background: "#9DDE2A",
                   display: "flex",
                   alignItems: "center",
@@ -85,17 +105,17 @@ const Rewards = () => {
                 }}
               >
                 <p>
-                  Cash <br /> Back
+                  Free <br /> Ride
                 </p>
               </div>
             </div>
             <p className="w-[60%] text-sm text-[#96A6B6]">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Perferendis mollitia
+              Enjoy a free ride with using claim
             </p>
             <Link to="/claim">
               {" "}
               <button
+                onClick={handleCollectButtonClick}
                 className="bg-[#96A6B6] py-2 px-4 rounded-full"
                 disabled={!isCashBackEnabled} // Disable the button if not enabled
               >
@@ -111,8 +131,8 @@ const Rewards = () => {
               <div
                 style={{
                   borderRadius: "50%",
-                  width: "70px",
-                  height: "70px",
+                  width: "60px",
+                  height: "60px",
                   background: "#9DDE2A",
                   display: "flex",
                   alignItems: "center",
@@ -125,10 +145,10 @@ const Rewards = () => {
               </div>
             </div>
             <p className="w-[60%] text-sm text-[#96A6B6]">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Perferendis mollitia
+              Enjoy Cashback with using claim
             </p>
             <button
+              onClick={handleCollectButtonClick}
               className="bg-[#9DDE2A] py-2 px-4 rounded-full"
               disabled={!isFreeRideEnabled} // Disable the button if not enabled
             >

@@ -44,7 +44,7 @@ const TicketInformation = ({ ticket, refetch }) => {
       e.target.value == 41110
     ) {
       const url = `https://nirapode-server.vercel.app/myticket/${item}`;
-      console.log(url);
+
       fetch(url, {
         method: "PUT",
         headers: {
