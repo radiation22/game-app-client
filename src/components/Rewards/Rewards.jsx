@@ -6,6 +6,7 @@ import { FaAngleRight } from "react-icons/fa";
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 
 const Rewards = () => {
   const { user } = useContext(AuthContext);
@@ -69,64 +70,71 @@ const Rewards = () => {
           </div>
           <hr className="mt-2 mb-4" />
           {/* Render Cash Back reward if enabled */}
-          {isCashBackEnabled && (
-            <div className="flex gap-3 items-center justify-between">
-              <div className="w-[20%]">
-                <div
-                  style={{
-                    borderRadius: "50%",
-                    width: "70px",
-                    height: "70px",
-                    background: "#9DDE2A",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <p>
-                    Cash <br /> Back
-                  </p>
-                </div>
+
+          <div className="flex gap-3 items-center justify-between">
+            <div className="w-[20%]">
+              <div
+                style={{
+                  borderRadius: "50%",
+                  width: "70px",
+                  height: "70px",
+                  background: "#9DDE2A",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <p>
+                  Cash <br /> Back
+                </p>
               </div>
-              <p className="w-[60%] text-sm text-[#96A6B6]">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Perferendis mollitia
-              </p>
-              <button className="bg-[#96A6B6] py-2 px-4 rounded-full">
+            </div>
+            <p className="w-[60%] text-sm text-[#96A6B6]">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Perferendis mollitia
+            </p>
+            <Link to="/claim">
+              {" "}
+              <button
+                className="bg-[#96A6B6] py-2 px-4 rounded-full"
+                disabled={!isCashBackEnabled} // Disable the button if not enabled
+              >
                 Claim
               </button>
-            </div>
-          )}
+            </Link>
+          </div>
 
           {/* Render Free Ride reward if enabled */}
-          {isFreeRideEnabled && (
-            <div className="flex gap-3 items-center mt-3 justify-between">
-              <div className="w-[20%]">
-                <div
-                  style={{
-                    borderRadius: "50%",
-                    width: "70px",
-                    height: "70px",
-                    background: "#9DDE2A",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <p>
-                    Free <br /> Ride
-                  </p>
-                </div>
+
+          <div className="flex gap-3 items-center mt-3 justify-between">
+            <div className="w-[20%]">
+              <div
+                style={{
+                  borderRadius: "50%",
+                  width: "70px",
+                  height: "70px",
+                  background: "#9DDE2A",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <p>
+                  Free <br /> Ride
+                </p>
               </div>
-              <p className="w-[60%] text-sm text-[#96A6B6]">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Perferendis mollitia
-              </p>
-              <button className="bg-[#9DDE2A] py-2 px-4 rounded-full">
-                Claim
-              </button>
             </div>
-          )}
+            <p className="w-[60%] text-sm text-[#96A6B6]">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Perferendis mollitia
+            </p>
+            <button
+              className="bg-[#9DDE2A] py-2 px-4 rounded-full"
+              disabled={!isFreeRideEnabled} // Disable the button if not enabled
+            >
+              Claim
+            </button>
+          </div>
         </div>
 
         <div className="bg-white mx-6 rounded-full py-3 px-5 mt-6">

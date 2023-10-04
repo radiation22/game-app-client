@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import Message from "./../../Message/Message";
 import io from "socket.io-client";
 import { AuthContext } from "../../context/AuthProvider";
+import MessageAdmin from "./MessageAdmin";
 const Tabs = () => {
   const [activeTab, setActiveTab] = useState("London");
   const [tickets, setTickets] = useState([]);
@@ -10,22 +11,6 @@ const Tabs = () => {
   // const socket = io.connect("https://nirapode-server.vercel.app");
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
-  const handleMessage = (e) => {
-    if (newMessage.trim() === "") return;
-    const userMessage = { text: newMessage, sender: "Admin" };
-    fetch("https://nirapode-server.vercel.app/addMessage", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(userMessage),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.acknowledged) {
-          console.log("success");
-          setNewMessage("");
-        }
-      });
-  };
 
   useEffect(() => {
     // Fetch messages from the database when the component mounts
@@ -36,7 +21,7 @@ const Tabs = () => {
         );
         if (response.ok) {
           const data = await response.json();
-
+          console.log(data);
           setMessages(data);
         }
       } catch (error) {
@@ -176,51 +161,7 @@ const Tabs = () => {
             activeTab === "message" ? "block" : "hidden"
           } bg-white border p-4 rounded-lg`}
         >
-          <div className="w-full">
-            <h2>All the Message</h2>
-            <div className="flex flex-col bg-gray-100">
-              <div className="flex-1 overflow-y-scroll p-4">
-                {messages?.map((message, index) => (
-                  <div
-                    key={index}
-                    className={`mb-2 ${
-                      message.sender === "Admin" ? "text-left" : "text-right"
-                    }`}
-                  >
-                    <span
-                      className={`px-3 py-1 rounded-lg inline-block ${
-                        message.sender === "Admin"
-                          ? "bg-blue-500 text-white"
-                          : "bg-gray-300"
-                      }`}
-                    >
-                      {message.text}
-                    </span>
-                  </div>
-                ))}
-              </div>
-              <div className="p-4">
-                <input
-                  type="text"
-                  className="w-full px-3 py-4 border border-gray-300 rounded-lg"
-                  placeholder="Type your message..."
-                  value={newMessage}
-                  onChange={(e) => setNewMessage(e.target.value)}
-                  onKeyPress={(e) => {
-                    if (e.key === "Enter") {
-                      handleMessage();
-                    }
-                  }}
-                />
-                <button
-                  className="mt-2 px-4 py-3 w-full bg-[#05A83F] text-white rounded-full"
-                  onClick={handleMessage}
-                >
-                  Send Message
-                </button>
-              </div>
-            </div>
-          </div>
+          <MessageAdmin messages={messages}></MessageAdmin>
         </div>
 
         <div

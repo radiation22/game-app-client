@@ -41,7 +41,7 @@ const Claim = () => {
   const progressBarWidth = `${progressPercentage}%`;
 
   // Define whether each reward is enabled based on points
-  const isCashBackEnabled = points >= 50;
+  const isCashBackEnabled = points >= 10;
   const isFreeRideEnabled = points >= 200;
 
   return (

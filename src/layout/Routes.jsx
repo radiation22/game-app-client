@@ -67,6 +67,7 @@ import Profileb from "../components/Profile/Profileb";
 import DriverRouteb from "../components/PrivateRoute/DriverRouteb";
 import Login2b from "../components/Login/Login2b";
 import ShowTicketb from "../components/UserTicket/ShowTicketb";
+import Claimb from "../components/Claim/Claimb";
 
 export const router = createBrowserRouter([
   {
@@ -91,6 +92,10 @@ export const router = createBrowserRouter([
       {
         path: "/claim",
         element: <Claim></Claim>,
+      },
+      {
+        path: "/claimb",
+        element: <Claimb></Claimb>,
       },
       {
         path: "/homeb",

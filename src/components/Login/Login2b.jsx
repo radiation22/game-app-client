@@ -120,7 +120,6 @@ const Login2b = () => {
 
       toast.success("Successfully registered");
       navigate("/dashboardb");
-      window.reload();
     } catch (error) {
       console.error("Image upload or user creation failed:", error);
     } finally {

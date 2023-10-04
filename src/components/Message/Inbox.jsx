@@ -41,8 +41,11 @@ function Inbox() {
           // Filter messages for user.email and admin senders
           const filteredMessages = data.filter(
             (message) =>
-              message.sender === user.email || message.sender === "Admin"
+              message.sender === user.email ||
+              message.targetEmail === user.email
+            // message.sender === "Admin"
           );
+          console.log(filteredMessages);
 
           setMessages(filteredMessages);
         }
