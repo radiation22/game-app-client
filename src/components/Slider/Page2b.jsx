@@ -11,7 +11,7 @@ const Page2b = () => {
         <img className="w-full" src={slid1} alt="" />
         <div className="mt-[-50px]">
           <p className="text-[#232323] font-bold text-xl">সুবিধাসমূহ</p>
-          <p className="text-sm mx-10  text-center mb-10 text-[#C9CACB]">
+          <p className="text-sm mx-10  text-center mb-10 text-[#474d53]">
             এই অ্যাপটি গুগল ম্যাপিং পরিসেবা দ্বারা গঠিত। যে কেউ অ্যাপ অনলাইনে সে
             যেকোনো স্থান থেকে বা যেকোনো সময় বাসের টিকিট কিনতে পারে। টিকিট নিতে
             এবং বাস সুবিধা নিতে রাস্তায় থাকতে হবে না।

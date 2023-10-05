@@ -447,24 +447,26 @@ const ChooseBus = () => {
                         className="  bg-[#F2F3F5] w-full py-3  text-[#A5B1C0]   focus:outline-none "
                         id="packageRequested"
                       >
-                        <option value="Muradpur">My Location</option>
-                        <option value="NotunBridge">NotunBridge</option>
-                        <option value="RajaKhali">RajaKhali</option>
-                        <option value="KalmiyaBazar">KalmiyaBazar</option>
-                        <option value="RahatarPhul">RahatarPhul</option>
-                        <option value="Bohoddarhat"> Bohoddarhat</option>
-                        <option value="MuradPur"> MuradPur</option>
-                        <option value="DuiNogate"> DuiNogate</option>
-                        <option value="GEC"> GEC</option>
-                        <option value="Washa">Washa</option>
-                        <option value="Lalkhan">Lalkhan</option>
-                        <option value="Dewanhat">Dewanhat</option>
-                        <option value="Agrabad">Agrabad</option>
-                        <option value="BarekBuilding">BarekBuilding</option>
-                        <option value="Bandhar"> Bandhar</option>
-                        <option value="Cepz">Cepz</option>
-                        <option value="Katghor">Katghor</option>
-                        <option value="Potenga">Potenga</option>
+                        <option disabled value="">
+                          My Location
+                        </option>
+                        <option value="NotunBridge">নতুন ব্রীজ</option>
+                        <option value="RajaKhali">রাজাখালী</option>
+                        <option value="KalmiyaBazar">কালামিয়া বাজার</option>
+                        <option value="RahatarPhul">রাহাত্তার পুল</option>
+                        <option value="Bohoddarhat"> বহদ্দারহাট</option>
+                        <option value="MuradPur">মুরাদপুর</option>
+                        <option value="DuiNogate">২ নং গেইট</option>
+                        <option value="GEC"> জি.ই.সি</option>
+                        <option value="Washa">ওয়াসা</option>
+                        <option value="Lalkhan">লালখান বাজার</option>
+                        <option value="Dewanhat">দেওয়ানহাট</option>
+                        <option value="Agrabad">আগ্রাবাদ</option>
+                        <option value="BarekBuilding">বারেকবিল্ডিং</option>
+                        <option value="Bandhar">বন্দর</option>
+                        <option value="Cepz">সিইপিজেড</option>
+                        <option value="Katghor">কাটগড়</option>
+                        <option value="Potenga">পতেঙ্গা</option>
                       </select>
                     </div>
                     <div className="w-full  px-2 mb-1 lg:mb-0">
@@ -485,24 +487,26 @@ const ChooseBus = () => {
                         className="  bg-[#F2F3F5] w-full py-3  text-[#A5B1C0]   focus:outline-none "
                         id="packageRequested"
                       >
-                        <option value="Muradpur">Destination</option>
-                        <option value="NotunBridge">NotunBridge</option>
-                        <option value="RajaKhali">RajaKhali</option>
-                        <option value="KalmiyaBazar">KalmiyaBazar</option>
-                        <option value="RahatarPhul">RahatarPhul</option>
-                        <option value="Bohoddarhat"> Bohoddarhat</option>
-                        <option value="MuradPur"> MuradPur</option>
-                        <option value="DuiNogate"> DuiNogate</option>
-                        <option value="GEC"> GEC</option>
-                        <option value="Washa">Washa</option>
-                        <option value="Lalkhan">Lalkhan</option>
-                        <option value="Dewanhat">Dewanhat</option>
-                        <option value="Agrabad">Agrabad</option>
-                        <option value="BarekBuilding">BarekBuilding</option>
-                        <option value="Bandhar"> Bandhar</option>
-                        <option value="Cepz">Cepz</option>
-                        <option value="Katghor">Katghor</option>
-                        <option value="Potenga">Potenga</option>
+                        <option disabled value="">
+                          Destination
+                        </option>
+                        <option value="NotunBridge">নতুন ব্রীজ</option>
+                        <option value="RajaKhali">রাজাখালী</option>
+                        <option value="KalmiyaBazar">কালামিয়া বাজার</option>
+                        <option value="RahatarPhul">রাহাত্তার পুল</option>
+                        <option value="Bohoddarhat"> বহদ্দারহাট</option>
+                        <option value="MuradPur">মুরাদপুর</option>
+                        <option value="DuiNogate">২ নং গেইট</option>
+                        <option value="GEC"> জি.ই.সি</option>
+                        <option value="Washa">ওয়াসা</option>
+                        <option value="Lalkhan">লালখান বাজার</option>
+                        <option value="Dewanhat">দেওয়ানহাট</option>
+                        <option value="Agrabad">আগ্রাবাদ</option>
+                        <option value="BarekBuilding">বারেকবিল্ডিং</option>
+                        <option value="Bandhar">বন্দর</option>
+                        <option value="Cepz">সিইপিজেড</option>
+                        <option value="Katghor">কাটগড়</option>
+                        <option value="Potenga">পতেঙ্গা</option>
                       </select>
                     </div>
                   </div>

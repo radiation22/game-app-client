@@ -11,7 +11,7 @@ const Page2 = () => {
         <img className="w-full" src={slid1} alt="" />
         <div className="mt-[-50px]">
           <p className="text-[#232323] font-bold text-xl">Facilitated</p>
-          <p className="text-sm mx-10  text-center mb-10 text-[#C9CACB]">
+          <p className="text-sm mx-10  text-center mb-10 text-[#474d53]">
             This app is facilitated by google maping service. anyone who exist
             in online he or she can buy bus ticket from anywhere or anytime. no
             need to stay on road to take the ticket and take the bus facilities.

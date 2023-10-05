@@ -8,15 +8,18 @@ const Page1b = () => {
         <img className="w-full" src={slid1} alt="" />
         <div className="mt-[-50px]">
           <p className="text-[#232323] font-bold text-xl">স্বাগতম</p>
-          <p className="text-sm mx-10 text-center mb-10 text-[#C9CACB]">
+          <p className="text-sm mx-10 text-center mb-10 text-[#474d53]">
             নিরাপদে পরিবারে আপনাকে স্বাগতম . এটি একটি পাবলিক ট্রান্সপোর্ট
             অটোমেশন
             <br />
             পরিসেবা যা প্রোডাক্ট/সিস্টার কনসার্ন
-            <a className="underline" href="https://radiationgroup.tech/">
+            <a
+              className="underline text-green-500"
+              href="https://radiationgroup.tech/"
+            >
               Radiation corporation.
             </a>
-            Developed by :
+            <span className="text-green-500">Developed by :</span>
             <a className="underline" href="https://ceo.radiationgroup.tech/">
               Md Habibul Islam
             </a>
