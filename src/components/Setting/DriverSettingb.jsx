@@ -15,6 +15,7 @@ import { Link, useNavigate } from "react-router-dom";
 import DriverFooter from "../Footer/DriverFooter";
 import DriverFooterb from "../Footer/DriverFooterb";
 import Navbarb from "../Navbar/Navbarb";
+import DriverNavb from "../Navbar/DriverNavb";
 const DriverSettingb = () => {
   const navigate = useNavigate();
   const { user, logOut } = useContext(AuthContext);
@@ -28,7 +29,7 @@ const DriverSettingb = () => {
   };
   return (
     <>
-      <Navbarb></Navbarb>
+      <DriverNavb></DriverNavb>
       <div>
         <Link to="/dashboardb">
           <img className="h-10 pl-6 mt-10" src={icon} alt="" />

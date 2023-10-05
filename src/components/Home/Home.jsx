@@ -53,7 +53,7 @@ const Home = () => {
 
   const handleAvailableBusesClick = () => {
     if (locationEnabled) {
-      navigate("/account"); // Navigate to the "/account" route when location is enabled
+      navigate("/account");
     } else {
       navigate("/account");
     }

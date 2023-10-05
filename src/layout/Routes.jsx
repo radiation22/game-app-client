@@ -91,11 +91,19 @@ export const router = createBrowserRouter([
       },
       {
         path: "/claim",
-        element: <Claim></Claim>,
+        element: (
+          <PrivateRoute>
+            <Claim></Claim>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/claimb",
-        element: <Claimb></Claimb>,
+        element: (
+          <PrivateRouteb>
+            <Claimb></Claimb>
+          </PrivateRouteb>
+        ),
       },
       {
         path: "/homeb",
@@ -144,9 +152,9 @@ export const router = createBrowserRouter([
       {
         path: "/chooseBusb/:busNumber",
         element: (
-          <PrivateRoute>
+          <PrivateRouteb>
             <ChooseBusb></ChooseBusb>
-          </PrivateRoute>
+          </PrivateRouteb>
         ),
       },
       {
@@ -160,9 +168,9 @@ export const router = createBrowserRouter([
       {
         path: "/ticketb",
         element: (
-          <PrivateRoute>
+          <PrivateRouteb>
             <TicketDetailsb></TicketDetailsb>
-          </PrivateRoute>
+          </PrivateRouteb>
         ),
       },
       {
@@ -211,11 +219,19 @@ export const router = createBrowserRouter([
       },
       {
         path: "/trip",
-        element: <SuperTicket></SuperTicket>,
+        element: (
+          <DriverRoute>
+            <SuperTicket></SuperTicket>
+          </DriverRoute>
+        ),
       },
       {
         path: "/tripb",
-        element: <Tripb></Tripb>,
+        element: (
+          <DriverRouteb>
+            <Tripb></Tripb>
+          </DriverRouteb>
+        ),
       },
       {
         path: "/login",
@@ -235,11 +251,19 @@ export const router = createBrowserRouter([
       },
       {
         path: "/ticket/:id",
-        element: <ShowTicket></ShowTicket>,
+        element: (
+          <PrivateRoute>
+            <ShowTicket></ShowTicket>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/ticketb/:id",
-        element: <ShowTicketb></ShowTicketb>,
+        element: (
+          <PrivateRouteb>
+            <ShowTicketb></ShowTicketb>
+          </PrivateRouteb>
+        ),
       },
       {
         path: "/slider",
@@ -255,11 +279,19 @@ export const router = createBrowserRouter([
       },
       {
         path: "/driverSetting",
-        element: <DriverSetting></DriverSetting>,
+        element: (
+          <DriverRoute>
+            <DriverSetting></DriverSetting>
+          </DriverRoute>
+        ),
       },
       {
         path: "/driverSettingb",
-        element: <DriverSettingb></DriverSettingb>,
+        element: (
+          <DriverRouteb>
+            <DriverSettingb></DriverSettingb>
+          </DriverRouteb>
+        ),
       },
       {
         path: "/driverProfile",
@@ -327,11 +359,19 @@ export const router = createBrowserRouter([
       },
       {
         path: "/message",
-        element: <Message></Message>,
+        element: (
+          <PrivateRoute>
+            <Message></Message>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/messageb",
-        element: <Messageb></Messageb>,
+        element: (
+          <PrivateRouteb>
+            <Messageb></Messageb>
+          </PrivateRouteb>
+        ),
       },
       {
         path: "/more",
@@ -343,11 +383,19 @@ export const router = createBrowserRouter([
       },
       {
         path: "/inbox",
-        element: <Inbox></Inbox>,
+        element: (
+          <PrivateRoute>
+            <Inbox></Inbox>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/inboxb",
-        element: <Inboxb></Inboxb>,
+        element: (
+          <PrivateRouteb>
+            <Inboxb></Inboxb>
+          </PrivateRouteb>
+        ),
       },
       {
         path: "/welcome",

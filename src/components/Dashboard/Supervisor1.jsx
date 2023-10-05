@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import Footer from "../Footer/Footer";
-import Navbar from "../Navbar/Navbar";
+
 import { AuthContext } from "../context/AuthProvider";
 import MyTickets from "./MyTickets";
 import { useQuery } from "@tanstack/react-query";
@@ -8,6 +7,8 @@ import DriverNav from "../Navbar/DriverNav";
 import { toast } from "react-toastify";
 import DriverFooter from "../Footer/DriverFooter";
 import { useForm } from "react-hook-form";
+import DriverFooterb from "./../Footer/DriverFooterb";
+import DriverNavb from "./../Navbar/DriverNavb";
 const Supervisor1 = () => {
   const { user } = useContext(AuthContext);
   const [ticketNo, setTicketNo] = useState(0);
@@ -63,8 +64,10 @@ const Supervisor1 = () => {
       minutes < 10 ? "0" : ""
     }${minutes} ${ampm}`;
     // Calculate the total cost (including donation)
-    const totalCost = parseInt(data.totalCost);
     const passenger = parseInt(data.passenger);
+
+    const totalCost = parseInt(data.totalCost * passenger);
+
     const tickets = {
       startPoint: "auto",
       destination: "auto",
@@ -93,29 +96,6 @@ const Supervisor1 = () => {
         }
       });
   };
-  useEffect(() => {
-    // Fetch data from the URL
-    fetch("https://nirapode-server.vercel.app/trips")
-      .then((response) => response.json())
-      .then((data) => {
-        // Get today's date in ISO format (e.g., "2023-09-29T00:00:00Z")
-
-        // Filter trips by today's date
-        const todayTrips = data.filter((trip) => {
-          return (
-            trip.formattedDate === formattedDate &&
-            trip.status == "Pending" &&
-            trip.busNo == busNo
-          );
-        });
-        console.log(todayTrips);
-        // Update the state with the filtered trips for today
-        setTrips(todayTrips);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-  }, []);
 
   const refreshPage = () => {
     window.location.reload();
@@ -142,20 +122,6 @@ const Supervisor1 = () => {
           `https://nirapode-server.vercel.app/ticket`
         );
         const busTicketData = await busTicketResponse.json();
-
-        // Filter data by status "confirmed"
-        // const confirmedTickets = busTicketData.filter((ticket) => {
-        //   const today = new Date();
-        //   const dd = String(today.getDate()).padStart(2, "0");
-        //   const mm = String(today.getMonth() + 1).padStart(2, "0"); // January is 0!
-        //   const yyyy = today.getFullYear();
-        //   const formattedDate = `${dd}/${mm}/${yyyy}`;
-
-        //   return (
-        //     ticket.status === "checked" &&
-        //     ticket.formattedDate === formattedDate
-        //   );
-        // });
         const confirmedTickets = busTicketData.filter((ticket) => {
           const today = new Date();
           const dd = String(today.getDate()).padStart(2, "0");
@@ -253,10 +219,32 @@ const Supervisor1 = () => {
       });
   }, [formattedDate, busNo]);
 
+  useEffect(() => {
+    // Fetch data from the URL
+    fetch("https://nirapode-server.vercel.app/trips")
+      .then((response) => response.json())
+      .then((data) => {
+        // Filter trips by today's date
+        const todayTrips = data.filter((trip) => {
+          return (
+            trip.formattedDate === formattedDate &&
+            trip.status == "Pending" &&
+            trip.busNo == busNo
+          );
+        });
+
+        // Update the state with the filtered trips for today
+        setTrips(todayTrips);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, [busNo]);
+
   // this is for reducing the cost when it send to the manager
 
   const handleManager = () => {
-    if (trips.length > 0) {
+    if (trips?.length > 0) {
       return toast.error("Wait for Manager approve");
     }
     // Create a confirmation dialog
@@ -268,9 +256,9 @@ const Supervisor1 = () => {
     }
 
     const tripsInfo = {
-      totalCostSum,
-      totalPassengerSum,
-      ticketNo,
+      totalCostSum: totalCostSum - totalCost,
+      totalPassengerSum: totalPassengerSum - tripPassenger,
+      ticketNo: ticketNo - totalTickets,
       donation,
       trip: trip + 1,
       email: user?.email,
@@ -342,7 +330,7 @@ const Supervisor1 = () => {
                         className="w-full px-3 py-2 drop-shadow-xl border rounded-full  border-[#54B89C] focus:outline-green-500  text-gray-900"
                         id="numPeople"
                         type="number"
-                        value={1}
+                        // value={1}
                         required
                         placeholder="    Number of Passengers"
                       />
@@ -416,8 +404,8 @@ const Supervisor1 = () => {
                   <p>{ticketNo - totalTickets}</p>
                 </div>
                 <div className="flex justify-between uppercase">
-                  <p className="border-l-4 ps-3 border-[#41d341]">Donation</p>
-                  <p>{donation}</p>
+                  {/* <p className="border-l-4 ps-3 border-[#41d341]">Donation</p>
+                  <p>{donation}</p> */}
                 </div>
                 <button
                   onClick={handleManager}

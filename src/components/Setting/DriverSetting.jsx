@@ -13,6 +13,7 @@ import { AuthContext } from "../context/AuthProvider";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import DriverFooter from "../Footer/DriverFooter";
+import DriverNav from "../Navbar/DriverNav";
 const DriverSetting = () => {
   const navigate = useNavigate();
   const { user, logOut } = useContext(AuthContext);
@@ -26,7 +27,7 @@ const DriverSetting = () => {
   };
   return (
     <>
-      <Navbar></Navbar>
+      <DriverNav></DriverNav>
       <div>
         <Link to="/dashboard">
           {" "}
