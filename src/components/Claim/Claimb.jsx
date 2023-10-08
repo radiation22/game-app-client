@@ -102,15 +102,24 @@ const Claimb = () => {
       toast.error("Not Match");
     }
   };
+  const refreshPage = () => {
+    window.location.reload();
+  };
 
   return (
     <>
       <Navbarb></Navbarb>
       <div className="pt-10 pb-28">
-        <div>
+        <div className="text-center">
           <p className="text-xl font-bold text-center px-4">
             Don't Click Anywhere Just Show it Supervisor when you want to use
           </p>
+          <button
+            onClick={refreshPage}
+            className=" ml-2 px-4 bg-[#05A83F] text-white uppercase py-2 rounded-lg my-3"
+          >
+            Refresh
+          </button>
         </div>
         <div className="bg-white p-4 rounded-2xl mt-5 mx-5">
           <div className="flex justify-between">

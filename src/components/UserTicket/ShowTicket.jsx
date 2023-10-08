@@ -248,7 +248,7 @@ const ShowTicket = () => {
                 </div>
               ) : (
                 <>
-                  {details?.status === "checked" ? (
+                  {details?.status === "checked" || isDateExpired ? (
                     <></>
                   ) : (
                     <>

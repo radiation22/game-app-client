@@ -361,7 +361,7 @@ const ChooseBusb = () => {
     const startPoint = data.startPoint;
     const destination = data.destination;
     const passenger = parseFloat(data.passenger);
-    const donation = parseFloat(data.donation);
+    const donation = data.donation ? parseFloat(data.donation) : 0;
     const email = user?.email;
 
     // Get the current time
@@ -526,8 +526,7 @@ const ChooseBusb = () => {
                     className="w-full px-3 py-2 drop-shadow-xl border rounded-full  border-[#54B89C] focus:outline-green-500  text-gray-900"
                     id="numPeople"
                     type="number"
-                    placeholder="    অনুদান"
-                    required
+                    placeholder="    অনুদান (optional)"
                   />
                 </div>
               </div>

@@ -222,7 +222,7 @@ const TicketInformation = ({ ticket, refetch }) => {
               </div>
             ) : (
               <>
-                {status === "checked" ? (
+                {status === "checked" || isDateExpired ? (
                   <></>
                 ) : (
                   <>

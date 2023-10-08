@@ -217,17 +217,25 @@ const TicketInformationb = ({ ticket, refetch }) => {
                 <p className="text-red-500">{secret}</p>
               </div>
             ) : (
-              <div className="flex justify-center">
-                <button
-                  onClick={() => {
-                    confirmTicket(ticket?._id);
-                    confirmTicket2(ticket._id);
-                  }}
-                  className="bg-[#C1282D] text-white px-20 mt-1 rounded-full py-1"
-                >
-                  Confirm
-                </button>
-              </div>
+              <>
+                {status === "checked" || isDateExpired ? (
+                  <></>
+                ) : (
+                  <>
+                    <div className="flex justify-center">
+                      <button
+                        onClick={() => {
+                          confirmTicket(ticket?._id);
+                          confirmTicket2(ticket?._id);
+                        }}
+                        className="bg-[#C1282D] text-white px-20 mt-1 rounded-full py-1"
+                      >
+                        Confirm
+                      </button>
+                    </div>
+                  </>
+                )}
+              </>
             )}
             {isDateExpired && (
               <p className="text-center text-red-500 font-bold">
