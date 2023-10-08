@@ -517,6 +517,7 @@ const ChooseBusb = () => {
                     type="number"
                     required
                     placeholder="    নাম্বার অফ প্যাসেঞ্জার"
+                    min="1"
                   />
                 </div>
                 <div className="w-full pt-3  px-2 mb-1 lg:mb-0">

@@ -515,11 +515,12 @@ const ChooseBus = () => {
                 <div className="w-full pt-5  px-2 mb-1 lg:mb-0">
                   <input
                     {...register("passenger")}
-                    className="w-full px-3 py-2 drop-shadow-xl border rounded-full  border-[#54B89C] focus:outline-green-500  text-gray-900"
+                    className="w-full px-3 py-2 drop-shadow-xl border rounded-full border-[#54B89C] focus:outline-green-500 text-gray-900"
                     id="numPeople"
                     type="number"
                     required
-                    placeholder="    Number of Passengers"
+                    placeholder="Number of Passengers"
+                    min="1" // Set the minimum value to 1
                   />
                 </div>
                 <div className="w-full pt-3  px-2 mb-1 lg:mb-0">
