@@ -27,7 +27,7 @@ const Homeb = () => {
     if (locationEnabled) {
       navigate("/accountb"); // Navigate to the "/account" route when location is enabled
     } else {
-      alert("Turn On Location");
+      navigate("/accountb");
     }
   };
 

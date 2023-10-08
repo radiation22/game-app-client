@@ -9,12 +9,14 @@ import DriverFooter from "../Footer/DriverFooter";
 import { useForm } from "react-hook-form";
 import DriverFooterb from "./../Footer/DriverFooterb";
 import DriverNavb from "./../Navbar/DriverNavb";
+import { useNavigate } from "react-router-dom";
 const Supervisor1 = () => {
   const { user } = useContext(AuthContext);
   const [ticketNo, setTicketNo] = useState(0);
   const [trip, setTrip] = useState(1);
   const [busNo, setBusNo] = useState(0);
   const [donation, setDonation] = useState(0);
+  const [donationSum, setDonationSum] = useState(0);
   const [totalCostSum, setTotalCostSum] = useState(0);
   const [totalPassengerSum, setTotalPassengerSum] = useState(0);
   const [totalCost, setTotalCost] = useState(0);
@@ -27,7 +29,7 @@ const Supervisor1 = () => {
   const mm = String(today.getMonth() + 1).padStart(2, "0"); // January is 0!
   const yyyy = today.getFullYear();
   const formattedDate = `${dd}/${mm}/${yyyy}`;
-
+  const navigate = useNavigate();
   const [trips, setTrips] = useState([]);
   const [secret, setSecret] = useState(null);
 
@@ -91,8 +93,9 @@ const Supervisor1 = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged) {
+          setIsModalOpen(false);
           toast.success("Ticket Confirmed");
-          refreshPage();
+          navigate("/dashboard");
         }
       });
   };
@@ -162,11 +165,13 @@ const Supervisor1 = () => {
           (sum, ticket) => sum + ticket.donation,
           0
         );
+        console.log(donationSum);
         // setBusNo(extractedBusNumbers);
 
         setTotalCostSum(costSum);
         setTotalPassengerSum(passengerSum);
         setDonation(donationSum);
+
         setLoading(false);
         // setTimeout(refreshPage, 20000);
 
@@ -208,7 +213,8 @@ const Supervisor1 = () => {
           (sum, trip) => sum + trip.totalPassengerSum,
           0
         );
-
+        console.log(totalDonationSum);
+        setDonationSum(totalDonationSum);
         setTripPassenger(tripPassenger);
         setTrip(todayTrips?.length);
         setTotalCost(totalCostSum);
@@ -259,7 +265,7 @@ const Supervisor1 = () => {
       totalCostSum: totalCostSum - totalCost,
       totalPassengerSum: totalPassengerSum - tripPassenger,
       ticketNo: ticketNo - totalTickets,
-      donation,
+      donation: donation - donationSum,
       trip: trip + 1,
       email: user?.email,
       busNo,
@@ -284,7 +290,7 @@ const Supervisor1 = () => {
   return (
     <>
       <DriverNav></DriverNav>
-      <div className=" text-center h-screen  py-5 ">
+      <div className=" text-center h-screen  pt-8 pb-20 ">
         <h1 className="text-2xl font-bold">Dashboard</h1>
         <p>[Supervisor - 2]</p>
         <p className="text-xl mt-4">Welcome {user?.displayName}</p>
@@ -404,15 +410,24 @@ const Supervisor1 = () => {
                   <p>{ticketNo - totalTickets}</p>
                 </div>
                 <div className="flex justify-between uppercase">
-                  {/* <p className="border-l-4 ps-3 border-[#41d341]">Donation</p>
-                  <p>{donation}</p> */}
+                  <p className="border-l-4 ps-3 border-[#41d341]">Donation</p>
+                  <p>{donation - donationSum}</p>
                 </div>
-                <button
-                  onClick={handleManager}
-                  className="px-5 bg-[#9DDE2A] uppercase py-2 rounded-full my-3"
-                >
-                  Deliver to Manager
-                </button>
+                {trips?.length > 0 ? (
+                  <button
+                    onClick={handleManager}
+                    className="px-5 bg-[#b4b4b2] uppercase py-2 rounded-full my-3"
+                  >
+                    Deliver to Manager
+                  </button>
+                ) : (
+                  <button
+                    onClick={handleManager}
+                    className="px-5 bg-[#9DDE2A] uppercase py-2 rounded-full my-3"
+                  >
+                    Deliver to Manager
+                  </button>
+                )}
               </div>
             </div>
           </>

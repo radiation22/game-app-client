@@ -68,13 +68,14 @@ import DriverRouteb from "../components/PrivateRoute/DriverRouteb";
 import Login2b from "../components/Login/Login2b";
 import ShowTicketb from "../components/UserTicket/ShowTicketb";
 import Claimb from "../components/Claim/Claimb";
+import Notfound from "../components/Notfound/Notfound";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <Root></Root>,
 
-    // errorElement: <Notfound></Notfound>,
+    errorElement: <Notfound></Notfound>,
     children: [
       {
         path: "/",

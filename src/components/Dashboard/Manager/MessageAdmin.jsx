@@ -6,7 +6,7 @@ const MessageAdmin = ({ messages }) => {
   // Store the selected sender
 
   const handleMessage = (e) => {
-    if (newMessage.trim() === "") return;
+    if (newMessage?.trim() === "") return;
     const userMessage = {
       text: newMessage,
       sender: "Admin",
@@ -26,14 +26,6 @@ const MessageAdmin = ({ messages }) => {
       });
   };
 
-  // useEffect(() => {
-  //   // Extract unique sender values from messages
-  //   const uniqueSenders = Array.from(
-  //     new Set(messages.map((message) => message.sender))
-  //   );
-  //   setSelectedSender(uniqueSenders[0] || ""); // Set the default selected sender
-  // }, [messages]);
-
   return (
     <div>
       <div className="w-full">
@@ -42,21 +34,21 @@ const MessageAdmin = ({ messages }) => {
 
         <div className="flex flex-col bg-gray-100">
           <div className="flex-1 overflow-y-scroll p-4">
-            {messages.map((message, index) => (
+            {messages?.map((message, index) => (
               <div
                 key={index}
                 className={`mb-2 ${
-                  message.sender === "Admin" ? "text-left" : "text-right"
+                  message?.sender === "Admin" ? "text-left" : "text-right"
                 }`}
               >
                 <span
                   className={`px-3 py-1 rounded-lg inline-block ${
-                    message.sender === "Admin"
+                    message?.sender === "Admin"
                       ? "bg-blue-500 text-white"
                       : "bg-gray-300"
                   }`}
                 >
-                  {message.text}=by
+                  {message?.text}=by
                   {message?.sender}
                 </span>
               </div>
@@ -67,7 +59,7 @@ const MessageAdmin = ({ messages }) => {
             onChange={(e) => setSelectedSender(e.target.value)}
           >
             <option value="">Select Sender</option>
-            {messages.map((message, index) => (
+            {messages?.map((message, index) => (
               <option key={index} value={message.sender}>
                 {message.sender}
               </option>

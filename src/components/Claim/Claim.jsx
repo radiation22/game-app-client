@@ -124,7 +124,7 @@ const Claim = () => {
           <hr className="mt-2 mb-4" />
           {/* Render Cash Back reward if enabled */}
 
-          {claim.map((c) => (
+          {claim?.map((c) => (
             <div
               key={c._id}
               className="flex gap-3 items-center justify-between"
@@ -141,8 +141,9 @@ const Claim = () => {
                     justifyContent: "center",
                   }}
                 >
-                  <p className="text-white">
-                    Free <br /> Ride
+                  <p className="text-white text-sm">
+                    Gift: <br />
+                    No {claim?.length}
                   </p>
                 </div>
               </div>

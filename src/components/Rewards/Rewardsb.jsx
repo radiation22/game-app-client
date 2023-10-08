@@ -3,12 +3,12 @@ import { AuthContext } from "../context/AuthProvider";
 import sun from "../../assets/sun.png";
 import star from "../../assets/star.png";
 import { FaAngleRight } from "react-icons/fa";
-import Navbar from "../Navbar/Navbar";
-import Footer from "../Footer/Footer";
+
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
-import Footerb from "../Footer/Footerb";
-import Navbarb from "../Navbar/Navbarb";
+import { toast } from "react-toastify";
+import Navbarb from "./../Navbar/Navbarb";
+import Footerb from "./../Footer/Footerb";
 
 const Rewardsb = () => {
   const { user } = useContext(AuthContext);
@@ -23,14 +23,16 @@ const Rewardsb = () => {
       const url = `https://nirapode-server.vercel.app/myTicket?email=${user?.email}`;
       const res = await fetch(url);
       const data = await res.json();
-      return data;
+      const count = data?.filter((tik) => tik?.status == "checked");
+      // console.log(count);
+      return count;
     },
     {
       enabled: !!user?.email, // Only fetch data when user.email is available
     }
   );
-  const points = 10 + 5 * tickets.length; // Replace with the actual points
-  const totalPointsGoal = 200; // Replace with your total points goal
+  const points = 10 + 10 * tickets?.length; // Replace with the actual points
+  const totalPointsGoal = 3010; // Replace with your total points goal
 
   // Calculate the progress percentage
   const progressPercentage = (points / totalPointsGoal) * 100;
@@ -39,8 +41,15 @@ const Rewardsb = () => {
   const progressBarWidth = `${progressPercentage}%`;
 
   // Define whether each reward is enabled based on points
-  const isCashBackEnabled = points >= 100;
-  const isFreeRideEnabled = points >= 200;
+  const isCashBackEnabled = points >= 60;
+  const isFreeRideEnabled = points >= 160;
+  const isFreeRingEnabled = points >= 310;
+  const isFreeGlassEnabled = points >= 510;
+  const isFreeCapEnabled = points >= 810;
+  const isFreeTwoRideEnabled = points >= 1210;
+  const isFreeShirtEnabled = points >= 1710;
+  const isFreeWatchEnabled = points >= 2310;
+  const isFreeMugEnabled = points >= 3010;
 
   const claims = {
     status: "Pending",
@@ -48,7 +57,7 @@ const Rewardsb = () => {
   };
 
   const handleCollectButtonClick = () => {
-    fetch("http://localhost:5000/addClaim", {
+    fetch("https://nirapode-server.vercel.app/addClaim", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(claims),
@@ -56,7 +65,8 @@ const Rewardsb = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged) {
-          console.log("success");
+          toast.success("Enjoy Claim");
+          refetch();
         }
       });
     // setIsButtonClicked(true);
@@ -78,7 +88,14 @@ const Rewardsb = () => {
           <p className="text-[#9FDF29]">{points} Points</p>
         </div>
         <div className="bg-[#FE9F0D] rounded-full mt-4 mx-5 py-2">
-          <p className="text-center text-white">Gold</p>
+          {points <= 500 ? (
+            <p className="text-center font-bold text-white">ব্রোঞ্জ</p>
+          ) : points <= 1000 ? (
+            <p className="text-center font-bold text-white">সিল্ভার</p>
+          ) : (
+            <p className="text-center font-bold text-white">গোল্ড</p>
+          )}
+
           <div
             className="rounded-full  h-[7px] mx-5 mb-3 mt-1 bg-white"
             style={{ width: progressBarWidth }}
@@ -106,7 +123,7 @@ const Rewardsb = () => {
                   justifyContent: "center",
                 }}
               >
-                <p>
+                <p className="text-sm">
                   Free <br /> Ride
                 </p>
               </div>
@@ -115,14 +132,23 @@ const Rewardsb = () => {
               Enjoy a free ride with using claim
             </p>
             <Link to="/claim">
-              {" "}
-              <button
-                onClick={handleCollectButtonClick}
-                className="bg-[#96A6B6] py-2 px-4 rounded-full"
-                disabled={!isCashBackEnabled} // Disable the button if not enabled
-              >
-                Claim
-              </button>
+              {isCashBackEnabled ? (
+                <button
+                  onClick={handleCollectButtonClick}
+                  className="bg-[#9DDE2A] py-2 px-4 rounded-full"
+                  disabled={!isCashBackEnabled} // Disable the button if not enabled
+                >
+                  Claim
+                </button>
+              ) : (
+                <button
+                  onClick={handleCollectButtonClick}
+                  className="bg-[#a3a899] py-2 px-4 rounded-full"
+                  disabled={!isCashBackEnabled} // Disable the button if not enabled
+                >
+                  Claim
+                </button>
+              )}
             </Link>
           </div>
 
@@ -141,21 +167,320 @@ const Rewardsb = () => {
                   justifyContent: "center",
                 }}
               >
-                <p>
-                  Free <br /> Ride
+                <p className="text-sm">
+                  Snack <br /> Pack
                 </p>
               </div>
             </div>
             <p className="w-[60%] text-sm text-[#96A6B6]">
-              Enjoy Cashback with using claim
+              Enjoy Snack Pack with using claim
             </p>
-            <button
-              onClick={handleCollectButtonClick}
-              className="bg-[#9DDE2A] py-2 px-4 rounded-full"
-              disabled={!isFreeRideEnabled} // Disable the button if not enabled
-            >
-              Claim
-            </button>
+            {isFreeRideEnabled ? (
+              <button
+                onClick={handleCollectButtonClick}
+                className="bg-[#9DDE2A] py-2 px-4 rounded-full"
+                disabled={!isFreeRideEnabled} // Disable the button if not enabled
+              >
+                Claim
+              </button>
+            ) : (
+              <button
+                onClick={handleCollectButtonClick}
+                className="bg-[#a3a899] py-2 px-4 rounded-full"
+                disabled={!isFreeRideEnabled} // Disable the button if not enabled
+              >
+                Claim
+              </button>
+            )}
+          </div>
+          <div className="flex gap-3 items-center mt-3 justify-between">
+            <div className="w-[20%]">
+              <div
+                style={{
+                  borderRadius: "50%",
+                  width: "60px",
+                  height: "60px",
+                  background: "#9DDE2A",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <p className="text-sm">
+                  Key <br /> Ring
+                </p>
+              </div>
+            </div>
+            <p className="w-[60%] text-sm text-[#96A6B6]">
+              Enjoy Key Ring with using claim
+            </p>
+            {isFreeRingEnabled ? (
+              <button
+                onClick={handleCollectButtonClick}
+                className="bg-[#9DDE2A] py-2 px-4 rounded-full"
+                disabled={!isFreeRingEnabled} // Disable the button if not enabled
+              >
+                Claim
+              </button>
+            ) : (
+              <button
+                onClick={handleCollectButtonClick}
+                className="bg-[#a3a899] py-2 px-4 rounded-full"
+                disabled={!isFreeRingEnabled} // Disable the button if not enabled
+              >
+                Claim
+              </button>
+            )}
+          </div>
+          <div className="flex gap-3 items-center mt-3 justify-between">
+            <div className="w-[20%]">
+              <div
+                style={{
+                  borderRadius: "50%",
+                  width: "60px",
+                  height: "60px",
+                  background: "#9DDE2A",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <p className="text-sm">
+                  Sun <br /> Glass
+                </p>
+              </div>
+            </div>
+            <p className="w-[60%] text-sm text-[#96A6B6]">
+              Enjoy Sun Glass with using claim
+            </p>
+            {isFreeGlassEnabled ? (
+              <button
+                onClick={handleCollectButtonClick}
+                className="bg-[#9DDE2A] py-2 px-4 rounded-full"
+                disabled={!isFreeGlassEnabled} // Disable the button if not enabled
+              >
+                Claim
+              </button>
+            ) : (
+              <button
+                onClick={handleCollectButtonClick}
+                className="bg-[#a3a899] py-2 px-4 rounded-full"
+                disabled={!isFreeGlassEnabled} // Disable the button if not enabled
+              >
+                Claim
+              </button>
+            )}
+          </div>
+          <div className="flex gap-3 items-center mt-3 justify-between">
+            <div className="w-[20%]">
+              <div
+                style={{
+                  borderRadius: "50%",
+                  width: "60px",
+                  height: "60px",
+                  background: "#9DDE2A",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <p className="text-sm">
+                  Sun <br /> Cap
+                </p>
+              </div>
+            </div>
+            <p className="w-[60%] text-sm text-[#96A6B6]">
+              Enjoy Sun Cap with using claim
+            </p>
+            {isFreeCapEnabled ? (
+              <button
+                onClick={handleCollectButtonClick}
+                className="bg-[#9DDE2A] py-2 px-4 rounded-full"
+                disabled={!isFreeCapEnabled} // Disable the button if not enabled
+              >
+                Claim
+              </button>
+            ) : (
+              <button
+                onClick={handleCollectButtonClick}
+                className="bg-[#a3a899] py-2 px-4 rounded-full"
+                disabled={!isFreeCapEnabled} // Disable the button if not enabled
+              >
+                Claim
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* this is for silver stage */}
+
+        <div className="bg-white p-4 rounded-2xl mt-5 mx-5">
+          <div className="flex justify-between">
+            <h1 className="text-[#0DAB46]">Silver</h1>
+          </div>
+          <hr className="mt-2 mb-4" />
+          {/* Render Cash Back reward if enabled */}
+
+          <div className="flex gap-3 items-center justify-between">
+            <div className="w-[20%]">
+              <div
+                style={{
+                  borderRadius: "50%",
+                  width: "60px",
+                  height: "60px",
+                  background: "#9DDE2A",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <p className="text-sm">
+                  Two <br /> Ride
+                </p>
+              </div>
+            </div>
+            <p className="w-[60%] text-sm text-[#96A6B6]">
+              Enjoy a Two ride with using claim
+            </p>
+            <Link to="/claim">
+              {isFreeTwoRideEnabled ? (
+                <button
+                  onClick={handleCollectButtonClick}
+                  className="bg-[#9DDE2A] py-2 px-4 rounded-full"
+                  disabled={!isFreeTwoRideEnabled} // Disable the button if not enabled
+                >
+                  Claim
+                </button>
+              ) : (
+                <button
+                  onClick={handleCollectButtonClick}
+                  className="bg-[#a3a899] py-2 px-4 rounded-full"
+                  disabled={!isFreeTwoRideEnabled} // Disable the button if not enabled
+                >
+                  Claim
+                </button>
+              )}
+            </Link>
+          </div>
+
+          {/* Render Free Ride reward if enabled */}
+
+          <div className="flex gap-3 items-center mt-3 justify-between">
+            <div className="w-[20%]">
+              <div
+                style={{
+                  borderRadius: "50%",
+                  width: "60px",
+                  height: "60px",
+                  background: "#9DDE2A",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <p className="text-sm">
+                  T- <br /> Shirt
+                </p>
+              </div>
+            </div>
+            <p className="w-[60%] text-sm text-[#96A6B6]">
+              Enjoy a T-shirt with using claim
+            </p>
+            {isFreeShirtEnabled ? (
+              <button
+                onClick={handleCollectButtonClick}
+                className="bg-[#9DDE2A] py-2 px-4 rounded-full"
+                disabled={!isFreeShirtEnabled} // Disable the button if not enabled
+              >
+                Claim
+              </button>
+            ) : (
+              <button
+                onClick={handleCollectButtonClick}
+                className="bg-[#a3a899] py-2 px-4 rounded-full"
+                disabled={!isFreeShirtEnabled} // Disable the button if not enabled
+              >
+                Claim
+              </button>
+            )}
+          </div>
+          <div className="flex gap-3 items-center mt-3 justify-between">
+            <div className="w-[20%]">
+              <div
+                style={{
+                  borderRadius: "50%",
+                  width: "60px",
+                  height: "60px",
+                  background: "#9DDE2A",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <p className="text-sm">
+                  Hand <br /> Watch
+                </p>
+              </div>
+            </div>
+            <p className="w-[60%] text-sm text-[#96A6B6]">
+              Enjoy hand watch with using claim
+            </p>
+            {isFreeWatchEnabled ? (
+              <button
+                onClick={handleCollectButtonClick}
+                className="bg-[#9DDE2A] py-2 px-4 rounded-full"
+                disabled={!isFreeWatchEnabled} // Disable the button if not enabled
+              >
+                Claim
+              </button>
+            ) : (
+              <button
+                onClick={handleCollectButtonClick}
+                className="bg-[#a3a899] py-2 px-4 rounded-full"
+                disabled={!isFreeWatchEnabled} // Disable the button if not enabled
+              >
+                Claim
+              </button>
+            )}
+          </div>
+          <div className="flex gap-3 items-center mt-3 justify-between">
+            <div className="w-[20%]">
+              <div
+                style={{
+                  borderRadius: "50%",
+                  width: "60px",
+                  height: "60px",
+                  background: "#9DDE2A",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <p className="text-sm">
+                  Small <br /> Mug
+                </p>
+              </div>
+            </div>
+            <p className="w-[60%] text-sm text-[#96A6B6]">
+              Enjoy a Mug with using claim
+            </p>
+            {isFreeMugEnabled ? (
+              <button
+                onClick={handleCollectButtonClick}
+                className="bg-[#9DDE2A] py-2 px-4 rounded-full"
+                disabled={!isFreeMugEnabled} // Disable the button if not enabled
+              >
+                Claim
+              </button>
+            ) : (
+              <button
+                onClick={handleCollectButtonClick}
+                className="bg-[#a3a899] py-2 px-4 rounded-full"
+                disabled={!isFreeMugEnabled} // Disable the button if not enabled
+              >
+                Claim
+              </button>
+            )}
           </div>
         </div>
 

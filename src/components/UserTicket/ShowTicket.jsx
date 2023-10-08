@@ -9,32 +9,58 @@ import { toast } from "react-toastify";
 import circle from "../../assets/style.png";
 import { AuthContext } from "../context/AuthProvider";
 import Footer from "../Footer/Footer";
+import { useQuery } from "@tanstack/react-query";
 
 const ShowTicket = () => {
   const { user, logOut } = useContext(AuthContext);
   const { id } = useParams();
 
-  const [details, setDetails] = useState([]);
+  // const [details, setDetails] = useState([]);
   const [isInputVisible, setInputVisible] = useState(false);
   const [item, setItem] = useState(null);
   const [item2, setItem2] = useState(null);
   const [secret, setSecret] = useState("");
 
-  useEffect(() => {
-    // Fetch data from the URL
-    fetch(`https://nirapode-server.vercel.app/ticket/${id}`)
-      .then((response) => response.json())
-      .then((data) => {
-        // Update the state with the fetched data
-        setDetails(data);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-  }, [id]);
+  const queryKey = ["details", id];
+
+  // Use the useQuery hook to fetch data
+  const { data: details = [], refetch } = useQuery(
+    queryKey,
+    async () => {
+      const url = `https://nirapode-server.vercel.app/ticket/${id}`;
+      const res = await fetch(url);
+      const data = await res.json();
+      return data;
+    },
+    {
+      enabled: !!id, // Only fetch data when user.email is available
+    }
+  );
+
+  const today = new Date();
+  const dd = String(today.getDate()).padStart(2, "0");
+  const mm = String(today.getMonth() + 1).padStart(2, "0"); // January is 0!
+  const yyyy = today.getFullYear();
+  const formattedDate = `${dd}/${mm}/${yyyy}`;
+  const ticketDate = details?.formattedDate;
+  const isDateExpired = ticketDate < formattedDate;
+
+  // useEffect(() => {
+  //   // Fetch data from the URL
+  //   fetch(`https://nirapode-server.vercel.app/ticket/${id}`)
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       // Update the state with the fetched data
+  //       setDetails(data);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching data:", error);
+  //     });
+  // }, [id]);
   const handleSecret = (e) => {
     const reviews = {
       status: "checked",
+      secret: e.target.value,
     };
     if (
       e.target.value == 19990 ||
@@ -54,7 +80,7 @@ const ShowTicket = () => {
         .then((response) => response.json())
         .then((data) => {
           // console.log(data);
-          //   refetch();
+          refetch();
           toast.success("Ticket Confirm");
           document.getElementById("secret").style.display = "none";
         })
@@ -240,6 +266,11 @@ const ShowTicket = () => {
                     </>
                   )}
                 </>
+              )}
+              {isDateExpired && (
+                <p className="text-center text-red-500 font-bold">
+                  This ticket has expired!
+                </p>
               )}
             </div>
           </div>

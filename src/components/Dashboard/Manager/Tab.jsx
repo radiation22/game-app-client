@@ -3,6 +3,7 @@ import Message from "./../../Message/Message";
 import io from "socket.io-client";
 import { AuthContext } from "../../context/AuthProvider";
 import MessageAdmin from "./MessageAdmin";
+import { useNavigate } from "react-router-dom";
 const Tabs = () => {
   const [activeTab, setActiveTab] = useState("London");
   const [tickets, setTickets] = useState([]);
@@ -11,7 +12,7 @@ const Tabs = () => {
   // const socket = io.connect("https://nirapode-server.vercel.app");
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
-
+  const navigate = useNavigate();
   useEffect(() => {
     // Fetch messages from the database when the component mounts
     const fetchMessagesFromDatabase = async () => {
@@ -46,6 +47,10 @@ const Tabs = () => {
         console.error("Error fetching data:", error);
       });
   }, []);
+
+  const refreshPage = () => {
+    navigate("/manager");
+  };
   useEffect(() => {
     // Fetch data from the URL
     fetch("https://nirapode-server.vercel.app/ticket")
@@ -76,7 +81,8 @@ const Tabs = () => {
   return (
     <div className="bg-gray-100 p-4">
       <h2 className="text-3xl font-bold text-center">Managers Dashboard</h2>
-      <div className="flex space-x-2">
+
+      <div className="flex space-x-2 mt-8">
         <button
           className={`py-2 px-4 bg-gray-300 hover:bg-gray-400 ${
             activeTab === "London" ? "bg-gray-400" : ""
@@ -108,6 +114,12 @@ const Tabs = () => {
           onClick={() => openTab("message")}
         >
           Message
+        </button>
+        <button
+          onClick={refreshPage}
+          className=" ml-2 px-4 bg-[#05A83F] text-white uppercase py-2 rounded-lg my-3"
+        >
+          Refresh
         </button>
       </div>
 

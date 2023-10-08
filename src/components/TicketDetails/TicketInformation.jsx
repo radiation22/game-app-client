@@ -27,6 +27,14 @@ const TicketInformation = ({ ticket, refetch }) => {
     ticketNo,
   } = ticket;
 
+  const today = new Date();
+  const dd = String(today.getDate()).padStart(2, "0");
+  const mm = String(today.getMonth() + 1).padStart(2, "0"); // January is 0!
+  const yyyy = today.getFullYear();
+  const formattedDate1 = `${dd}/${mm}/${yyyy}`;
+  const ticketDate = formattedDate;
+  const isDateExpired = ticketDate < formattedDate1;
+
   const url = `https://nirapode-server.vercel.app/ticket`;
   fetch(url)
     .then((res) => res.json())
@@ -197,6 +205,11 @@ const TicketInformation = ({ ticket, refetch }) => {
             <p className="text-[#9EB1C5] text-sm">
               A supervisor will check your ticket confirmation
             </p>
+            {isDateExpired && (
+              <p className="text-center text-red-500 font-bold">
+                This ticket has expired!
+              </p>
+            )}
             {isInputVisible ? (
               <div id="secret" className="flex  mt-2 justify-center gap-4 pt-4">
                 <input

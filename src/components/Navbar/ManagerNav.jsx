@@ -21,8 +21,9 @@ const ManagerNav = () => {
         const notificationLength = data.filter(
           (noti) => noti.status === "Pending"
         );
+        console.log();
         setNotificationCount(notificationLength?.length);
-        setTrips(data);
+        setTrips(notificationLength);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
