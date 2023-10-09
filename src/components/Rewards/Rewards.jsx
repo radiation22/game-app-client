@@ -31,7 +31,7 @@ const Rewards = () => {
     }
   );
   const points = 10 + 10 * tickets?.length; // Replace with the actual points
-  const totalPointsGoal = 3010; // Replace with your total points goal
+  const totalPointsGoal = 11360; // Replace with your total points goal
 
   // Calculate the progress percentage
   const progressPercentage = (points / totalPointsGoal) * 100;
@@ -40,15 +40,15 @@ const Rewards = () => {
   const progressBarWidth = `${progressPercentage}%`;
 
   // Define whether each reward is enabled based on points
-  const isCashBackEnabled = points >= 60;
-  const isFreeRideEnabled = points >= 160;
-  const isFreeRingEnabled = points >= 310;
-  const isFreeGlassEnabled = points >= 510;
-  const isFreeCapEnabled = points >= 810;
-  const isFreeTwoRideEnabled = points >= 1210;
-  const isFreeShirtEnabled = points >= 1710;
-  const isFreeWatchEnabled = points >= 2310;
-  const isFreeMugEnabled = points >= 3010;
+  const isCashBackEnabled = points >= 60; //10 ticket
+  const isFreeRideEnabled = points >= 260; // 20 ticket
+  const isFreeRingEnabled = points >= 660; //40 ticket
+  const isFreeGlassEnabled = points >= 1360; //70 ticket
+  const isFreeCapEnabled = points >= 2360; //100 ticket
+  const isFreeTwoRideEnabled = points >= 3860; //150 ticket
+  const isFreeShirtEnabled = points >= 5860; //200 ticket
+  const isFreeWatchEnabled = points >= 8360; //250 ticket
+  const isFreeMugEnabled = points >= 11360; //300 ticket
 
   const claims = {
     status: "Pending",
@@ -70,7 +70,9 @@ const Rewards = () => {
       });
     // setIsButtonClicked(true);
   };
-
+  const handleSilver = () => {
+    document.getElementById("silver").style.display = "block";
+  };
   return (
     <>
       <Navbar></Navbar>
@@ -104,7 +106,9 @@ const Rewards = () => {
         <div className="bg-white p-4 rounded-2xl mt-5 mx-5">
           <div className="flex justify-between">
             <h1 className="text-[#0DAB46]">Rewards</h1>
-            <p className="text-[#9DDE2A]">View all</p>
+            <p onClick={handleSilver} className="text-[#9DDE2A] cursor-pointer">
+              View all
+            </p>
           </div>
           <hr className="mt-2 mb-4" />
           {/* Render Cash Back reward if enabled */}
@@ -313,7 +317,7 @@ const Rewards = () => {
 
         {/* this is for silver stage */}
 
-        <div className="bg-white p-4 rounded-2xl mt-5 mx-5">
+        <div id="silver" className="bg-white hidden p-4 rounded-2xl mt-5 mx-5">
           <div className="flex justify-between">
             <h1 className="text-[#0DAB46]">Silver</h1>
           </div>

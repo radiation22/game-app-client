@@ -354,7 +354,7 @@ const ChooseBusb = () => {
     fetch(url)
       .then((res) => res.json())
       .then((data) => setTicket(data));
-  }, []);
+  }, [user]);
 
   const onSubmit = (data) => {
     console.log(data);
@@ -379,7 +379,7 @@ const ChooseBusb = () => {
     const cost = calculateCost(startPoint, destination);
 
     // Calculate the total cost (including donation)
-    const totalCost = cost * passenger + 1;
+    const totalCost = (cost + 1) * passenger;
     const tickets = {
       startPoint,
       destination,

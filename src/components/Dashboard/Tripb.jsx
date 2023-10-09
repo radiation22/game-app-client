@@ -29,6 +29,7 @@ const Tripb = ({ tickets }) => {
           <caption className="text-lg font-bold mb-4">All of Your Trip</caption>
           <thead>
             <tr>
+              <th className=" border p-2">Date</th>
               <th className=" border p-2">Total Ticket</th>
               <th className=" border p-2">Total Passenger</th>
               <th className=" border p-2">Total Cost</th>
@@ -38,13 +39,17 @@ const Tripb = ({ tickets }) => {
             </tr>
           </thead>
           <tbody>
-            {trip?.map((ticket) => (
-              <tr key={ticket._id} className="text-center">
-                <td className="border p-2">{ticket?.ticketNo}</td>
-                <td className="border p-2">{ticket.totalPassengerSum}</td>
-                <td className="border p-2">{ticket.totalCostSum}tk</td>
-                <td className="border p-2">{ticket.trip}</td>
-                {/* <td className="border p-2">{ticket.totalCost} tk</td>
+            {trip
+              ?.slice()
+              .reverse()
+              .map((ticket) => (
+                <tr key={ticket._id} className="text-center">
+                  <td className="border p-2">{ticket?.formattedDate}</td>
+                  <td className="border p-2">{ticket?.ticketNo}</td>
+                  <td className="border p-2">{ticket.totalPassengerSum}</td>
+                  <td className="border p-2">{ticket.totalCostSum}tk</td>
+                  <td className="border p-2">{ticket.trip}</td>
+                  {/* <td className="border p-2">{ticket.totalCost} tk</td>
                 <td className="border p-2">
                   <button
                     //   onClick={() => confirmTicket(ticket?._id)}
@@ -53,8 +58,8 @@ const Tripb = ({ tickets }) => {
                     {ticket.status}
                   </button>
                 </td> */}
-              </tr>
-            ))}
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>

@@ -95,7 +95,7 @@ const Supervisor1 = () => {
         if (data.acknowledged) {
           setIsModalOpen(false);
           toast.success("Ticket Confirmed");
-          navigate("/dashboard");
+          refreshPage();
         }
       });
   };

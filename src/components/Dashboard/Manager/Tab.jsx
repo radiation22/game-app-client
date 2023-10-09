@@ -49,7 +49,7 @@ const Tabs = () => {
   }, []);
 
   const refreshPage = () => {
-    navigate("/manager");
+    window.location.reload();
   };
   useEffect(() => {
     // Fetch data from the URL
@@ -137,6 +137,7 @@ const Tabs = () => {
               </caption>
               <thead className="bg-gray-400">
                 <tr>
+                  <th className=" border p-2">Date</th>
                   <th className=" border p-2">Trip No</th>
                   <th className=" border p-2">Bus NO</th>
                   <th className=" border p-2">Total Ticket</th>
@@ -151,6 +152,7 @@ const Tabs = () => {
                   .reverse()
                   .map((trip) => (
                     <tr key={trip._id} className="text-center">
+                      <td className="border p-2">0{trip.formattedDate}</td>
                       <td className="border p-2">0{trip.trip}</td>
                       <td className="border p-2">0{trip.busNo}</td>
                       <td className="border p-2">{trip.ticketNo}</td>

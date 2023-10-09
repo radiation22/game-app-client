@@ -192,11 +192,10 @@ const ShowTicket = () => {
 
             <div className="flex py-1 px-10 justify-between">
               <div className="">
-                <h1 className="text-[#A3B5C9] font-bold uppercase text-right">
-                  Total
-                </h1>
+                <h1 className="text-[#A3B5C9] font-bold uppercase">Total</h1>
                 <p className=" text-[#593C29] font-bold">
-                  {details.totalCost + details.donation} tk
+                  {details.totalCost + details.donation} tk/{details.passenger}
+                  <span className="text-xs">(Person)</span>
                 </p>
               </div>
               <div className="">

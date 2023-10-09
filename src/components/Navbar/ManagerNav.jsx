@@ -48,6 +48,7 @@ const ManagerNav = () => {
       .then((data) => {
         // console.log(data);
         toast.success("Trip Confirm");
+        window.location.reload();
       })
       .catch((error) => {
         console.error("Error:", error);

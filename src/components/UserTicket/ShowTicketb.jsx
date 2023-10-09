@@ -198,7 +198,8 @@ const ShowTicketb = () => {
                   Total
                 </h1>
                 <p className=" text-[#593C29] font-bold">
-                  {details.totalCost + details.donation} tk
+                  {details.totalCost + details.donation} tk/{details.passenger}
+                  <span className="text-xs">(Person)</span>
                 </p>
               </div>
               <div className="">
