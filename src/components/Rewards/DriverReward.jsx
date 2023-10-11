@@ -76,7 +76,7 @@ const DriverReward = () => {
                 }}
               >
                 <p className="text-white font-bold text-center">
-                  {100 * trip?.length}
+                  {40 * trip?.length}
                   <br /> tk
                 </p>
               </div>

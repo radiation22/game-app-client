@@ -89,9 +89,9 @@ const Rewards = () => {
           <p className="text-[#9FDF29]">{points} Points</p>
         </div>
         <div className="bg-[#FE9F0D] rounded-full mt-4 mx-5 py-2">
-          {points <= 500 ? (
+          {points <= 2360 ? (
             <p className="text-center font-bold text-white">Bronze</p>
-          ) : points <= 1000 ? (
+          ) : points <= 11360 ? (
             <p className="text-center font-bold text-white">Silver</p>
           ) : (
             <p className="text-center font-bold text-white">Gold</p>

@@ -32,7 +32,7 @@ const Rewardsb = () => {
     }
   );
   const points = 10 + 10 * tickets?.length; // Replace with the actual points
-  const totalPointsGoal = 3010; // Replace with your total points goal
+  const totalPointsGoal = 11360; // Replace with your total points goal
 
   // Calculate the progress percentage
   const progressPercentage = (points / totalPointsGoal) * 100;
@@ -92,9 +92,9 @@ const Rewardsb = () => {
           <p className="text-[#9FDF29]">{points} Points</p>
         </div>
         <div className="bg-[#FE9F0D] rounded-full mt-4 mx-5 py-2">
-          {points <= 500 ? (
+          {points <= 2360 ? (
             <p className="text-center font-bold text-white">ব্রোঞ্জ</p>
-          ) : points <= 1000 ? (
+          ) : points <= 11360 ? (
             <p className="text-center font-bold text-white">সিল্ভার</p>
           ) : (
             <p className="text-center font-bold text-white">গোল্ড</p>
