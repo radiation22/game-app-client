@@ -48,7 +48,7 @@ const Login = () => {
     sendPasswordResetEmail(auth, email)
       .then(() => {
         // Password reset email sent!
-        console.log("check inbox");
+        toast.success("Check Your Email");
         // ..
       })
       .catch((error) => {

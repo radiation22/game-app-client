@@ -354,18 +354,32 @@ const Supervisor1b = () => {
                         id="packageRequested"
                       >
                         <option value="13">13 tk</option>
+                        <option value="15">15 tk</option>
                         <option value="16">16 tk</option>
+                        <option value="17">17 tk</option>
+                        <option value="18">18 tk</option>
                         <option value="19">19 tk</option>
+                        <option value="20">20 tk</option>
                         <option value="22">22 tk</option>
+                        <option value="23">23 tk</option>
                         <option value="25">25 tk</option>
+                        <option value="27">27 tk</option>
                         <option value="28">28 tk</option>
-                        <option value="31">31 tk</option>
-                        <option value="34">34 tk</option>
+                        <option value="30">30 tk</option>
+                        <option value="33">33 tk</option>
+                        <option value="35">35 tk</option>
+                        <option value="37">37 tk</option>
                         <option value="38">38 tk</option>
-                        <option value="41">41 tk</option>
-                        <option value="44">44 tk</option>
+                        <option value="40">40 tk</option>
+                        <option value="42">42 tk</option>
+                        <option value="45">45 tk</option>
+                        <option value="47">47 tk</option>
                         <option value="48">48 tk</option>
-                        <option value="51">51 tk</option>
+                        <option value="50">50 tk</option>
+                        <option value="52">52 tk</option>
+                        <option value="55">55 tk</option>
+                        <option value="57">57 tk</option>
+                        <option value="60">60 tk</option>
                       </select>
                     </div>
                     <button className=" ml-2 px-4 bg-[#05A83F] text-white uppercase py-2 rounded-lg my-3">
@@ -394,7 +408,7 @@ const Supervisor1b = () => {
                 </h1>
                 <p className="font-bold text-white">Total</p>
               </div>
-              <div className="space-y-3 w-[60%] mx-auto">
+              <div className="space-y-3 w-[60%] mx-auto mb-20">
                 <p className="text-lg font-bold">Summary for this trip</p>
                 <div className="flex justify-between uppercase mt-5">
                   <p className="border-l-4 ps-3 border-[#41d341]">
@@ -423,7 +437,7 @@ const Supervisor1b = () => {
                 ) : (
                   <button
                     onClick={handleManager}
-                    className="px-5 bg-[#9DDE2A] uppercase py-2 rounded-full my-3"
+                    className="px-5 bg-[#9DDE2A] uppercase py-2 mb-20 rounded-full my-3"
                   >
                     Deliver to Manager
                   </button>

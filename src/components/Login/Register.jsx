@@ -25,8 +25,20 @@ const Register = () => {
   const from = location.state?.from?.pathname || "/";
   const { createUser, updateUserProfile, signIn } = useContext(AuthContext);
   const [selectedCity, setSelectedCity] = useState("");
+  const [error, setError] = useState("");
 
-  const [showPopup, setShowPopup] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [phoneNumberError, setPhoneNumberError] = useState("");
+
+  const validatePhoneNumber = (phoneNumber) => {
+    if (phoneNumber.length === 11) {
+      setPhoneNumberError(""); // No error
+      return true;
+    } else {
+      setPhoneNumberError("Phone number must be 11 characters");
+      return false;
+    }
+  };
 
   const handleCityChange = (e) => {
     const selectedValue = e.target.value;
@@ -76,7 +88,7 @@ const Register = () => {
       }
     } catch (error) {
       // Handle any errors that occurred during the fetch
-      console.error("Error uploading image:", error);
+      setError("Error uploading image:", error);
       throw error;
     }
   };
@@ -90,14 +102,33 @@ const Register = () => {
       const user = result.user;
 
       await handleUpdateUser(data.name, data.email, imageUrl, selectedCity);
+      saveUser(data.name, data.email, 0, phoneNumber);
 
       toast.success("Successfully registered");
       navigate("/location");
     } catch (error) {
-      console.error("Image upload or user creation failed:", error);
+      setError(error.message);
     } finally {
       setIsSignUpLoading(false); // Set loading to false when the sign-up process is complete
     }
+  };
+
+  const saveUser = (name, email, balance, phoneNumber) => {
+    const user = { name, email, balance, phoneNumber };
+    fetch("https://e-wallet-server.vercel.app/addUsers", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (loading) {
+          return <Loader></Loader>;
+        }
+        setCreatedUserEmail(email);
+      });
   };
 
   const handleUpdateUser = async (name, email, photoURL, city) => {
@@ -112,7 +143,7 @@ const Register = () => {
     try {
       await updateUserProfile(profile);
     } catch (error) {
-      console.error("Error updating user profile:", error);
+      setError("Error updating user profile:", error);
     }
   };
 
@@ -198,6 +229,25 @@ const Register = () => {
                 </span>
               </div>
               <div>
+                <input
+                  {...register("phoneNumber")}
+                  type="tel"
+                  name="phoneNumber"
+                  id="phoneNumber"
+                  required
+                  placeholder="   Enter Your Phone Number"
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  onBlur={() => validatePhoneNumber(phoneNumber)}
+                  className={`w-full pl-10 py-3 drop-shadow-xl border-2 rounded-full border-[#54B89C] focus:outline-green-500 text-gray-900 ${
+                    phoneNumberError ? "border-red-500" : ""
+                  }`}
+                />
+                {phoneNumberError && (
+                  <p className="text-red-500">{phoneNumberError}</p>
+                )}
+              </div>
+              <div>
                 <div>
                   <select
                     value={selectedCity}
@@ -235,6 +285,9 @@ const Register = () => {
                   className="w-full px-3 py-3 drop-shadow-xl  border-2 file:bg-[#9DDE2A] file:rounded-full file:border-0 file:text-white file:px-2 rounded-full  border-[#54B89C] focus:outline-green-500  text-gray-400"
                 />
               </div>
+              <div>
+                <p className="text-red-600">{error}</p>
+              </div>
 
               <div>
                 <button
@@ -248,9 +301,6 @@ const Register = () => {
           )}
 
           {/* Error message */}
-          <div>
-            <p className="text-red-600">{loginError}</p>
-          </div>
 
           <div className="flex items-cen	pt-4 space-x-1">
             <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
@@ -259,7 +309,6 @@ const Register = () => {
           <p className="px-6 text-sm text-center text-[#B0BDC9]">
             <i>"Already have an account? "</i>
             <Link to="/login">
-              {" "}
               <button className="hover:underline  font-bold text-[#A7E142]">
                 Sign In
               </button>

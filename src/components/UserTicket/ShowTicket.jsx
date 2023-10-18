@@ -143,12 +143,12 @@ const ShowTicket = () => {
               <h1 className=" uppercase text-xs text-[#A3A3A3]">To</h1>
             </div>
             <div className="flex items-center px-10 justify-between">
-              <h1 className=" text-[#41200B]  uppercase">
+              <h1 className=" text-[#41200B] text-sm  uppercase">
                 {details.startPoint}
               </h1>
-              <img src="" alt="" />
+              <FaArrowRight></FaArrowRight>
 
-              <h1 className=" text-[#41200B] uppercase">
+              <h1 className=" text-[#41200B] text-sm uppercase">
                 {details.destination}
               </h1>
             </div>

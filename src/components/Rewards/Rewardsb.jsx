@@ -41,15 +41,15 @@ const Rewardsb = () => {
   const progressBarWidth = `${progressPercentage}%`;
 
   // Define whether each reward is enabled based on points
-  const isCashBackEnabled = points >= 60; //10 ticket
-  const isFreeRideEnabled = points >= 260; // 20 ticket
-  const isFreeRingEnabled = points >= 660; //40 ticket
-  const isFreeGlassEnabled = points >= 1360; //70 ticket
-  const isFreeCapEnabled = points >= 2360; //100 ticket
-  const isFreeTwoRideEnabled = points >= 3860; //150 ticket
-  const isFreeShirtEnabled = points >= 5860; //200 ticket
-  const isFreeWatchEnabled = points >= 8360; //250 ticket
-  const isFreeMugEnabled = points >= 11360; //300 ticket
+  const isCashBackEnabled = points >= 110; //10 ticket
+  const isFreeRideEnabled = points >= 310; // 20 ticket
+  const isFreeRingEnabled = points >= 710; //40 ticket
+  const isFreeGlassEnabled = points >= 1410; //70 ticket
+  const isFreeCapEnabled = points >= 2410; //100 ticket
+  const isFreeTwoRideEnabled = points >= 3910; //150 ticket
+  const isFreeShirtEnabled = points >= 5910; //200 ticket
+  const isFreeWatchEnabled = points >= 8410; //250 ticket
+  const isFreeMugEnabled = points >= 11410; //300 ticket
 
   const claims = {
     status: "Pending",

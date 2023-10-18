@@ -55,7 +55,7 @@ const Location = () => {
             </>
           )}
           <button
-            className="bg-[#04A83F] px-5 py-2 z-0  rounded-full font-bold text-white uppercase text-lg"
+            className="bg-[#04A83F] px-5 py-2 z-40  rounded-full font-bold text-white uppercase text-lg"
             onClick={handleChooseBusClick}
           >
             Choose Bus
@@ -80,7 +80,12 @@ const Location = () => {
               alt=""
             />
             <img
-              className="h-6 absolute bottom-[180px] left-[100px]"
+              className="h-6 absolute bottom-[100px] left-[-100px]"
+              src={icon1}
+              alt=""
+            />
+            <img
+              className="h-6 absolute bottom-[190px] left-[120px]"
               src={icon1}
               alt=""
             />
