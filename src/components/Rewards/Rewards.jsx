@@ -6,11 +6,12 @@ import { FaAngleRight } from "react-icons/fa";
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
 import { useQuery } from "@tanstack/react-query";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const Rewards = () => {
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   // Define the query key
   const queryKey = ["tickets", user?.email];
@@ -65,6 +66,7 @@ const Rewards = () => {
       .then((data) => {
         if (data.acknowledged) {
           toast.success("Enjoy Claim");
+          navigate("/claim");
           refetch();
         }
       });
@@ -106,6 +108,10 @@ const Rewards = () => {
         <div className="bg-white p-4 rounded-2xl mt-5 mx-5">
           <div className="flex justify-between">
             <h1 className="text-[#0DAB46]">Rewards</h1>
+            <Link to="/claim">
+              {" "}
+              <button className="text-[#0DAB46]">Used Claim</button>
+            </Link>
             <p onClick={handleSilver} className="text-[#9DDE2A] cursor-pointer">
               View all
             </p>
@@ -134,22 +140,22 @@ const Rewards = () => {
             <p className="w-[60%] text-sm text-[#96A6B6]">
               Enjoy a free ride with using claim
             </p>
-            <Link to="/claim">
+            <Link to="/claim" className="">
               {isCashBackEnabled ? (
                 <button
                   onClick={handleCollectButtonClick}
-                  className="bg-[#9DDE2A] py-2 px-4 rounded-full"
+                  className="bg-[#9DDE2A] py-2 px-4 text-xs rounded-full text-white"
                   disabled={!isCashBackEnabled} // Disable the button if not enabled
                 >
-                  Claim
+                  সংগ্রহ করুন
                 </button>
               ) : (
                 <button
                   onClick={handleCollectButtonClick}
-                  className="bg-[#a3a899] py-2 px-4 rounded-full"
+                  className="bg-[#a3a899] py-2 px-4 text-xs rounded-full text-white"
                   disabled={!isCashBackEnabled} // Disable the button if not enabled
                 >
-                  Claim
+                  সংগ্রহ করুন
                 </button>
               )}
             </Link>
@@ -181,18 +187,18 @@ const Rewards = () => {
             {isFreeRideEnabled ? (
               <button
                 onClick={handleCollectButtonClick}
-                className="bg-[#9DDE2A] py-2 px-4 rounded-full"
+                className="bg-[#9DDE2A] py-2 px-4 text-xs rounded-full text-white"
                 disabled={!isFreeRideEnabled} // Disable the button if not enabled
               >
-                Claim
+                সংগ্রহ করুন
               </button>
             ) : (
               <button
                 onClick={handleCollectButtonClick}
-                className="bg-[#a3a899] py-2 px-4 rounded-full"
+                className="bg-[#a3a899] py-2 px-4 text-xs rounded-full text-white"
                 disabled={!isFreeRideEnabled} // Disable the button if not enabled
               >
-                Claim
+                সংগ্রহ করুন
               </button>
             )}
           </div>
@@ -220,18 +226,18 @@ const Rewards = () => {
             {isFreeRingEnabled ? (
               <button
                 onClick={handleCollectButtonClick}
-                className="bg-[#9DDE2A] py-2 px-4 rounded-full"
+                className="bg-[#9DDE2A] py-2 px-4 text-xs rounded-full text-white"
                 disabled={!isFreeRingEnabled} // Disable the button if not enabled
               >
-                Claim
+                সংগ্রহ করুন
               </button>
             ) : (
               <button
                 onClick={handleCollectButtonClick}
-                className="bg-[#a3a899] py-2 px-4 rounded-full"
+                className="bg-[#a3a899] py-2 px-4 text-xs rounded-full text-white"
                 disabled={!isFreeRingEnabled} // Disable the button if not enabled
               >
-                Claim
+                সংগ্রহ করুন
               </button>
             )}
           </div>
@@ -259,18 +265,18 @@ const Rewards = () => {
             {isFreeGlassEnabled ? (
               <button
                 onClick={handleCollectButtonClick}
-                className="bg-[#9DDE2A] py-2 px-4 rounded-full"
+                className="bg-[#9DDE2A] py-2 px-4 text-xs rounded-full text-white"
                 disabled={!isFreeGlassEnabled} // Disable the button if not enabled
               >
-                Claim
+                সংগ্রহ করুন
               </button>
             ) : (
               <button
                 onClick={handleCollectButtonClick}
-                className="bg-[#a3a899] py-2 px-4 rounded-full"
+                className="bg-[#a3a899] py-2 px-4 text-xs rounded-full text-white"
                 disabled={!isFreeGlassEnabled} // Disable the button if not enabled
               >
-                Claim
+                সংগ্রহ করুন
               </button>
             )}
           </div>
@@ -298,18 +304,18 @@ const Rewards = () => {
             {isFreeCapEnabled ? (
               <button
                 onClick={handleCollectButtonClick}
-                className="bg-[#9DDE2A] py-2 px-4 rounded-full"
+                className="bg-[#9DDE2A] py-2 px-4 text-xs rounded-full text-white"
                 disabled={!isFreeCapEnabled} // Disable the button if not enabled
               >
-                Claim
+                সংগ্রহ করুন
               </button>
             ) : (
               <button
                 onClick={handleCollectButtonClick}
-                className="bg-[#a3a899] py-2 px-4 rounded-full"
+                className="bg-[#a3a899] py-2 px-4 text-xs rounded-full text-white"
                 disabled={!isFreeCapEnabled} // Disable the button if not enabled
               >
-                Claim
+                সংগ্রহ করুন
               </button>
             )}
           </div>
@@ -349,18 +355,18 @@ const Rewards = () => {
               {isFreeTwoRideEnabled ? (
                 <button
                   onClick={handleCollectButtonClick}
-                  className="bg-[#9DDE2A] py-2 px-4 rounded-full"
+                  className="bg-[#9DDE2A] py-2 px-4 text-xs rounded-full text-white"
                   disabled={!isFreeTwoRideEnabled} // Disable the button if not enabled
                 >
-                  Claim
+                  সংগ্রহ করুন
                 </button>
               ) : (
                 <button
                   onClick={handleCollectButtonClick}
-                  className="bg-[#a3a899] py-2 px-4 rounded-full"
+                  className="bg-[#a3a899] py-2 px-4 text-xs rounded-full text-white"
                   disabled={!isFreeTwoRideEnabled} // Disable the button if not enabled
                 >
-                  Claim
+                  সংগ্রহ করুন
                 </button>
               )}
             </Link>
@@ -392,18 +398,18 @@ const Rewards = () => {
             {isFreeShirtEnabled ? (
               <button
                 onClick={handleCollectButtonClick}
-                className="bg-[#9DDE2A] py-2 px-4 rounded-full"
+                className="bg-[#9DDE2A] py-2 px-4 text-xs rounded-full text-white"
                 disabled={!isFreeShirtEnabled} // Disable the button if not enabled
               >
-                Claim
+                সংগ্রহ করুন
               </button>
             ) : (
               <button
                 onClick={handleCollectButtonClick}
-                className="bg-[#a3a899] py-2 px-4 rounded-full"
+                className="bg-[#a3a899] py-2 px-4 text-xs rounded-full text-white"
                 disabled={!isFreeShirtEnabled} // Disable the button if not enabled
               >
-                Claim
+                সংগ্রহ করুন
               </button>
             )}
           </div>
@@ -431,18 +437,18 @@ const Rewards = () => {
             {isFreeWatchEnabled ? (
               <button
                 onClick={handleCollectButtonClick}
-                className="bg-[#9DDE2A] py-2 px-4 rounded-full"
+                className="bg-[#9DDE2A] py-2 px-4 text-xs rounded-full text-white"
                 disabled={!isFreeWatchEnabled} // Disable the button if not enabled
               >
-                Claim
+                সংগ্রহ করুন
               </button>
             ) : (
               <button
                 onClick={handleCollectButtonClick}
-                className="bg-[#a3a899] py-2 px-4 rounded-full"
+                className="bg-[#a3a899] py-2 px-4 text-xs rounded-full text-white"
                 disabled={!isFreeWatchEnabled} // Disable the button if not enabled
               >
-                Claim
+                সংগ্রহ করুন
               </button>
             )}
           </div>
@@ -470,18 +476,18 @@ const Rewards = () => {
             {isFreeMugEnabled ? (
               <button
                 onClick={handleCollectButtonClick}
-                className="bg-[#9DDE2A] py-2 px-4 rounded-full"
+                className="bg-[#9DDE2A] py-2 px-4 text-xs rounded-full text-white"
                 disabled={!isFreeMugEnabled} // Disable the button if not enabled
               >
-                Claim
+                সংগ্রহ করুন
               </button>
             ) : (
               <button
                 onClick={handleCollectButtonClick}
-                className="bg-[#a3a899] py-2 px-4 rounded-full"
+                className="bg-[#a3a899] py-2 px-4 text-xs rounded-full text-white"
                 disabled={!isFreeMugEnabled} // Disable the button if not enabled
               >
-                Claim
+                সংগ্রহ করুন
               </button>
             )}
           </div>

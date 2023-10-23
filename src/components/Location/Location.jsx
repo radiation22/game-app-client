@@ -55,7 +55,7 @@ const Location = () => {
             </>
           )}
           <button
-            className="bg-[#04A83F] px-5 py-2 z-40  rounded-full font-bold text-white uppercase text-lg"
+            className="bg-[#04A83F] px-5 py-2 z-30  rounded-full font-bold text-white uppercase text-lg"
             onClick={handleChooseBusClick}
           >
             Choose Bus

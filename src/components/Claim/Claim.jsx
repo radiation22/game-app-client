@@ -132,7 +132,7 @@ const Claim = () => {
           <hr className="mt-2 mb-4" />
           {/* Render Cash Back reward if enabled */}
 
-          {claim?.map((c) => (
+          {claim?.map((c, idx) => (
             <div
               key={c._id}
               className="flex gap-3 items-center justify-between"
@@ -151,7 +151,7 @@ const Claim = () => {
                 >
                   <p className="text-white text-sm">
                     Gift: <br />
-                    No {claim?.length}
+                    No {idx + 1}
                   </p>
                 </div>
               </div>
