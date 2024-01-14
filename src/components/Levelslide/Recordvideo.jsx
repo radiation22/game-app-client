@@ -8,7 +8,6 @@ import { AuthContext } from "../context/AuthProvider";
 
 const VideoRecordingApp = () => {
   const { slNo } = useParams();
-  console.log(slNo);
   const { user } = useContext(AuthContext);
   const [event, setEvent] = useState({});
   const [previewStream, setPreviewStream] = useState(null);

@@ -119,7 +119,7 @@ const Modal = ({ event, price }) => {
                     </div>
                     <div className="border gap-5 mt-2 items-center justify-between flex p-1 rounded-lg">
                       <h1 className="text-white"> 2. Sleep 5 minutes</h1>
-                      <Link to="/recorder/1">
+                      <Link to="/recorder/30">
                         <button className="px-4 py-1 rounded-full bg-rose-600 text-white">
                           Go
                         </button>
@@ -129,7 +129,7 @@ const Modal = ({ event, price }) => {
 
                     <div className="border gap-5 mt-2 items-center justify-between flex p-1 rounded-lg">
                       <h1 className="text-white"> 2. Sleep 5 minutes</h1>
-                      <Link to="/recorder/1">
+                      <Link to="/recorder/40">
                         <button className="px-4 py-1 rounded-full bg-rose-600 text-white">
                           Go
                         </button>
