@@ -1,0 +1,19 @@
+/* .video-slider {
+    display: flex;
+    overflow: hidden;
+
+
+
+} */
+
+.video-slide {
+    text-align: center;
+
+
+}
+
+
+
+.slick-arrow slick-next {
+    display: none;
+}

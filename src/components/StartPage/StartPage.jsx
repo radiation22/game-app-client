@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import logo from "../../assets/logo.png";
+import logo from "../../assets/gamelog.png";
 import { AuthContext } from "../context/AuthProvider";
 const StartPage = () => {
   const navigate = useNavigate();
@@ -10,11 +10,8 @@ const StartPage = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-      if (user) {
-        navigate("/account");
-      } else {
-        navigate("/language");
-      }
+
+      navigate("/appHome");
     }, 4000);
 
     return () => clearTimeout(timer);
@@ -27,8 +24,8 @@ const StartPage = () => {
   return (
     <div>
       {isLoading ? (
-        <div className="flex justify-center bg-[#04A83F] items-center h-screen">
-          <img className="h-48" src={logo} alt="" />
+        <div className="flex justify-center  items-center h-screen">
+          <img className="h-20" src={logo} alt="" />
         </div>
       ) : null}
     </div>

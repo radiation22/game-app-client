@@ -1,0 +1,12 @@
+/* store.css */
+.mySwiper {
+    max-height: 500px;
+
+}
+
+.swiperSlide {
+    max-height: 100%;
+    /* Limit the maximum height to the container's height */
+    overflow: auto;
+    /* Add scrollbars if necessary */
+}

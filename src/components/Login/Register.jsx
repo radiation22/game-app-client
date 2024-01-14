@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { AuthContext } from "../context/AuthProvider";
 
 import bg from "../../assets/signbg.jpg";
-import logo from "../../assets/logo.png";
+import logo from "../../assets/avt6.png";
 import icon from "../../assets/leftarrow.png";
 import { toast } from "react-toastify";
 import { FaAngleRight, FaEnvelope, FaLock } from "react-icons/fa";
@@ -50,15 +50,6 @@ const Register = () => {
     }
   };
 
-  const cities = [
-    { value: "Chattogram", label: "Chattogram" },
-    { value: "Dhaka", label: "Dhaka" },
-    { value: "Rajshahi", label: "Rajshahi" },
-    { value: "Sylhet", label: "Sylhet" },
-    { value: "Khulna", label: "Khulna" },
-    // Add more cities here
-  ];
-
   const uploadImageToImgBB = async (imageFile) => {
     try {
       // Create a FormData object to send the image file
@@ -102,10 +93,10 @@ const Register = () => {
       const user = result.user;
 
       await handleUpdateUser(data.name, data.email, imageUrl, selectedCity);
-      saveUser(data.name, data.email, 0, phoneNumber);
+      // saveUser(data.name, data.email, 0, phoneNumber);
 
       toast.success("Successfully registered");
-      navigate("/location");
+      navigate("/");
     } catch (error) {
       setError(error.message);
     } finally {
@@ -113,23 +104,23 @@ const Register = () => {
     }
   };
 
-  const saveUser = (name, email, balance, phoneNumber) => {
-    const user = { name, email, balance, phoneNumber };
-    fetch("https://e-wallet-server.vercel.app/addUsers", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(user),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (loading) {
-          return <Loader></Loader>;
-        }
-        setCreatedUserEmail(email);
-      });
-  };
+  // const saveUser = (name, email, balance, phoneNumber) => {
+  //   const user = { name, email, balance, phoneNumber };
+  //   fetch("https://e-wallet-server.vercel.app/addUsers", {
+  //     method: "POST",
+  //     headers: {
+  //       "content-type": "application/json",
+  //     },
+  //     body: JSON.stringify(user),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       if (loading) {
+  //         return <Loader></Loader>;
+  //       }
+  //       setCreatedUserEmail(email);
+  //     });
+  // };
 
   const handleUpdateUser = async (name, email, photoURL, city) => {
     const profile = {
@@ -155,25 +146,30 @@ const Register = () => {
 
   return (
     <div
-      style={{
-        backgroundImage: `url(${bg})`,
-        backgroundSize: "cover",
-        width: "100%",
-        backgroundRepeat: "no-repeat",
-        height: "500px",
-      }}
-      className=""
+      // style={{
+      //   backgroundImage: `url(${bg})`,
+      //   backgroundSize: "cover",
+      //   width: "100%",
+      //   backgroundRepeat: "no-repeat",
+      //   height: "500px",
+      // }}
+      className="mb-20 pb-20"
     >
-      <Link to="/welcome">
+      {/* <Link to="/welcome">
         <div>
           <img className="h-12 pt-4 pl-4" src={icon} alt="" />
         </div>
-      </Link>
-      <div className="flex justify-center pt-16 pb-16 ">
-        <img className="h-20" src={logo} alt="" />
+      </Link> */}
+      <div className="flex justify-center py-3 ">
+        <img className="h-16 rounded-full" src={logo} alt="" />
       </div>
       <div className="flex justify-center w-[85%] mx-auto  items-center">
-        <div className="flex w-full flex-col py-10 px-8 shadow  bg-white rounded-[25px] sm:p-10  text-gray-900">
+        <div
+          style={{
+            backgroundImage: "linear-gradient(#262642, #17ACA7)",
+          }}
+          className="flex w-full flex-col py-10 px-8 shadow   rounded-[25px] sm:p-10  text-gray-900"
+        >
           {/* Loading indicator */}
           {isSignUpLoading && <Loader />}
 
@@ -192,8 +188,8 @@ const Register = () => {
                   name="name"
                   id="name"
                   required
-                  placeholder="    Enter Your Name"
-                  className="w-full pl-10 py-3 drop-shadow-xl border-2 rounded-full border-[#54B89C] focus:outline-green-500 text-gray-900"
+                  placeholder="Enter Your Name"
+                  className="w-full pl-10 py-3 drop-shadow-xl border rounded-full bg-gradient-to-r from-[#08355C] via-[#0B1C38] to-[#9E8340] border-amber-600 focus:outline-green-500 text-white"
                 />
               </div>
 
@@ -204,8 +200,8 @@ const Register = () => {
                   name="email"
                   id="email"
                   required
-                  placeholder="   Enter Your Email"
-                  className="w-full pl-10 py-3 drop-shadow-xl border-2 rounded-full border-[#54B89C] focus:outline-green-500 text-gray-900"
+                  placeholder=" Enter Your Email"
+                  className="w-full pl-10 py-3 drop-shadow-xl border rounded-full bg-gradient-to-r from-[#08355C] via-[#0B1C38] to-[#9E8340] border-amber-600 focus:outline-green-500 text-white"
                   data-temp-mail-org="0"
                 />
 
@@ -220,8 +216,8 @@ const Register = () => {
                   name="password"
                   id="password"
                   required
-                  placeholder="   Password"
-                  className="w-full pl-10 py-3 drop-shadow-xl border-2 rounded-full border-[#54B89C] focus:outline-green-500 text-gray-900"
+                  placeholder=" Password"
+                  className="w-full pl-10 py-3 drop-shadow-xl border rounded-full bg-gradient-to-r from-[#08355C] via-[#0B1C38] to-[#9E8340] border-amber-600 focus:outline-green-500 text-white"
                 />
 
                 <span className="absolute left-3 top-1/2 transform -translate-y-1/2">
@@ -235,43 +231,17 @@ const Register = () => {
                   name="phoneNumber"
                   id="phoneNumber"
                   required
-                  placeholder="   Enter Your Phone Number"
+                  placeholder="Enter Your Phone Number"
                   value={phoneNumber}
                   onChange={(e) => setPhoneNumber(e.target.value)}
                   onBlur={() => validatePhoneNumber(phoneNumber)}
-                  className={`w-full pl-10 py-3 drop-shadow-xl border-2 rounded-full border-[#54B89C] focus:outline-green-500 text-gray-900 ${
+                  className={`w-full pl-10 py-3 drop-shadow-xl border rounded-full bg-gradient-to-r from-[#08355C] via-[#0B1C38] to-[#9E8340] border-amber-600 focus:outline-green-500 text-white ${
                     phoneNumberError ? "border-red-500" : ""
                   }`}
                 />
                 {phoneNumberError && (
                   <p className="text-red-500">{phoneNumberError}</p>
                 )}
-              </div>
-              <div>
-                <div>
-                  <select
-                    value={selectedCity}
-                    onChange={handleCityChange}
-                    className="w-full pl-10 py-3 drop-shadow-xl border-2 rounded-full border-[#54B89C] focus:outline-green-500 text-gray-900"
-                  >
-                    <option value="" disabled>
-                      Select your city
-                    </option>
-                    {cities.map((city) => (
-                      <option
-                        key={city.value}
-                        value={city.value}
-                        className={
-                          city.label === "Chattogram"
-                            ? "text-red-500"
-                            : "text-[#A3B5C9]"
-                        }
-                      >
-                        {city.label}
-                      </option>
-                    ))}
-                  </select>
-                </div>
               </div>
 
               <div>
@@ -282,7 +252,7 @@ const Register = () => {
                   id="photo"
                   placeholder="Profile Photo"
                   onChange={handleFileChange}
-                  className="w-full px-3 py-3 drop-shadow-xl  border-2 file:bg-[#9DDE2A] file:rounded-full file:border-0 file:text-white file:px-2 rounded-full  border-[#54B89C] focus:outline-green-500  text-gray-400"
+                  className="w-full bg-gradient-to-r from-[#08355C] via-[#0B1C38] px-3 py-3 drop-shadow-xl  border-2 file:bg-[#C1205C] file:rounded-full file:border-0 file:text-white file:px-2 rounded-full  border-amber-600 focus:outline-green-500  text-gray-400"
                 />
               </div>
               <div>
@@ -292,7 +262,7 @@ const Register = () => {
               <div>
                 <button
                   type="submit"
-                  className="w-full px-8 py-3 font-semibold drop-shadow-xl rounded-full bg-[#9DDE2A] hover:text-white text-gray-100"
+                  className="w-full border px-8 py-3 font-semibold drop-shadow-xl rounded-full bg-gradient-to-r from-[#C81D5F] to-[#151B3B] hover:text-white text-gray-100"
                 >
                   Sign Up
                 </button>
@@ -306,37 +276,16 @@ const Register = () => {
             <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
             <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
           </div>
-          <p className="px-6 text-sm text-center text-[#B0BDC9]">
+          <p className="px-6 text-sm text-center text-white">
             <i>"Already have an account? "</i>
             <Link to="/login">
-              <button className="hover:underline  font-bold text-[#A7E142]">
+              <button className="hover:underline  font-bold text-black">
                 Sign In
               </button>
             </Link>
           </p>
         </div>
       </div>
-
-      <>
-        <div className="bg-white mx-6 rounded-full py-3 px-5 mt-6">
-          <div className="flex justify-between items-center">
-            <div className="flex gap-2">
-              <img className="h-6" src={userPlus} alt="" />
-              <p>Invite a friend</p>
-            </div>
-            <FaAngleRight className="text-[#92A1B3]"></FaAngleRight>
-          </div>
-        </div>
-        <div className="bg-white mx-6 rounded-full py-3 px-5 mt-6">
-          <div className="flex justify-between items-center">
-            <div className="flex gap-2">
-              <img className="h-6" src={question} alt="" />
-              <p>Help</p>
-            </div>
-            <FaAngleRight className="text-[#92A1B3]"></FaAngleRight>
-          </div>
-        </div>
-      </>
     </div>
   );
 };

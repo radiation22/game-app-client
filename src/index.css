@@ -20,6 +20,9 @@ h3 {
 }
 
 body {
-    background-color: #F2F3F5;
+    background-color: #1f1a3a;
     font-family: 'Nexa', sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100%;
 }

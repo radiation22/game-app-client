@@ -1,19 +1,16 @@
 import React from "react";
 import { FaCogs, FaEnvelopeOpenText, FaHome, FaTasks } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
-import home from "../../assets/home2.png";
-import home2 from "../../assets/homeg.png";
-import message from "../../assets/inbox.png";
-import message2 from "../../assets/inboxg.png";
-import more from "../../assets/more2.png";
-import more2 from "../../assets/moreg.png";
-import setting from "../../assets/setting2.png";
-import setting2 from "../../assets/settingg.png";
-import plus from "../../assets/plus.png";
+import home from "../../assets/home.png";
+import earn from "../../assets/earn.png";
+import play from "../../assets/play.png";
+import me from "../../assets/user.png";
+import buy from "../../assets/buy.png";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthProvider";
+import ShopingSlide from "../ShopingSlide/ShopingSlide";
 
 const Footer = () => {
   const { user } = useContext(AuthContext);
@@ -46,17 +43,18 @@ const Footer = () => {
   }, [user, messages]);
 
   return (
-    <footer className="bg-white fixed px-2 w-full bottom-0 text-white py-1">
+    <footer className="bg-[#2B2549] fixed px-2 w-full bottom-0 text-white py-1">
+      {/* <ShopingSlide></ShopingSlide> */}
       <div className="container mx-auto flex justify-around pt-2">
-        <div className="flex flex-col items-center">
-          <NavLink to="/location">
+        <div className="flex  items-center">
+          <NavLink to="/appHome">
             {({ isActive }) => (
               <>
                 {isActive ? (
                   <>
                     <div className="flex flex-col items-center">
-                      <img className="w-7" src={home2} alt="" />
-                      <span className="uppercase pt-1 text-sm text-[#04A83F]">
+                      <img className="w-6" src={home} alt="" />
+                      <span className="uppercase pt-1 font-bold text-sm text-[#04A83F]">
                         Home
                       </span>
                     </div>
@@ -64,8 +62,8 @@ const Footer = () => {
                 ) : (
                   <>
                     <div className="flex flex-col items-center">
-                      <img className="w-7" src={home} alt="" />
-                      <span className="uppercase pt-1 text-sm text-[#A0B1C6]">
+                      <img className="w-6" src={home} alt="" />
+                      <span className="uppercase pt-1 text-sm font-bold text-[#A0B1C6]">
                         Home
                       </span>
                     </div>
@@ -75,97 +73,96 @@ const Footer = () => {
             )}
           </NavLink>
         </div>
-        <NavLink to="/message">
-          {({ isActive }) => (
-            <>
-              {isActive ? (
-                <>
-                  <div className="flex flex-col items-center">
-                    <img className="w-7" src={message2} alt="" />
-                    <span className="uppercase relative pt-1 text-sm text-[#04A83F]">
-                      Inbox
-                    </span>
-                    {messages > 0 && (
-                      <span className="bg-red-500 text-white rounded-full px-2 py-1 text-xs absolute -top-2">
-                        {messages}
+        <div className="flex items-center">
+          <NavLink to="/earn">
+            {({ isActive }) => (
+              <>
+                {isActive ? (
+                  <>
+                    <div className="flex flex-col items-center">
+                      <img className="w-5" src={earn} alt="" />
+                      <span className="uppercase pt-1 text-sm font-bold text-[#A0B1C6]">
+                        Earn
                       </span>
-                    )}
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div className="flex flex-col items-center">
-                    <img className="w-7" src={message} alt="" />
-                    <span className="uppercase relative pt-1 text-sm text-[#A0B1C6]">
-                      Inbox
-                    </span>
-                    {messages > 0 && (
-                      <span className="bg-red-500 text-white rounded-full px-2 py-1 text-xs absolute -top-2">
-                        {messages}
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="flex flex-col items-center">
+                      <img className="w-5" src={earn} alt="" />
+                      <span className="uppercase pt-1 text-sm font-bold text-[#A0B1C6]">
+                        Earn
                       </span>
-                    )}
-                  </div>
-                </>
-              )}
-            </>
-          )}
-        </NavLink>
+                    </div>
+                  </>
+                )}
+              </>
+            )}
+          </NavLink>
+        </div>
 
         <Link to="/location">
-          <div className="flex flex-col items-center mt-[-40px]">
-            <img className="w-[70px]" src={plus} alt="" />
+          <div className="flex flex-col items-center ">
+            <img className="w-[55px]" src={play} alt="" />
           </div>
         </Link>
-        <NavLink to="/setting">
-          {({ isActive }) => (
-            <>
-              {isActive ? (
-                <>
-                  <div className="flex flex-col items-center">
-                    <img className="w-7 " src={setting2} alt="" />
-                    <span className="uppercase pt-1 text-sm text-[#04A83F]">
-                      Setting
-                    </span>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div className="flex flex-col items-center">
-                    <img className="w-7 " src={setting} alt="" />
-                    <span className="uppercase pt-1 text-sm text-[#A0B1C6]">
-                      Setting
-                    </span>
-                  </div>
-                </>
-              )}
-            </>
-          )}
-        </NavLink>
-        <NavLink to="/more">
-          {({ isActive }) => (
-            <>
-              {isActive ? (
-                <>
-                  <div className="flex flex-col items-center">
-                    <img className="w-7 " src={more2} alt="" />
-                    <span className="uppercase pt-1 text-sm text-[#04A83F]">
-                      More
-                    </span>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div className="flex flex-col items-center">
-                    <img className="w-7 " src={more} alt="" />
-                    <span className="uppercase pt-1 text-sm text-[#A0B1C6]">
-                      More
-                    </span>
-                  </div>
-                </>
-              )}
-            </>
-          )}
-        </NavLink>
+
+        <div className="flex items-center">
+          {" "}
+          <NavLink to="/buy">
+            {({ isActive }) => (
+              <>
+                {isActive ? (
+                  <>
+                    <div className="flex  flex-col items-center">
+                      <img className="w-6" src={buy} alt="" />
+                      <span className="uppercase pt-1 text-sm font-bold text-[#A0B1C6]">
+                        Buy
+                      </span>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="flex flex-col items-center">
+                      <img className="w-6" src={buy} alt="" />
+                      <span className="uppercase pt-1 text-sm font-bold text-[#A0B1C6]">
+                        Buy
+                      </span>
+                    </div>
+                  </>
+                )}
+              </>
+            )}
+          </NavLink>
+        </div>
+
+        <div className="flex items-center">
+          <NavLink to="/myProfile">
+            {({ isActive }) => (
+              <>
+                {isActive ? (
+                  <>
+                    <div className="flex flex-col items-center">
+                      <img className="w-6" src={me} alt="" />
+                      <span className="uppercase pt-1 text-sm font-bold text-[#A0B1C6]">
+                        Me
+                      </span>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="flex flex-col items-center">
+                      <img className="w-6" src={me} alt="" />
+                      <span className="uppercase pt-1 text-sm font-bold text-[#A0B1C6]">
+                        Me
+                      </span>
+                    </div>
+                  </>
+                )}
+              </>
+            )}
+          </NavLink>
+        </div>
       </div>
     </footer>
   );

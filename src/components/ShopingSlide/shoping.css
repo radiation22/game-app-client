@@ -1,0 +1,31 @@
+.swiper-slide {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.swiper-button-next {
+    background-image: url('../../assets/righta.png');
+    background-repeat: no-repeat;
+    background-size: 50% auto;
+    background-position: right;
+
+
+}
+
+.swiper-button-next::after {
+    display: none;
+}
+
+.swiper-button-prev {
+    background-image: url('../../assets/lefta.png');
+    background-repeat: no-repeat;
+    background-size: 50% auto;
+    background-position: left;
+}
+
+.swiper-button-prev::after {
+    display: none;
+}

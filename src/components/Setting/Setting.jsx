@@ -25,13 +25,8 @@ const Setting = () => {
   };
   return (
     <>
-      <Navbar></Navbar>
       <div>
-        <Link to="/location">
-          {" "}
-          <img className="h-10 pl-6 mt-10" src={icon} alt="" />
-        </Link>
-        <p className="mx-6 mt-6 text-[#4d5155]">Account</p>
+        <p className="mx-6 mt-6 text-white text-[#4d5155]">Account</p>
         <Link to="/profile">
           <div className="bg-white mx-6 rounded-lg py-3 px-5 mt-3">
             <div className="flex justify-between items-center">
@@ -43,8 +38,8 @@ const Setting = () => {
             </div>
           </div>
         </Link>
-        <p className="mx-6 mt-6 mb-3 text-[#4d5155]">Setting</p>
-        <div className="bg-white mx-6 rounded-lg py-3 px-5">
+
+        {/* <div className="bg-white mx-6 rounded-lg py-3 px-5">
           <div className="flex justify-between items-center">
             <div className="flex gap-5">
               <img className="h-6" src={mode} alt="" />
@@ -52,8 +47,8 @@ const Setting = () => {
             </div>
             <FaAngleRight className="text-[#92A1B3]"></FaAngleRight>
           </div>
-        </div>
-        <Link to="/notification">
+        </div> */}
+        {/* <Link to="/notification">
           <div className="bg-white mx-6 rounded-lg py-3 px-5 mt-1">
             <div className="flex justify-between items-center">
               <div className="flex gap-5">
@@ -63,8 +58,8 @@ const Setting = () => {
               <FaAngleRight className="text-[#92A1B3]"></FaAngleRight>
             </div>
           </div>
-        </Link>
-        <div className="bg-white mx-6 rounded-lg py-3 px-5 mt-1">
+        </Link> */}
+        {/* <div className="bg-white mx-6 rounded-lg py-3 px-5 mt-1">
           <div className="flex justify-between items-center">
             <div className="flex gap-5">
               <img className="h-6" src={lang} alt="" />
@@ -72,8 +67,8 @@ const Setting = () => {
             </div>
             <FaAngleRight className="text-[#92A1B3]"></FaAngleRight>
           </div>
-        </div>
-        <div className="bg-white mx-6 rounded-lg py-3 px-5 mt-1">
+        </div> */}
+        {/* <div className="bg-white mx-6 rounded-lg py-3 px-5 mt-1">
           <div className="flex justify-between items-center">
             <div className="flex gap-5">
               <img className="h-6" src={help} alt="" />
@@ -81,7 +76,7 @@ const Setting = () => {
             </div>
             <FaAngleRight className="text-[#92A1B3]"></FaAngleRight>
           </div>
-        </div>
+        </div> */}
         <div
           onClick={handleSignOut}
           className="bg-white mx-6 rounded-lg py-3 px-5 mt-1"

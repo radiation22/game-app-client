@@ -13,6 +13,7 @@ import userPlus from "../../assets/userplus.png";
 import question from "../../assets/question.png";
 import Loader from "../Loader/Loader";
 import gmail from "../../assets/gmail.png";
+import avt from "../../assets/avt1.png";
 import {
   GithubAuthProvider,
   GoogleAuthProvider,
@@ -58,22 +59,22 @@ const UserWelcome = () => {
 
   return (
     <div
-      style={{
-        backgroundImage: `url(${bg})`,
-        backgroundSize: "cover",
-        width: "100%",
-        backgroundRepeat: "no-repeat",
-        height: "500px",
-      }}
+      // style={{
+      //   backgroundImage: `url(${bg})`,
+      //   backgroundSize: "cover",
+      //   width: "100%",
+      //   backgroundRepeat: "no-repeat",
+      //   height: "500px",
+      // }}
       className=""
     >
-      <Link to="/account">
+      {/* <Link to="/account">
         <div>
           <img className="h-12 pt-4 pl-4" src={icon} alt="" />
         </div>
-      </Link>
-      <div className="flex justify-center pt-12 pb-12 ">
-        <img className="h-20" src={logo} alt="" />
+      </Link> */}
+      <div className="flex justify-center py-4">
+        <img className="h-16 rounded-full" src={avt} alt="" />
       </div>
       <div className="flex justify-center w-[85%] mx-auto  items-center">
         <div className="flex w-full flex-col py-10 px-8 shadow  bg-white rounded-[25px] sm:p-10  text-gray-900">

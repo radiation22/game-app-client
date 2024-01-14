@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { AuthContext } from "../context/AuthProvider";
 
 import bg from "../../assets/signbg.jpg";
-import logo from "../../assets/logo.png";
+import logo from "../../assets/avt3.webp";
 import icon from "../../assets/leftarrow.png";
 import { toast } from "react-toastify";
 import { FaAngleRight, FaEnvelope, FaLock } from "react-icons/fa";
@@ -66,7 +66,7 @@ const Login = () => {
         const user = result.user;
         setLoginError("");
         toast.success("Login Successfully");
-        navigate("/location");
+        navigate(from, { replace: true });
         // navigate(from, { replace: true });
       })
       .catch((error) => {
@@ -79,26 +79,17 @@ const Login = () => {
   };
 
   return (
-    <div
-      style={{
-        backgroundImage: `url(${bg})`,
-        backgroundSize: "cover",
-        width: "100%",
-        backgroundRepeat: "no-repeat",
-        height: "500px",
-      }}
-      className=""
-    >
-      <Link to="/welcome">
-        <div>
-          <img className="h-12 pt-4 pl-4" src={icon} alt="" />
-        </div>
-      </Link>
-      <div className="flex justify-center pt-16 pb-16 ">
-        <img className="h-20" src={logo} alt="" />
+    <div className="">
+      <div className="flex justify-center py-8 ">
+        <img className="h-20 rounded-full" src={logo} alt="" />
       </div>
       <div className="flex justify-center w-[85%] mx-auto  items-center">
-        <div className="flex w-full flex-col py-10 px-8 shadow  bg-white rounded-[25px] sm:p-10  text-gray-900">
+        <div
+          style={{
+            backgroundImage: "linear-gradient(#262642, #17ACA7)",
+          }}
+          className="flex w-full flex-col py-10 px-8 shadow  rounded-[25px] sm:p-10  text-gray-900"
+        >
           {/* Loading indicator */}
           {isLoading && <Loader></Loader>}
 
@@ -120,7 +111,7 @@ const Login = () => {
                   id="email"
                   required
                   placeholder="   Enter Your Email"
-                  className="w-full pl-10 py-3 drop-shadow-xl border-2 rounded-full border-[#54B89C] focus:outline-green-500 text-gray-900"
+                  className="bg-gradient-to-r from-[#08355C] via-[#0B1C38] to-[#9E8340]  w-full pl-10 py-3 drop-shadow-xl border-2 rounded-full border-[#54B89C] focus:outline-green-500 text-white"
                   data-temp-mail-org="0"
                 />
 
@@ -136,7 +127,7 @@ const Login = () => {
                   id="password"
                   required
                   placeholder="   Password"
-                  className="w-full pl-10 py-3 drop-shadow-xl border-2 rounded-full border-[#54B89C] focus:outline-green-500 text-gray-900"
+                  className="bg-gradient-to-r from-[#08355C] via-[#0B1C38] to-[#9E8340] w-full pl-10 py-3 drop-shadow-xl border-2 rounded-full border-[#54B89C] focus:outline-green-500 text-white"
                 />
 
                 <span className="absolute left-3 top-1/2 transform -translate-y-1/2">
@@ -147,7 +138,7 @@ const Login = () => {
               <div>
                 <button
                   type="submit"
-                  className="w-full px-8 py-3 font-semibold drop-shadow-xl rounded-full bg-[#9DDE2A] hover:text-white text-gray-100"
+                  className="bg-gradient-to-r from-[#C81D5F] to-[#151B3B] w-full px-8 py-3 font-semibold drop-shadow-xl rounded-full bg-[#9DDE2A] hover:text-white text-gray-100"
                 >
                   Sign In
                 </button>
@@ -163,7 +154,7 @@ const Login = () => {
           {/* Additional UI */}
           {!isSignUp && (
             <div onClick={openForgotPasswordModal} className="py-4">
-              <p className="text-sm text-center  text-[#54C27D]">
+              <p className="text-sm text-center  text-white">
                 Forgot password?
               </p>
             </div>
@@ -214,10 +205,10 @@ const Login = () => {
             <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
             <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
           </div>
-          <p className="px-6 text-sm text-center text-[#B0BDC9]">
+          <p className="px-6 text-sm text-center text-white">
             <i>Do not have an account?</i>
             <Link to="/register">
-              <button className="hover:underline  font-bold text-[#A7E142]">
+              <button className="hover:underline  font-bold text-black">
                 Sign Up
               </button>
             </Link>
