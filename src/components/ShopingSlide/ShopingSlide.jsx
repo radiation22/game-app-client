@@ -208,7 +208,7 @@ export default function ShopingSlide() {
       {isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="modal-overlay" onClick={closeModal}></div>
-          <div className="modal-container bg-[#300a15] w-11/12 md:max-w-md mx-auto rounded-lg shadow-lg z-50 overflow-y-auto">
+          <div className="modal-container border border-rose-600 border-r-2 bg-[#0c13249d] w-11/12 md:max-w-md mx-auto rounded-[30px] shadow-lg z-50">
             <div className="modal-content py-4 text-left px-6">
               <div className="flex justify-between items-center pb-3">
                 <p className="text-2xl font-bold"></p>
