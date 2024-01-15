@@ -11,7 +11,6 @@ import RunningBoy from "./RunningBoy";
 import gif1 from "../../assets/gaming.gif";
 import gif2 from "../../assets/run.gif";
 const Modal = ({ event, price }) => {
-  console.log(price);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [category, setCategory] = useState("");
 
@@ -38,6 +37,7 @@ const Modal = ({ event, price }) => {
       <div className="modal-container p-4 bg-[#300a15]   rounded-lg shadow-lg z-50 overflow-y-auto">
         <div className=" p-2">
           <div className="flex gap-3 flex-col">
+            {/* {event.map((evt) => console.log(evt.Event1.no1))} */}
             <button
               onClick={() => toggleDropdown("dropdown1", event?.no1)}
               className="text-white bg-rose-600 rounded-md"
@@ -89,8 +89,6 @@ const Modal = ({ event, price }) => {
                   <p className="text-white">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     Maiores exercitationem magni ut ab dignissimos ducimus
-                    consequatur vitae, a quas tempora ipsa porro animi
-                    cupiditate facilis voluptatum ullam in quo ipsum?
                   </p>
                   <button className="bg-green-500 text-white px-3 rounded">
                     Got It

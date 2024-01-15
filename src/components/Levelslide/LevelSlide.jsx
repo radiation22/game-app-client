@@ -112,6 +112,9 @@ export default function LevelSlide() {
         no4: "Crazy Area",
         no5: "Action World",
       },
+      // event:[
+      //   {Event1:"Happy Zone",Activity: }
+      // ]
     },
     {
       no: 8,
