@@ -202,16 +202,14 @@ const SingleUser = () => {
 
       <div className="bg-white mt-4 mx-3 p-3">
         <div className="grid grid-cols-3 gap-4 mt-4">
-          {videos.map((video) => (
-            <>
-              <ReactPlayer
-                key={video._id}
-                url={video?.url}
-                controls
-                width="100%"
-                height=""
-              />
-            </>
+          {videos.map((video, idx) => (
+            <ReactPlayer
+              key={idx}
+              url={video?.url}
+              controls
+              width="100%"
+              height=""
+            />
           ))}
         </div>
       </div>
