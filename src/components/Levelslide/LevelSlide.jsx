@@ -34,6 +34,13 @@ export default function LevelSlide() {
         no4: "Crazy Area",
         no5: "Action World",
       },
+      // event: [
+      //   "Happy Zone",
+      //   " Sad Zone",
+      //   "Fun World",
+      //   "Crazy Area",
+      //   "Action World",
+      // ],
     },
     {
       no: 2,
@@ -47,6 +54,13 @@ export default function LevelSlide() {
         no4: "Crazy Area",
         no5: "Action World",
       },
+      // event: [
+      //   "Happy Zone",
+      //   " Sad Zone",
+      //   "Fun World",
+      //   "Crazy Area",
+      //   "Action World",
+      // ],
     },
     {
       no: 3,
@@ -60,6 +74,13 @@ export default function LevelSlide() {
         no4: "Crazy Area",
         no5: "Action World",
       },
+      // event: [
+      //   "Happy Zone",
+      //   " Sad Zone",
+      //   "Fun World",
+      //   "Crazy Area",
+      //   "Action World",
+      // ],
     },
     {
       no: 4,

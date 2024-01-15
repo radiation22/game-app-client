@@ -1,13 +1,10 @@
 import React from "react";
-import { Canvas } from "react-three-fiber";
+
 import { useState } from "react";
-import * as THREE from "three";
-import gsap from "gsap";
+
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
-import { useRef } from "react";
+
 import "./carton.css";
-import RunningBoy from "./RunningBoy";
 import gif1 from "../../assets/gaming.gif";
 import gif2 from "../../assets/run.gif";
 const Modal = ({ event, price }) => {
@@ -51,15 +48,21 @@ const Modal = ({ event, price }) => {
               {event?.no2}
             </button>
             <button
-              onClick={() => toggleDropdown("dropdown1")}
+              onClick={() => toggleDropdown("dropdown1", event.no3)}
               className="text-white bg-rose-600 rounded-md"
             >
               {event?.no3}
             </button>
-            <button className="text-white bg-rose-600 rounded-md">
+            <button
+              onClick={() => toggleDropdown("dropdown1", event.no4)}
+              className="text-white bg-rose-600 rounded-md"
+            >
               {event?.no4}
             </button>
-            <button className="text-white bg-rose-600 rounded-md">
+            <button
+              onClick={() => toggleDropdown("dropdown1", event.no5)}
+              className="text-white bg-rose-600 rounded-md"
+            >
               {event?.no5}
             </button>
           </div>
