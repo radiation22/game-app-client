@@ -101,7 +101,7 @@ const Footer = () => {
           </NavLink>
         </div>
 
-        <Link to="/location">
+        <Link to="/">
           <div className="flex flex-col items-center ">
             <img className="w-[55px]" src={play} alt="" />
           </div>

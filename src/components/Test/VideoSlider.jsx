@@ -275,7 +275,7 @@ const VideoSlider = ({ videos, refetch }) => {
   };
 
   return (
-    <div className="w-full object-cover">
+    <div className="w-full">
       <Slider {...settings} ref={sliderRef}>
         {videos
           .slice()
