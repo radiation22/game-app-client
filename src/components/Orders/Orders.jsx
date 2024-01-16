@@ -13,7 +13,7 @@ const Orders = () => {
 
   // Use the useQuery hook to fetch data
   const { data: orders = [], refetch } = useQuery(queryKey, async () => {
-    const url = `https://game-server-xi.vercel.app/orders?email=${user?.email}`;
+    const url = `https://game-app-server-three.vercel.app/orders?email=${user?.email}`;
     const res = await fetch(url);
     const data = await res.json();
     // console.log(data);

@@ -10,7 +10,6 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthProvider";
-import ShopingSlide from "../ShopingSlide/ShopingSlide";
 
 const Footer = () => {
   const { user } = useContext(AuthContext);

@@ -185,7 +185,7 @@ const VideoRecordingApp = () => {
         // Send the cloudinaryUrl and filter to your backend
         try {
           const backendResponse = await fetch(
-            "https://game-server-xi.vercel.app/addVideo",
+            "https://game-app-server-three.vercel.app/addVideo",
             {
               method: "POST",
               headers: {

@@ -53,16 +53,20 @@ const AddLevel = () => {
   const onSubmit = async (data) => {
     const imageUrl = await uploadImageToImgBB(selectedFile);
     console.log(data);
-    const title = data.title;
+    const activity = [data.title];
+    const zone = [data.zone];
+    const price = data.price;
 
     const product = {
-      title,
+      selectLevel,
+      activity,
+      zone,
+      price,
       imageUrl,
-      deliveryCharge: deliveryChargeOption, // Add delivery charge to the product object
       date: new Date().toLocaleDateString(),
     };
 
-    fetch("https://game-server-xi.vercel.app/addProduct", {
+    fetch("https://game-app-server-three.vercel.app/addLevel", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(product),
@@ -102,13 +106,32 @@ const AddLevel = () => {
                 <option value="6">Level 6</option>
                 <option value="7">Level 7</option>
                 <option value="8">Level 8</option>
+                <option value="9">Level 9</option>
+                <option value="10">Level 10</option>
               </select>
             </div>
             <div className="mb-4">
-              <label
-                htmlFor="title"
-                className="block font-medium text-gray-700"
-              >
+              <label htmlFor="title" className="block font-medium text-white">
+                Zone Name
+              </label>
+              <Controller
+                name="zone"
+                control={control}
+                defaultValue=""
+                render={({ field }) => (
+                  <input
+                    required
+                    {...field}
+                    type="text"
+                    id="title"
+                    className="mt-1 p-2 w-full rounded-md border border-gray-300 focus:ring focus:ring-indigo-200 focus:border-indigo-300"
+                    placeholder="Enter title"
+                  />
+                )}
+              />
+            </div>
+            <div className="mb-4">
+              <label htmlFor="title" className="block font-medium text-white">
                 Activity Name
               </label>
               <Controller
@@ -129,11 +152,8 @@ const AddLevel = () => {
             </div>
 
             <div className="mb-4">
-              <label
-                htmlFor="price"
-                className="block font-medium text-gray-700"
-              >
-                Price
+              <label htmlFor="price" className="block font-medium text-white">
+                Total Income
               </label>
               <Controller
                 name="price"
@@ -153,10 +173,7 @@ const AddLevel = () => {
             </div>
 
             <div className="mb-4">
-              <label
-                htmlFor="photo"
-                className="block font-medium text-gray-700"
-              >
+              <label htmlFor="photo" className="block font-medium text-white">
                 Photo
               </label>
               <Controller
@@ -180,9 +197,9 @@ const AddLevel = () => {
             <div className="text-center">
               <button
                 type="submit"
-                className="bg-indigo-500 text-white px-4 py-2 rounded-full hover:bg-indigo-700 focus:outline-none focus:ring focus:ring-indigo-200"
+                className="bg-amber-500 text-white px-4 py-2 rounded-full hover:bg-indigo-700 focus:outline-none focus:ring focus:ring-indigo-200"
               >
-                Add Product
+                Add Level
               </button>
             </div>
           </form>

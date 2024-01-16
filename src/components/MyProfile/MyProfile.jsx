@@ -19,7 +19,7 @@ const MyProfile = () => {
   const { data: videos = [], refetch } = useQuery(
     queryKey,
     async () => {
-      const url = `https://game-server-xi.vercel.app/myVideos?email=${user?.email}`;
+      const url = `https://game-app-server-three.vercel.app/myVideos?email=${user?.email}`;
       const res = await fetch(url);
       const data = await res.json();
 
@@ -42,7 +42,7 @@ const MyProfile = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `https://game-server-xi.vercel.app/myFollow?email=${user?.email}`
+          `https://game-app-server-three.vercel.app/myFollow?email=${user?.email}`
         );
         const data = await response.json();
         setFollowData(data);

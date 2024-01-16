@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
@@ -30,69 +30,23 @@ export default function ShopingSlide() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
   const [item, setItem] = useState({});
+  const [foods, setFoods] = useState([]);
 
-  const foods = [
-    {
-      id: 1,
-      imgSrc: burger,
-      price: 100,
-      name: "burger",
-    },
-    {
-      id: 2,
-      imgSrc: fizza,
-      price: 100,
-      name: "fizza",
-    },
-    {
-      id: 3,
-      imgSrc: chicken,
-      price: 100,
-      name: "chokolate",
-    },
-    {
-      id: 4,
-      imgSrc: sandwich,
-      price: 100,
-      name: "box",
-    },
-    {
-      id: 5,
-      imgSrc: juice,
-      price: 100,
-      name: "burger",
-    },
-    {
-      id: 6,
-      imgSrc: sharma,
-      price: 100,
-      name: "fizza",
-    },
-    {
-      id: 7,
-      imgSrc: icecream,
-      price: 100,
-      name: "burger",
-    },
-    {
-      id: 8,
-      imgSrc: kacci,
-      price: 100,
-      name: "fizza",
-    },
-    {
-      id: 9,
-      imgSrc: chawmin,
-      price: 100,
-      name: "chokolate",
-    },
-    {
-      id: 10,
-      imgSrc: hotDog,
-      price: 100,
-      name: "box",
-    },
-  ];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          `https://game-app-server-three.vercel.app/allProduct`
+        );
+        const data = await response.json();
+        setFoods(data);
+      } catch (error) {
+        console.error("Error fetching follow data:", error);
+      }
+    };
+
+    fetchData();
+  }, [foods]);
 
   const onSubmit = (data) => {
     const name = data.name;
@@ -122,7 +76,7 @@ export default function ShopingSlide() {
       price: item?.price,
     };
 
-    fetch("https://game-server-xi.vercel.app/addOrder", {
+    fetch("https://game-app-server-three.vercel.app/addOrder", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(orderInfo),
@@ -139,17 +93,18 @@ export default function ShopingSlide() {
   const [expanded, setExpanded] = useState(false);
   const [width, setWidth] = useState(25);
   const [arrowHeight, setArrowHeight] = useState(15);
-  const [arrowWidth, setArrowWidth] = useState(150);
+  const [arrowWidth, setArrowWidth] = useState(80);
 
   const toggleExpansion = () => {
     setExpanded(!expanded);
     if (expanded === false) {
+      // document.getElementById("arrow").style.display = "none";
       setWidth(100);
-      setArrowWidth(0);
-      setArrowHeight(0);
+      setArrowWidth(20);
+      setArrowHeight(10);
     } else {
       setArrowHeight(15);
-      setArrowHeight(150);
+      setArrowWidth(80);
       setWidth(25);
     }
   };
@@ -181,19 +136,25 @@ export default function ShopingSlide() {
         >
           {foods.map((food) => (
             <SwiperSlide className="" key={food.id}>
-              <div className="p-1 text-center">
+              <div className=" text-center">
                 <img
-                  onClick={() => openModal(food?.imgSrc, food)}
+                  onClick={() => openModal(food?.imageUrl, food)}
                   className="h-16 w-16 mx-auto"
-                  src={food?.imgSrc}
+                  src={food?.imageUrl}
                   alt=""
                 />
-                <p className="text-white text-[10px] uppercase">{food.name}</p>
+                <p className="text-white text-[10px] uppercase">
+                  {food?.title}
+                </p>
               </div>
             </SwiperSlide>
           ))}
         </Swiper>
-        <div className="" onClick={toggleExpansion}>
+        <div
+          id="arrow"
+          className={`w-[${arrowWidth}px]`}
+          onClick={toggleExpansion}
+        >
           <img
             className={`h-[${arrowHeight}px] w-[${arrowWidth}px]`}
             src={arrow}

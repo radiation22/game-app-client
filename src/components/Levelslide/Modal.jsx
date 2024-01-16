@@ -34,37 +34,14 @@ const Modal = ({ event, price }) => {
       <div className="modal-container p-4 bg-[#300a15]   rounded-lg shadow-lg z-50 overflow-y-auto">
         <div className=" p-2">
           <div className="flex gap-3 flex-col">
-            {/* {event.map((evt) => console.log(evt.Event1.no1))} */}
-            <button
-              onClick={() => toggleDropdown("dropdown1", event?.no1)}
-              className="text-white bg-rose-600 rounded-md"
-            >
-              {event?.no1}
-            </button>
-            <button
-              onClick={() => toggleDropdown("dropdown1", event.no2)}
-              className="text-white bg-rose-600 rounded-md"
-            >
-              {event?.no2}
-            </button>
-            <button
-              onClick={() => toggleDropdown("dropdown1", event.no3)}
-              className="text-white bg-rose-600 rounded-md"
-            >
-              {event?.no3}
-            </button>
-            <button
-              onClick={() => toggleDropdown("dropdown1", event.no4)}
-              className="text-white bg-rose-600 rounded-md"
-            >
-              {event?.no4}
-            </button>
-            <button
-              onClick={() => toggleDropdown("dropdown1", event.no5)}
-              className="text-white bg-rose-600 rounded-md"
-            >
-              {event?.no5}
-            </button>
+            {event.map((evt) => (
+              <button
+                onClick={() => toggleDropdown("dropdown1", evt)}
+                className="text-white bg-rose-600 rounded-md px-3 py-1"
+              >
+                {evt}
+              </button>
+            ))}
           </div>
         </div>
       </div>

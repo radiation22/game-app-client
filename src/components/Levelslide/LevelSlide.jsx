@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
@@ -18,164 +18,174 @@ export default function LevelSlide() {
     dropdown1: false,
   });
   const [event, setEvent] = useState({});
-  const [level, setLevel] = useState(3);
+  const [level, setLevel] = useState(1);
+  const [levels, setLevels] = useState([]);
   const [price, setPrice] = useState(0);
 
-  const levels = [
-    {
-      no: 1,
-      imgSrc: avt1,
-      price: 100,
-      name: "burger",
-      event: {
-        no1: "Happy Zone",
-        no2: "Sad Zone",
-        no3: "Fun World",
-        no4: "Crazy Area",
-        no5: "Action World",
-      },
-      // event: [
-      //   "Happy Zone",
-      //   " Sad Zone",
-      //   "Fun World",
-      //   "Crazy Area",
-      //   "Action World",
-      // ],
-    },
-    {
-      no: 2,
-      imgSrc: avt2,
-      price: 200,
-      name: "fizza",
-      event: {
-        no1: "Happy Zone",
-        no2: "Sad Zone",
-        no3: "Fun World",
-        no4: "Crazy Area",
-        no5: "Action World",
-      },
-      // event: [
-      //   "Happy Zone",
-      //   " Sad Zone",
-      //   "Fun World",
-      //   "Crazy Area",
-      //   "Action World",
-      // ],
-    },
-    {
-      no: 3,
-      imgSrc: avt3,
-      price: 300,
-      name: "chokolate",
-      event: {
-        no1: "Happy Zone",
-        no2: "Sad Zone",
-        no3: "Fun World",
-        no4: "Crazy Area",
-        no5: "Action World",
-      },
-      // event: [
-      //   "Happy Zone",
-      //   " Sad Zone",
-      //   "Fun World",
-      //   "Crazy Area",
-      //   "Action World",
-      // ],
-    },
-    {
-      no: 4,
-      imgSrc: avt4,
-      price: 400,
-      name: "box",
-      event: {
-        no1: "Happy Zone",
-        no2: "Sad Zone",
-        no3: "Fun World",
-        no4: "Crazy Area",
-        no5: "Action World",
-      },
-    },
-    {
-      no: 5,
-      imgSrc: avt5,
-      price: 100,
-      name: "burger",
-      event: {
-        no1: "Happy Zone",
-        no2: "Sad Zone",
-        no3: "Fun World",
-        no4: "Crazy Area",
-        no5: "Action World",
-      },
-    },
-    {
-      no: 6,
-      imgSrc: avt1,
-      price: 100,
-      name: "fizza",
-      event: {
-        no1: "Happy Zone",
-        no2: "Sad Zone",
-        no3: "Fun World",
-        no4: "Crazy Area",
-        no5: "Action World",
-      },
-    },
-    {
-      no: 7,
-      imgSrc: avt2,
-      price: 100,
-      name: "burger",
-      event: {
-        no1: "Happy Zone",
-        no2: "Sad Zone",
-        no3: "Fun World",
-        no4: "Crazy Area",
-        no5: "Action World",
-      },
-      // event:[
-      //   {Event1:"Happy Zone",Activity: }
-      // ]
-    },
-    {
-      no: 8,
-      imgSrc: avt1,
-      price: 100,
-      name: "fizza",
-      event: {
-        no1: "Happy Zone",
-        no2: "Sad Zone",
-        no3: "Fun World",
-        no4: "Crazy Area",
-        no5: "Action World",
-      },
-    },
-    {
-      no: 9,
-      imgSrc: avt2,
-      price: 100,
-      name: "chokolate",
-      event: {
-        no1: "Happy Zone",
-        no2: "Sad Zone",
-        no3: "Fun World",
-        no4: "Crazy Area",
-        no5: "Action World",
-      },
-    },
-    {
-      imgSrc: avt3,
-      price: 100,
-      name: "box",
-      event: {
-        no1: "Happy Zone",
-        no2: "Sad Zone",
-        no3: "Fun World",
-        no4: "Crazy Area",
-        no5: "Action World",
-      },
-    },
-  ];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          `https://game-app-server-three.vercel.app/allLevel`
+        );
+        const data = await response.json();
+        setLevels(data);
+      } catch (error) {
+        console.error("Error fetching follow data:", error);
+      }
+    };
+
+    fetchData();
+  }, [levels]);
+
+  // const levels = [
+  //   {
+  //     no: 1,
+  //     imgSrc: avt1,
+  //     price: 100,
+  //     name: "burger",
+  //     event: {
+  //       no1: "Happy Zone",
+  //       no2: "Sad Zone",
+  //       no3: "Fun World",
+  //       no4: "Crazy Area",
+  //       no5: "Action World",
+  //     },
+  //   },
+  //   {
+  //     no: 2,
+  //     imgSrc: avt2,
+  //     price: 200,
+  //     name: "fizza",
+  //     event: {
+  //       no1: "Happy Zone",
+  //       no2: "Sad Zone",
+  //       no3: "Fun World",
+  //       no4: "Crazy Area",
+  //       no5: "Action World",
+  //     },
+  //     // event: [
+  //     //   "Happy Zone",
+  //     //   " Sad Zone",
+  //     //   "Fun World",
+  //     //   "Crazy Area",
+  //     //   "Action World",
+  //     // ],
+  //   },
+  //   {
+  //     no: 3,
+  //     imgSrc: avt3,
+  //     price: 300,
+  //     name: "chokolate",
+  //     event: {
+  //       no1: "Happy Zone",
+  //       no2: "Sad Zone",
+  //       no3: "Fun World",
+  //       no4: "Crazy Area",
+  //       no5: "Action World",
+  //     },
+  //     // event: [
+  //     //   "Happy Zone",
+  //     //   " Sad Zone",
+  //     //   "Fun World",
+  //     //   "Crazy Area",
+  //     //   "Action World",
+  //     // ],
+  //   },
+  //   {
+  //     no: 4,
+  //     imgSrc: avt4,
+  //     price: 400,
+  //     name: "box",
+  //     event: {
+  //       no1: "Happy Zone",
+  //       no2: "Sad Zone",
+  //       no3: "Fun World",
+  //       no4: "Crazy Area",
+  //       no5: "Action World",
+  //     },
+  //   },
+  //   {
+  //     no: 5,
+  //     imgSrc: avt5,
+  //     price: 100,
+  //     name: "burger",
+  //     event: {
+  //       no1: "Happy Zone",
+  //       no2: "Sad Zone",
+  //       no3: "Fun World",
+  //       no4: "Crazy Area",
+  //       no5: "Action World",
+  //     },
+  //   },
+  //   {
+  //     no: 6,
+  //     imgSrc: avt1,
+  //     price: 100,
+  //     name: "fizza",
+  //     event: {
+  //       no1: "Happy Zone",
+  //       no2: "Sad Zone",
+  //       no3: "Fun World",
+  //       no4: "Crazy Area",
+  //       no5: "Action World",
+  //     },
+  //   },
+  //   {
+  //     no: 7,
+  //     imgSrc: avt2,
+  //     price: 100,
+  //     name: "burger",
+  //     event: {
+  //       no1: "Happy Zone",
+  //       no2: "Sad Zone",
+  //       no3: "Fun World",
+  //       no4: "Crazy Area",
+  //       no5: "Action World",
+  //     },
+  //     // event:[
+  //     //   {Event1:"Happy Zone",Activity: }
+  //     // ]
+  //   },
+  //   {
+  //     no: 8,
+  //     imgSrc: avt1,
+  //     price: 100,
+  //     name: "fizza",
+  //     event: {
+  //       no1: "Happy Zone",
+  //       no2: "Sad Zone",
+  //       no3: "Fun World",
+  //       no4: "Crazy Area",
+  //       no5: "Action World",
+  //     },
+  //   },
+  //   {
+  //     no: 9,
+  //     imgSrc: avt2,
+  //     price: 100,
+  //     name: "chokolate",
+  //     event: {
+  //       no1: "Happy Zone",
+  //       no2: "Sad Zone",
+  //       no3: "Fun World",
+  //       no4: "Crazy Area",
+  //       no5: "Action World",
+  //     },
+  //   },
+  //   {
+  //     imgSrc: avt3,
+  //     price: 100,
+  //     name: "box",
+  //     event: {
+  //       no1: "Happy Zone",
+  //       no2: "Sad Zone",
+  //       no3: "Fun World",
+  //       no4: "Crazy Area",
+  //       no5: "Action World",
+  //     },
+  //   },
+  // ];
 
   // Toggle a specific dropdown by key
   const toggleDropdown = (key, event, price) => {
@@ -209,13 +219,13 @@ export default function LevelSlide() {
                       ? () =>
                           toggleDropdown(
                             "dropdown1",
-                            currentLevel.event,
+                            currentLevel.zone,
                             currentLevel.price
                           )
                       : handleDisabledClick
                   }
                   className={`h-8 w-8 ${level < idx + 1 ? "disabled" : ""}`}
-                  src={currentLevel.imgSrc}
+                  src={currentLevel?.imageUrl}
                   alt=""
                 />
               </div>

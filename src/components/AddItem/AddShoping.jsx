@@ -64,7 +64,7 @@ const AddShoping = () => {
       date: new Date().toLocaleDateString(),
     };
 
-    fetch("https://game-server-xi.vercel.app/addProduct", {
+    fetch("https://game-app-server-three.vercel.app/addProduct", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(product),
@@ -79,15 +79,12 @@ const AddShoping = () => {
   };
   return (
     <div>
-      <h2 className="text-center text-3xl font-bold">Add Product</h2>
+      <h2 className="text-center text-white text-3xl font-bold">Add Product</h2>
       <div>
         <div className="container mx-auto p-4">
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-4">
-              <label
-                htmlFor="title"
-                className="block font-medium text-gray-700"
-              >
+              <label htmlFor="title" className="block font-medium text-white">
                 Product Name
               </label>
               <Controller
@@ -108,10 +105,7 @@ const AddShoping = () => {
             </div>
 
             <div className="mb-4">
-              <label
-                htmlFor="price"
-                className="block font-medium text-gray-700"
-              >
+              <label htmlFor="price" className="block font-medium text-white">
                 Price
               </label>
               <Controller
@@ -132,10 +126,7 @@ const AddShoping = () => {
             </div>
 
             <div className="mb-4">
-              <label
-                htmlFor="photo"
-                className="block font-medium text-gray-700"
-              >
+              <label htmlFor="photo" className="block font-medium text-white">
                 Product Photo
               </label>
               <Controller
@@ -159,7 +150,7 @@ const AddShoping = () => {
             <div className="mb-4">
               <label
                 htmlFor="deliveryChargeOption"
-                className="block font-medium text-gray-700"
+                className="block font-medium text-white"
               >
                 Delivery Charge
               </label>
@@ -177,7 +168,7 @@ const AddShoping = () => {
             <div className="text-center">
               <button
                 type="submit"
-                className="bg-indigo-500 text-white px-4 py-2 rounded-full hover:bg-indigo-700 focus:outline-none focus:ring focus:ring-indigo-200"
+                className="bg-amber-600 text-white px-4 py-2 rounded-full hover:bg-indigo-700 focus:outline-none focus:ring focus:ring-indigo-200"
               >
                 Add Product
               </button>

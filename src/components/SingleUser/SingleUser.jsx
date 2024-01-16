@@ -22,7 +22,7 @@ const SingleUser = () => {
   const { data: videos = [], refetch } = useQuery(
     queryKey,
     async () => {
-      const url = `https://game-server-xi.vercel.app/myVideos?email=${email}`;
+      const url = `https://game-app-server-three.vercel.app/myVideos?email=${email}`;
       const res = await fetch(url);
       const data = await res.json();
       const totalBalance = data.reduce((sum, video) => sum + video.earn, 0);
@@ -40,7 +40,7 @@ const SingleUser = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `https://game-server-xi.vercel.app/myFollow?email=${email}`
+          `https://game-app-server-three.vercel.app/myFollow?email=${email}`
         );
         const data = await response.json();
         setFollowData(data);
@@ -65,7 +65,7 @@ const SingleUser = () => {
     try {
       // Make a POST request
       const postResponse = await fetch(
-        "https://game-server-xi.vercel.app/addFollow",
+        "https://game-app-server-three.vercel.app/addFollow",
         {
           method: "POST",
           headers: {
@@ -79,7 +79,7 @@ const SingleUser = () => {
       if (postResponse.ok) {
         // Make a PUT request
         const putResponse = await fetch(
-          "https://game-server-xi.vercel.app/addFollow",
+          "https://game-app-server-three.vercel.app/addFollow",
           {
             method: "PUT",
             headers: {
@@ -117,7 +117,7 @@ const SingleUser = () => {
 
     try {
       const backendResponse = await fetch(
-        "https://game-server-xi.vercel.app/addUnFollow",
+        "https://game-app-server-three.vercel.app/addUnFollow",
         {
           method: "PUT",
           headers: {
