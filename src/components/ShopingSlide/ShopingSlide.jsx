@@ -139,7 +139,7 @@ export default function ShopingSlide() {
               <div className=" text-center">
                 <img
                   onClick={() => openModal(food?.imageUrl, food)}
-                  className="h-16 w-16 mx-auto"
+                  className=" w-16 mx-auto"
                   src={food?.imageUrl}
                   alt=""
                 />
